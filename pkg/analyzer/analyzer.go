@@ -23,7 +23,11 @@ func New() *analysis.Analyzer {
 func run(pass *analysis.Pass) (interface{}, error) {
 	i := pass.ResultOf[inspect.Analyzer].(*inspector.Inspector)
 	writeHeaderCase(pass, i)
-	stdlibVars(pass, i, _timeWeekdayVars, _timeMonthVars)
+	stdlibVars(pass, i,
+		_timeWeekdayVars,
+		_timeMonthVars,
+		_timeParseLayoutVars,
+	)
 	return nil, nil
 }
 
@@ -125,5 +129,23 @@ var (
 		"October":   "time.October.String()",
 		"November":  "time.November.String()",
 		"December":  "time.December.String()",
+	}
+	_timeParseLayoutVars = map[string]string{
+		"01/02 03:04:05PM '06 -0700":          "time.Layout",
+		"Mon Jan _2 15:04:05 2006":            "time.ANSIC",
+		"Mon Jan _2 15:04:05 MST 2006":        "time.UnixDate",
+		"Mon Jan 02 15:04:05 -0700 2006":      "time.RubyDate",
+		"02 Jan 06 15:04 MST":                 "time.RFC822",
+		"02 Jan 06 15:04 -0700":               "time.RFC822Z",
+		"Monday, 02-Jan-06 15:04:05 MST":      "time.RFC850",
+		"Mon, 02 Jan 2006 15:04:05 MST":       "time.RFC1123",
+		"Mon, 02 Jan 2006 15:04:05 -0700":     "time.RFC1123Z",
+		"2006-01-02T15:04:05Z07:00":           "time.RFC3339",
+		"2006-01-02T15:04:05.999999999Z07:00": "time.RFC3339Nano",
+		"3:04PM":                              "time.Kitchen",
+		"Jan _2 15:04:05":                     "time.Stamp",
+		"Jan _2 15:04:05.000":                 "time.StampMilli",
+		"Jan _2 15:04:05.000000":              "time.StampMicro",
+		"Jan _2 15:04:05.000000000":           "time.StampNano",
 	}
 )
