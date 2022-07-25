@@ -2,6 +2,7 @@ package analyzer
 
 import (
 	"go/ast"
+	"go/token"
 	"strings"
 
 	"golang.org/x/tools/go/analysis"
@@ -21,17 +22,47 @@ func New() *analysis.Analyzer {
 
 func run(pass *analysis.Pass) (any, error) {
 	i := pass.ResultOf[inspect.Analyzer].(*inspector.Inspector)
-	imports := make(map[string]struct{})
-	i.Preorder([]ast.Node{
-		(*ast.ImportSpec)(nil),
-	}, func(node ast.Node) {
-		importSpec, ok := node.(*ast.ImportSpec)
+	writeHeaderCase(pass, i)
+	stdlibVars(pass, i, _timeWeekdayVars, _timeMonthVars)
+	return nil, nil
+}
+
+func writeHeaderCase(pass *analysis.Pass, i *inspector.Inspector) {
+	filter := []ast.Node{
+		(*ast.CallExpr)(nil),
+	}
+	i.Preorder(filter, func(node ast.Node) {
+		callExpr, ok := node.(*ast.CallExpr)
 		if !ok {
 			return
 		}
-		imp := strings.Trim(importSpec.Path.Value, "\"")
-		imports[imp] = struct{}{}
+		selectorExpr, ok := callExpr.Fun.(*ast.SelectorExpr)
+		if !ok {
+			return
+		}
+		if selectorExpr.Sel.Name != "WriteHeader" {
+			return
+		}
+		if len(callExpr.Args) > 1 {
+			return
+		}
+		basicLit, ok := callExpr.Args[0].(*ast.BasicLit)
+		if !ok {
+			return
+		}
+		if basicLit.Kind != token.INT {
+			return
+		}
+		oldVal := strings.Trim(basicLit.Value, "\"")
+		newVal, ok := _httpStatusCodesVars[oldVal]
+		if !ok {
+			return
+		}
+		report(pass, basicLit.Pos(), newVal, oldVal)
 	})
+}
+
+func stdlibVars(pass *analysis.Pass, i *inspector.Inspector, dicts ...map[string]string) {
 	i.Preorder([]ast.Node{
 		(*ast.BasicLit)(nil),
 	}, func(node ast.Node) {
@@ -39,25 +70,39 @@ func run(pass *analysis.Pass) (any, error) {
 		if !ok {
 			return
 		}
-		key := strings.Trim(basicLit.Value, "\"")
-		for imp := range imports {
-			val, ok := _reuseStdlibVars[imp][key]
+		oldVal := strings.Trim(basicLit.Value, "\"")
+		for _, dict := range dicts {
+			newVal, ok := dict[oldVal]
 			if !ok {
 				continue
 			}
-			pass.Reportf(
-				basicLit.Pos(),
-				`can use %s instead "%s"`,
-				val,
-				key,
-			)
+			report(pass, basicLit.Pos(), newVal, oldVal)
 		}
 	})
-	return nil, nil
 }
 
-var _reuseStdlibVars = map[string]map[string]string{
-	"time": {
+func report(pass *analysis.Pass, pos token.Pos, newVal, oldVal string) {
+	pass.Reportf(
+		pos,
+		`can use %s instead "%s"`,
+		newVal,
+		oldVal,
+	)
+}
+
+var (
+	_httpStatusCodesVars = map[string]string{
+		"200": "http.StatusOK",
+		"201": "http.StatusCreated",
+		"204": "http.StatusNoContent",
+		"400": "http.StatusBadRequest",
+		"401": "http.StatusUnauthorized",
+		"403": "http.StatusForbidden",
+		"404": "http.StatusNotFound",
+		"409": "http.StatusConflict",
+		"500": "http.StatusInternalServerError",
+	}
+	_timeWeekdayVars = map[string]string{
 		"Sunday":    "time.Sunday.String()",
 		"Monday":    "time.Monday.String()",
 		"Tuesday":   "time.Tuesday.String()",
@@ -65,7 +110,8 @@ var _reuseStdlibVars = map[string]map[string]string{
 		"Thursday":  "time.Thursday.String()",
 		"Friday":    "time.Friday.String()",
 		"Saturday":  "time.Saturday.String()",
-
+	}
+	_timeMonthVars = map[string]string{
 		"January":   "time.January.String()",
 		"February":  "time.February.String()",
 		"March":     "time.March.String()",
@@ -78,16 +124,5 @@ var _reuseStdlibVars = map[string]map[string]string{
 		"October":   "time.October.String()",
 		"November":  "time.November.String()",
 		"December":  "time.December.String()",
-	},
-	"net/http": {
-		"200": "http.StatusOK",
-		"201": "http.StatusCreated",
-		"204": "http.StatusNoContent",
-		"400": "http.StatusBadRequest",
-		"401": "http.StatusUnauthorized",
-		"403": "http.StatusForbidden",
-		"404": "http.StatusNotFound",
-		"409": "http.StatusConflict",
-		"500": "http.StatusInternalServerError",
-	},
-}
+	}
+)
