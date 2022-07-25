@@ -1,4 +1,4 @@
-module github.com/sashamelentyev/reusestdlibvars
+module github.com/sashamelentyev/usestdlibvars
 
 go 1.18
 

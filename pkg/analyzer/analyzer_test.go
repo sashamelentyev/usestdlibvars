@@ -6,8 +6,9 @@ import (
 	"golang.org/x/tools/go/analysis/analysistest"
 )
 
-func TestReuseStdlibVars(t *testing.T) {
+func TestUseStdlibVars(t *testing.T) {
 	pkgs := []string{
+		"_crypto",
 		"_http",
 		"_time",
 	}

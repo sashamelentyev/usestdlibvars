@@ -1,14 +1,14 @@
-# reusestdlibvars
+# usestdlibvars
 
-The Golang linter that detect possibility reuse variables from stdlib
+The Golang linter that detect possibility use variables/constants from stdlib
 
 ## Install
 
 ```console
-go install github.com/sashamelentyev/reusestdlibvars/cmd/reusestdlibvars
+go install github.com/sashamelentyev/usestdlibvars
 ```
 
 ## Usage
 ```console
-reusestdlibvars ./...
+usestdlibvars ./...
 ```
