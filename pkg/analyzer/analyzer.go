@@ -20,7 +20,7 @@ func New() *analysis.Analyzer {
 	}
 }
 
-func run(pass *analysis.Pass) (any, error) {
+func run(pass *analysis.Pass) (interface{}, error) {
 	i := pass.ResultOf[inspect.Analyzer].(*inspector.Inspector)
 	writeHeaderCase(pass, i)
 	stdlibVars(pass, i, _timeWeekdayVars, _timeMonthVars)
@@ -63,9 +63,10 @@ func writeHeaderCase(pass *analysis.Pass, i *inspector.Inspector) {
 }
 
 func stdlibVars(pass *analysis.Pass, i *inspector.Inspector, dicts ...map[string]string) {
-	i.Preorder([]ast.Node{
+	filter := []ast.Node{
 		(*ast.BasicLit)(nil),
-	}, func(node ast.Node) {
+	}
+	i.Preorder(filter, func(node ast.Node) {
 		basicLit, ok := node.(*ast.BasicLit)
 		if !ok {
 			return
