@@ -1,7 +1,5 @@
 package _time
 
-import _ "time"
-
 func sunday() {
 	_ = "Sunday" // want `can use time.Sunday.String\(\) instead "Sunday"`
 }
