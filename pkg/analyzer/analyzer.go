@@ -24,20 +24,20 @@ func New() *analysis.Analyzer {
 	}
 }
 
-func run(pass *analysis.Pass) (interface{}, error) {
-	insp := pass.ResultOf[inspect.Analyzer].(*inspector.Inspector)
+func run(p *analysis.Pass) (interface{}, error) {
+	insp := p.ResultOf[inspect.Analyzer].(*inspector.Inspector)
 	filter := []ast.Node{
 		(*ast.BasicLit)(nil),
 		(*ast.CallExpr)(nil),
 	}
-	insp.Preorder(filter, func(node ast.Node) {
-		switch v := node.(type) {
+	insp.Preorder(filter, func(n ast.Node) {
+		switch v := n.(type) {
 		case *ast.BasicLit:
-			variable(pass, v, timeWeekdayVars, timeMonthVars, timeParseLayoutVars, cryptoVars)
+			variable(p, v, timeWeekday, timeMonth, timeParseLayout, cryptoHash)
 		case *ast.CallExpr:
-			funcArg(pass, v, "WriteHeader", 1, 0, token.INT, httpStatusCodeVars)
-			funcArg(pass, v, "NewRequest", 3, 0, token.STRING, httpMethodVars)
-			funcArg(pass, v, "NewRequestWithContext", 4, 1, token.STRING, httpMethodVars)
+			funcArg(p, v, "WriteHeader", 1, 0, token.INT, httpStatusCode)
+			funcArg(p, v, "NewRequest", 3, 0, token.STRING, httpMethod)
+			funcArg(p, v, "NewRequestWithContext", 4, 1, token.STRING, httpMethod)
 		}
 	})
 	return nil, nil
@@ -89,7 +89,7 @@ func report(p *analysis.Pass, pos token.Pos, newVal, oldVal string) {
 }
 
 var (
-	cryptoVars = map[string]string{
+	cryptoHash = map[string]string{
 		crypto.MD4.String():         "crypto.MD4.String()",
 		crypto.MD5.String():         "crypto.MD5.String()",
 		crypto.SHA1.String():        "crypto.SHA1.String()",
@@ -113,7 +113,7 @@ var (
 )
 
 var (
-	httpMethodVars = map[string]string{
+	httpMethod = map[string]string{
 		http.MethodGet:     "http.MethodGet",
 		http.MethodHead:    "http.MethodHead",
 		http.MethodPost:    "http.MethodPost",
@@ -124,7 +124,7 @@ var (
 		http.MethodOptions: "http.MethodOptions",
 		http.MethodTrace:   "http.MethodTrace",
 	}
-	httpStatusCodeVars = map[string]string{
+	httpStatusCode = map[string]string{
 		strconv.Itoa(http.StatusContinue):           "http.StatusContinue",
 		strconv.Itoa(http.StatusSwitchingProtocols): "http.StatusSwitchingProtocols",
 		strconv.Itoa(http.StatusProcessing):         "http.StatusProcessing",
@@ -195,7 +195,7 @@ var (
 )
 
 var (
-	timeWeekdayVars = map[string]string{
+	timeWeekday = map[string]string{
 		time.Sunday.String():    "time.Sunday.String()",
 		time.Monday.String():    "time.Monday.String()",
 		time.Tuesday.String():   "time.Tuesday.String()",
@@ -204,7 +204,7 @@ var (
 		time.Friday.String():    "time.Friday.String()",
 		time.Saturday.String():  "time.Saturday.String()",
 	}
-	timeMonthVars = map[string]string{
+	timeMonth = map[string]string{
 		time.January.String():   "time.January.String()",
 		time.February.String():  "time.February.String()",
 		time.March.String():     "time.March.String()",
@@ -218,7 +218,7 @@ var (
 		time.November.String():  "time.November.String()",
 		time.December.String():  "time.December.String()",
 	}
-	timeParseLayoutVars = map[string]string{
+	timeParseLayout = map[string]string{
 		time.Layout:      "time.Layout",
 		time.ANSIC:       "time.ANSIC",
 		time.UnixDate:    "time.UnixDate",
