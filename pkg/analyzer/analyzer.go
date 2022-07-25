@@ -33,107 +33,54 @@ func run(pass *analysis.Pass) (interface{}, error) {
 	insp.Preorder(filter, func(node ast.Node) {
 		switch v := node.(type) {
 		case *ast.BasicLit:
-			stdlibVars(pass, v, timeWeekdayVars, timeMonthVars, timeParseLayoutVars, cryptoVars)
+			variable(pass, v, timeWeekdayVars, timeMonthVars, timeParseLayoutVars, cryptoVars)
 		case *ast.CallExpr:
-			writeHeader(pass, v)
-			newRequest(pass, v)
-			newRequestWithContext(pass, v)
+			funcArg(pass, v, "WriteHeader", 1, 0, token.INT, httpStatusCodeVars)
+			funcArg(pass, v, "NewRequest", 3, 0, token.STRING, httpMethodVars)
+			funcArg(pass, v, "NewRequestWithContext", 4, 1, token.STRING, httpMethodVars)
 		}
 	})
 	return nil, nil
 }
 
-func stdlibVars(pass *analysis.Pass, bl *ast.BasicLit, dictionaries ...map[string]string) {
+func variable(p *analysis.Pass, bl *ast.BasicLit, dictionaries ...map[string]string) {
+	stdlibVars(p, bl, dictionaries...)
+}
+
+func funcArg(p *analysis.Pass, ce *ast.CallExpr, name string, length, idx int, typ token.Token, dict map[string]string) {
+	selectorExpr, ok := ce.Fun.(*ast.SelectorExpr)
+	if !ok {
+		return
+	}
+	if selectorExpr.Sel.Name != name {
+		return
+	}
+	if len(ce.Args) != length {
+		return
+	}
+	basicLit, ok := ce.Args[idx].(*ast.BasicLit)
+	if !ok {
+		return
+	}
+	if basicLit.Kind != typ {
+		return
+	}
+	stdlibVars(p, basicLit, dict)
+}
+
+func stdlibVars(p *analysis.Pass, bl *ast.BasicLit, dictionaries ...map[string]string) {
 	oldVal := strings.Trim(bl.Value, "\"")
 	for _, dict := range dictionaries {
 		newVal, ok := dict[oldVal]
 		if !ok {
 			continue
 		}
-		report(pass, bl.Pos(), newVal, oldVal)
+		report(p, bl.Pos(), newVal, oldVal)
 	}
 }
 
-func writeHeader(pass *analysis.Pass, ce *ast.CallExpr) {
-	selectorExpr, ok := ce.Fun.(*ast.SelectorExpr)
-	if !ok {
-		return
-	}
-	if selectorExpr.Sel.Name != "WriteHeader" {
-		return
-	}
-	if len(ce.Args) != 1 {
-		return
-	}
-	basicLit, ok := ce.Args[0].(*ast.BasicLit)
-	if !ok {
-		return
-	}
-	if basicLit.Kind != token.INT {
-		return
-	}
-	oldVal := strings.Trim(basicLit.Value, "\"")
-	newVal, ok := httpStatusCodeVars[oldVal]
-	if !ok {
-		return
-	}
-	report(pass, basicLit.Pos(), newVal, oldVal)
-}
-
-func newRequest(pass *analysis.Pass, ce *ast.CallExpr) {
-	selectorExpr, ok := ce.Fun.(*ast.SelectorExpr)
-	if !ok {
-		return
-	}
-	if selectorExpr.Sel.Name != "NewRequest" {
-		return
-	}
-	if len(ce.Args) != 3 {
-		return
-	}
-	basicLit, ok := ce.Args[0].(*ast.BasicLit)
-	if !ok {
-		return
-	}
-	if basicLit.Kind != token.STRING {
-		return
-	}
-	oldVal := strings.Trim(basicLit.Value, "\"")
-	newVal, ok := httpMethodVars[oldVal]
-	if !ok {
-		return
-	}
-	report(pass, basicLit.Pos(), newVal, oldVal)
-}
-
-func newRequestWithContext(pass *analysis.Pass, ce *ast.CallExpr) {
-	selectorExpr, ok := ce.Fun.(*ast.SelectorExpr)
-	if !ok {
-		return
-	}
-	if selectorExpr.Sel.Name != "NewRequestWithContext" {
-		return
-	}
-	if len(ce.Args) != 4 {
-		return
-	}
-	basicLit, ok := ce.Args[1].(*ast.BasicLit)
-	if !ok {
-		return
-	}
-	if basicLit.Kind != token.STRING {
-		return
-	}
-	oldVal := strings.Trim(basicLit.Value, "\"")
-	newVal, ok := httpMethodVars[oldVal]
-	if !ok {
-		return
-	}
-	report(pass, basicLit.Pos(), newVal, oldVal)
-}
-
-func report(pass *analysis.Pass, pos token.Pos, newVal, oldVal string) {
-	pass.Reportf(
+func report(p *analysis.Pass, pos token.Pos, newVal, oldVal string) {
+	p.Reportf(
 		pos,
 		`can use %s instead "%s"`,
 		newVal,
