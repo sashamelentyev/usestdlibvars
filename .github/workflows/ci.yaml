@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.18
+
+      - name: Lint
+        uses: golangci/golangci-lint-action@v3.2.0
+        with:
+          version: latest
+          args: --timeout 5m
+
+      - name: Go Format
+        run: gofmt -s -w . && git diff --exit-code
+
+      - name: Go Tidy
+        run: go mod tidy && git diff --exit-code
+
+      - name: Go Mod
+        run: go mod download
+
+      - name: Go Generate
+        run: go generate ./... && git diff --exit-code
+
+      - name: Go Build
+        run: go build -v ./...
+
+      - name: Go Test
+        run: go test -v -race ./...
