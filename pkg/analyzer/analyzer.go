@@ -22,48 +22,15 @@ func New() *analysis.Analyzer {
 
 func run(pass *analysis.Pass) (interface{}, error) {
 	i := pass.ResultOf[inspect.Analyzer].(*inspector.Inspector)
-	writeHeaderCase(pass, i)
 	stdlibVars(pass, i,
 		_timeWeekdayVars,
 		_timeMonthVars,
 		_timeParseLayoutVars,
 	)
+	writeHeader(pass, i)
+	newRequest(pass, i)
+	newRequestWithContext(pass, i)
 	return nil, nil
-}
-
-func writeHeaderCase(pass *analysis.Pass, i *inspector.Inspector) {
-	filter := []ast.Node{
-		(*ast.CallExpr)(nil),
-	}
-	i.Preorder(filter, func(node ast.Node) {
-		callExpr, ok := node.(*ast.CallExpr)
-		if !ok {
-			return
-		}
-		selectorExpr, ok := callExpr.Fun.(*ast.SelectorExpr)
-		if !ok {
-			return
-		}
-		if selectorExpr.Sel.Name != "WriteHeader" {
-			return
-		}
-		if len(callExpr.Args) > 1 {
-			return
-		}
-		basicLit, ok := callExpr.Args[0].(*ast.BasicLit)
-		if !ok {
-			return
-		}
-		if basicLit.Kind != token.INT {
-			return
-		}
-		oldVal := strings.Trim(basicLit.Value, "\"")
-		newVal, ok := _httpStatusCodesVars[oldVal]
-		if !ok {
-			return
-		}
-		report(pass, basicLit.Pos(), newVal, oldVal)
-	})
 }
 
 func stdlibVars(pass *analysis.Pass, i *inspector.Inspector, dicts ...map[string]string) {
@@ -86,6 +53,103 @@ func stdlibVars(pass *analysis.Pass, i *inspector.Inspector, dicts ...map[string
 	})
 }
 
+func writeHeader(pass *analysis.Pass, i *inspector.Inspector) {
+	callExpr(pass, i, func(pass *analysis.Pass, ce *ast.CallExpr) {
+		selectorExpr, ok := ce.Fun.(*ast.SelectorExpr)
+		if !ok {
+			return
+		}
+		if selectorExpr.Sel.Name != "WriteHeader" {
+			return
+		}
+		if len(ce.Args) != 1 {
+			return
+		}
+		basicLit, ok := ce.Args[0].(*ast.BasicLit)
+		if !ok {
+			return
+		}
+		if basicLit.Kind != token.INT {
+			return
+		}
+		oldVal := strings.Trim(basicLit.Value, "\"")
+		newVal, ok := _httpStatusCodeVars[oldVal]
+		if !ok {
+			return
+		}
+		report(pass, basicLit.Pos(), newVal, oldVal)
+	})
+}
+
+func newRequest(pass *analysis.Pass, i *inspector.Inspector) {
+	callExpr(pass, i, func(pass *analysis.Pass, ce *ast.CallExpr) {
+		selectorExpr, ok := ce.Fun.(*ast.SelectorExpr)
+		if !ok {
+			return
+		}
+		if selectorExpr.Sel.Name != "NewRequest" {
+			return
+		}
+		if len(ce.Args) != 3 {
+			return
+		}
+		basicLit, ok := ce.Args[0].(*ast.BasicLit)
+		if !ok {
+			return
+		}
+		if basicLit.Kind != token.STRING {
+			return
+		}
+		oldVal := strings.Trim(basicLit.Value, "\"")
+		newVal, ok := _httpMethodVars[oldVal]
+		if !ok {
+			return
+		}
+		report(pass, basicLit.Pos(), newVal, oldVal)
+	})
+}
+
+func newRequestWithContext(pass *analysis.Pass, i *inspector.Inspector) {
+	callExpr(pass, i, func(pass *analysis.Pass, ce *ast.CallExpr) {
+		selectorExpr, ok := ce.Fun.(*ast.SelectorExpr)
+		if !ok {
+			return
+		}
+		if selectorExpr.Sel.Name != "NewRequestWithContext" {
+			return
+		}
+		if len(ce.Args) != 4 {
+			return
+		}
+		basicLit, ok := ce.Args[1].(*ast.BasicLit)
+		if !ok {
+			return
+		}
+		if basicLit.Kind != token.STRING {
+			return
+		}
+		oldVal := strings.Trim(basicLit.Value, "\"")
+		newVal, ok := _httpMethodVars[oldVal]
+		if !ok {
+			return
+		}
+		report(pass, basicLit.Pos(), newVal, oldVal)
+	})
+}
+
+func callExpr(pass *analysis.Pass, i *inspector.Inspector, fn func(*analysis.Pass, *ast.CallExpr)) {
+	filter := []ast.Node{
+		(*ast.CallExpr)(nil),
+	}
+	i.Preorder(filter, func(node ast.Node) {
+		ce, ok := node.(*ast.CallExpr)
+		if !ok {
+			return
+		}
+		fn(pass, ce)
+	})
+}
+
 func report(pass *analysis.Pass, pos token.Pos, newVal, oldVal string) {
 	pass.Reportf(
 		pos,
@@ -96,7 +160,18 @@ func report(pass *analysis.Pass, pos token.Pos, newVal, oldVal string) {
 }
 
 var (
-	_httpStatusCodesVars = map[string]string{
+	_httpMethodVars = map[string]string{
+		"GET":     "http.MethodGet",
+		"HEAD":    "http.MethodHead",
+		"POST":    "http.MethodPost",
+		"PUT":     "http.MethodPut",
+		"PATCH":   "http.MethodPatch",
+		"DELETE":  "http.MethodDelete",
+		"CONNECT": "http.MethodConnect",
+		"OPTIONS": "http.MethodOptions",
+		"TRACE":   "http.MethodTrace",
+	}
+	_httpStatusCodeVars = map[string]string{
 		"200": "http.StatusOK",
 		"201": "http.StatusCreated",
 		"204": "http.StatusNoContent",
