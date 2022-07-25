@@ -26,6 +26,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 		_timeWeekdayVars,
 		_timeMonthVars,
 		_timeParseLayoutVars,
+		_crypto,
 	)
 	writeHeader(pass, i)
 	newRequest(pass, i)
@@ -282,5 +283,29 @@ var (
 		"Jan _2 15:04:05.000":                 "time.StampMilli",
 		"Jan _2 15:04:05.000000":              "time.StampMicro",
 		"Jan _2 15:04:05.000000000":           "time.StampNano",
+	}
+)
+
+var (
+	_crypto = map[string]string{
+		"MD4":         "crypto.MD4.String()",
+		"MD5":         "crypto.MD5.String()",
+		"SHA-1":       "crypto.SHA1.String()",
+		"SHA-224":     "crypto.SHA224.String()",
+		"SHA-256":     "crypto.SHA256.String()",
+		"SHA-384":     "crypto.SHA384.String()",
+		"SHA-512":     "crypto.SHA512.String()",
+		"MD5+SHA1":    "crypto.MD5SHA1.String()",
+		"RIPEMD-160":  "crypto.RIPEMD160.String()",
+		"SHA3-224":    "crypto.SHA3_224.String()",
+		"SHA3-256":    "crypto.SHA3_256.String()",
+		"SHA3-384":    "crypto.SHA3_384.String()",
+		"SHA3-512":    "crypto.SHA3_512.String()",
+		"SHA-512/224": "crypto.SHA512_224.String()",
+		"SHA-512/256": "crypto.SHA512_256.String()",
+		"BLAKE2s-256": "crypto.BLAKE2s_256.String()",
+		"BLAKE2b-256": "crypto.BLAKE2b_256.String()",
+		"BLAKE2b-384": "crypto.BLAKE2b_384.String()",
+		"BLAKE2b-512": "crypto.BLAKE2b_512.String()",
 	}
 )
