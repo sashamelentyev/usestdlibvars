@@ -1,6 +1,6 @@
 # usestdlibvars
 
-The Golang linter that detect possibility use variables/constants from stdlib
+The Golang linter that detect the possibility to use constants/variables from the stdlib.
 
 ## Install
 

@@ -10,17 +10,36 @@ import (
 	"golang.org/x/tools/go/ast/inspector"
 )
 
-// New returns new usestdlibvars analyzer.
-func New() *analysis.Analyzer {
+type Config struct {
+	ExcludeCryptoHash     bool
+	ExcludeHTTPMethod     bool
+	ExcludeHTTPStatusCode bool
+	ExcludeTimeWeekday    bool
+	ExcludeTimeMonth      bool
+	ExcludeTimeLayout     bool
+}
+
+// NewAnalyzer returns new usestdlibvars analyzer.
+func NewAnalyzer(cfg *Config) *analysis.Analyzer {
+	a := newAnalyzer(cfg)
+
 	return &analysis.Analyzer{
 		Name:     "usestdlibvars",
 		Doc:      "Detect the possibility to use constants/variables from the stdlib.",
-		Run:      run,
+		Run:      a.run,
 		Requires: []*analysis.Analyzer{inspect.Analyzer},
 	}
 }
 
-func run(pass *analysis.Pass) (interface{}, error) {
+type analyzer struct {
+	cfg *Config
+}
+
+func newAnalyzer(cfg *Config) *analyzer {
+	return &analyzer{cfg: cfg}
+}
+
+func (a *analyzer) run(pass *analysis.Pass) (interface{}, error) {
 	insp := pass.ResultOf[inspect.Analyzer].(*inspector.Inspector)
 
 	filter := []ast.Node{
@@ -43,7 +62,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 					return
 				}
 
-				checkHTTPStatusCode(pass, basicLit)
+				a.checkHTTPStatusCode(pass, basicLit)
 
 			case "NewRequest":
 				basicLit := getBasicLit(v, 3, 0, token.STRING)
@@ -51,7 +70,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 					return
 				}
 
-				checkHTTPMethod(pass, basicLit)
+				a.checkHTTPMethod(pass, basicLit)
 
 			case "NewRequestWithContext":
 				basicLit := getBasicLit(v, 4, 1, token.STRING)
@@ -59,24 +78,28 @@ func run(pass *analysis.Pass) (interface{}, error) {
 					return
 				}
 
-				checkHTTPMethod(pass, basicLit)
+				a.checkHTTPMethod(pass, basicLit)
 			}
 
 		case *ast.BasicLit:
-			currentVal := getBasicLiValue(v)
+			currentVal := getBasicLitValue(v)
 
-			checkTimeWeekday(pass, v.Pos(), currentVal)
-			checkTimeMonth(pass, v.Pos(), currentVal)
-			checkTimeLayout(pass, v.Pos(), currentVal)
-			checkCryptoHash(pass, v.Pos(), currentVal)
+			a.checkTimeWeekday(pass, v.Pos(), currentVal)
+			a.checkTimeMonth(pass, v.Pos(), currentVal)
+			a.checkTimeLayout(pass, v.Pos(), currentVal)
+			a.checkCryptoHash(pass, v.Pos(), currentVal)
 		}
 	})
 
 	return nil, nil
 }
 
-func checkHTTPMethod(pass *analysis.Pass, basicLit *ast.BasicLit) {
-	currentVal := getBasicLiValue(basicLit)
+func (a *analyzer) checkHTTPMethod(pass *analysis.Pass, basicLit *ast.BasicLit) {
+	if a.cfg.ExcludeHTTPMethod {
+		return
+	}
+
+	currentVal := getBasicLitValue(basicLit)
 
 	newVal, ok := httpMethod[currentVal]
 	if !ok {
@@ -86,8 +109,12 @@ func checkHTTPMethod(pass *analysis.Pass, basicLit *ast.BasicLit) {
 	report(pass, basicLit.Pos(), newVal, currentVal)
 }
 
-func checkHTTPStatusCode(pass *analysis.Pass, basicLit *ast.BasicLit) {
-	currentVal := getBasicLiValue(basicLit)
+func (a *analyzer) checkHTTPStatusCode(pass *analysis.Pass, basicLit *ast.BasicLit) {
+	if a.cfg.ExcludeHTTPStatusCode {
+		return
+	}
+
+	currentVal := getBasicLitValue(basicLit)
 
 	newVal, ok := httpStatusCode[currentVal]
 	if !ok {
@@ -97,7 +124,11 @@ func checkHTTPStatusCode(pass *analysis.Pass, basicLit *ast.BasicLit) {
 	report(pass, basicLit.Pos(), newVal, currentVal)
 }
 
-func checkTimeWeekday(pass *analysis.Pass, pos token.Pos, currentVal string) {
+func (a *analyzer) checkTimeWeekday(pass *analysis.Pass, pos token.Pos, currentVal string) {
+	if a.cfg.ExcludeTimeWeekday {
+		return
+	}
+
 	newVal, ok := timeWeekday[currentVal]
 	if !ok {
 		return
@@ -106,7 +137,11 @@ func checkTimeWeekday(pass *analysis.Pass, pos token.Pos, currentVal string) {
 	report(pass, pos, newVal, currentVal)
 }
 
-func checkTimeMonth(pass *analysis.Pass, pos token.Pos, currentVal string) {
+func (a *analyzer) checkTimeMonth(pass *analysis.Pass, pos token.Pos, currentVal string) {
+	if a.cfg.ExcludeTimeMonth {
+		return
+	}
+
 	newVal, ok := timeMonth[currentVal]
 	if !ok {
 		return
@@ -115,7 +150,11 @@ func checkTimeMonth(pass *analysis.Pass, pos token.Pos, currentVal string) {
 	report(pass, pos, newVal, currentVal)
 }
 
-func checkTimeLayout(pass *analysis.Pass, pos token.Pos, currentVal string) {
+func (a *analyzer) checkTimeLayout(pass *analysis.Pass, pos token.Pos, currentVal string) {
+	if a.cfg.ExcludeTimeLayout {
+		return
+	}
+
 	newVal, ok := timeLayout[currentVal]
 	if !ok {
 		return
@@ -124,7 +163,11 @@ func checkTimeLayout(pass *analysis.Pass, pos token.Pos, currentVal string) {
 	report(pass, pos, newVal, currentVal)
 }
 
-func checkCryptoHash(pass *analysis.Pass, pos token.Pos, currentVal string) {
+func (a *analyzer) checkCryptoHash(pass *analysis.Pass, pos token.Pos, currentVal string) {
+	if a.cfg.ExcludeCryptoHash {
+		return
+	}
+
 	newVal, ok := cryptoHash[currentVal]
 	if !ok {
 		return
@@ -155,7 +198,7 @@ func getBasicLit(ce *ast.CallExpr, count, idx int, typ token.Token) *ast.BasicLi
 	return basicLit
 }
 
-func getBasicLiValue(basicLit *ast.BasicLit) string {
+func getBasicLitValue(basicLit *ast.BasicLit) string {
 	return strings.Trim(basicLit.Value, "\"")
 }
 
