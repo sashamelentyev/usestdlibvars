@@ -8,9 +8,9 @@ import (
 
 func TestUseStdlibVars(t *testing.T) {
 	pkgs := []string{
-		"_crypto",
-		"_http",
-		"_time",
+		// "a/crypto",
+		"a/http",
+		// "a/time",
 	}
 	analysistest.Run(t, analysistest.TestData(), New(), pkgs...)
 }
