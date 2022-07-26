@@ -12,7 +12,7 @@ go install github.com/sashamelentyev/usestdlibvars
 
 ```console
 $ usestdlibvars -h                                                     
-usestdlibvars: Detect the possibility to use constants/variables from the stdlib.
+usestdlibvars: A linter that detect the possibility to use variables/constants from the Go standard library.
 
 Usage: usestdlibvars [-flag] [package]
 

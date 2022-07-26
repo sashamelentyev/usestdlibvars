@@ -24,7 +24,7 @@ const (
 func New() *analysis.Analyzer {
 	return &analysis.Analyzer{
 		Name:     "usestdlibvars",
-		Doc:      "Detect the possibility to use constants/variables from the stdlib.",
+		Doc:      "A linter that detect the possibility to use variables/constants from the Go standard library.",
 		Run:      run,
 		Flags:    flags(),
 		Requires: []*analysis.Analyzer{inspect.Analyzer},
