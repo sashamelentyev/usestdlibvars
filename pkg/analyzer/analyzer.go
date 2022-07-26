@@ -33,12 +33,12 @@ func New() *analysis.Analyzer {
 
 func flags() flag.FlagSet {
 	flags := flag.NewFlagSet("", flag.ExitOnError)
-	flags.Bool(HTTPMethodFlag, true, "")
-	flags.Bool(HTTPStatusCodeFlag, true, "")
-	flags.Bool(TimeWeekdayFlag, false, "")
-	flags.Bool(TimeMonthFlag, false, "")
-	flags.Bool(TimeLayoutFlag, false, "")
-	flags.Bool(CryptoHashFlag, false, "")
+	flags.Bool(HTTPMethodFlag, true, "suggest the use of http.MethodXX")
+	flags.Bool(HTTPStatusCodeFlag, true, "suggest the use of http.StatusXX")
+	flags.Bool(TimeWeekdayFlag, false, "suggest the use of time.Weekday")
+	flags.Bool(TimeMonthFlag, false, "suggest the use of time.Month")
+	flags.Bool(TimeLayoutFlag, false, "suggest the use of time.Layout")
+	flags.Bool(CryptoHashFlag, false, "suggest the use of crypto.Hash")
 	return *flags
 }
 
