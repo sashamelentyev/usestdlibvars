@@ -43,11 +43,18 @@ func run(p *analysis.Pass) (interface{}, error) {
 	return nil, nil
 }
 
+// variable finds possibility in like variable or constant use variables/constants from stdlib
 func variable(p *analysis.Pass, bl *ast.BasicLit, dictionaries ...map[string]string) {
 	stdlibVars(p, bl, dictionaries...)
 }
 
-func funcArg(p *analysis.Pass, ce *ast.CallExpr, name string, length, idx int, typ token.Token, dict map[string]string) {
+// funcArg finds possibility use variables/constants from stdlib in selected function argument
+// name - name of function
+// count - count of argument in function
+// idx - argument in which will be use variables/constants from stdlib
+// typ - argument type
+// dict - dictionary of variables/constants from stdlib
+func funcArg(p *analysis.Pass, ce *ast.CallExpr, name string, count, idx int, typ token.Token, dict map[string]string) {
 	selectorExpr, ok := ce.Fun.(*ast.SelectorExpr)
 	if !ok {
 		return
@@ -55,7 +62,7 @@ func funcArg(p *analysis.Pass, ce *ast.CallExpr, name string, length, idx int, t
 	if selectorExpr.Sel.Name != name {
 		return
 	}
-	if len(ce.Args) != length {
+	if len(ce.Args) != count {
 		return
 	}
 	basicLit, ok := ce.Args[idx].(*ast.BasicLit)
