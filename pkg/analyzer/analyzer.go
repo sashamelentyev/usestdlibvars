@@ -1,6 +1,7 @@
 package analyzer
 
 import (
+	"flag"
 	"go/ast"
 	"go/token"
 	"strings"
@@ -10,14 +11,35 @@ import (
 	"golang.org/x/tools/go/ast/inspector"
 )
 
+const (
+	TimeWeekdayFlag    = "time-weekday"
+	TimeMonthFlag      = "time-month"
+	TimeLayoutFlag     = "time-layout"
+	CryptoHashFlag     = "crypto-hash"
+	HTTPMethodFlag     = "http-method"
+	HTTPStatusCodeFlag = "http-status-code"
+)
+
 // New returns new usestdlibvars analyzer.
 func New() *analysis.Analyzer {
 	return &analysis.Analyzer{
 		Name:     "usestdlibvars",
 		Doc:      "Detect the possibility to use constants/variables from the stdlib.",
 		Run:      run,
+		Flags:    flags(),
 		Requires: []*analysis.Analyzer{inspect.Analyzer},
 	}
+}
+
+func flags() flag.FlagSet {
+	flags := flag.NewFlagSet("", flag.ExitOnError)
+	flags.Bool(HTTPMethodFlag, true, "")
+	flags.Bool(HTTPStatusCodeFlag, true, "")
+	flags.Bool(TimeWeekdayFlag, false, "")
+	flags.Bool(TimeMonthFlag, false, "")
+	flags.Bool(TimeLayoutFlag, false, "")
+	flags.Bool(CryptoHashFlag, false, "")
+	return *flags
 }
 
 func run(pass *analysis.Pass) (interface{}, error) {
@@ -38,6 +60,10 @@ func run(pass *analysis.Pass) (interface{}, error) {
 
 			switch selectorExpr.Sel.Name {
 			case "WriteHeader":
+				if !lookupFlag(pass, HTTPStatusCodeFlag) {
+					return
+				}
+
 				basicLit := getBasicLit(v, 1, 0, token.INT)
 				if basicLit == nil {
 					return
@@ -46,6 +72,10 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				checkHTTPStatusCode(pass, basicLit)
 
 			case "NewRequest":
+				if !lookupFlag(pass, HTTPMethodFlag) {
+					return
+				}
+
 				basicLit := getBasicLit(v, 3, 0, token.STRING)
 				if basicLit == nil {
 					return
@@ -54,6 +84,10 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				checkHTTPMethod(pass, basicLit)
 
 			case "NewRequestWithContext":
+				if !lookupFlag(pass, HTTPMethodFlag) {
+					return
+				}
+
 				basicLit := getBasicLit(v, 4, 1, token.STRING)
 				if basicLit == nil {
 					return
@@ -63,20 +97,35 @@ func run(pass *analysis.Pass) (interface{}, error) {
 			}
 
 		case *ast.BasicLit:
-			currentVal := getBasicLiValue(v)
+			currentVal := getBasicLitValue(v)
 
-			checkTimeWeekday(pass, v.Pos(), currentVal)
-			checkTimeMonth(pass, v.Pos(), currentVal)
-			checkTimeLayout(pass, v.Pos(), currentVal)
-			checkCryptoHash(pass, v.Pos(), currentVal)
+			if lookupFlag(pass, TimeWeekdayFlag) {
+				checkTimeWeekday(pass, v.Pos(), currentVal)
+			}
+
+			if lookupFlag(pass, TimeMonthFlag) {
+				checkTimeMonth(pass, v.Pos(), currentVal)
+			}
+
+			if lookupFlag(pass, TimeLayoutFlag) {
+				checkTimeLayout(pass, v.Pos(), currentVal)
+			}
+
+			if lookupFlag(pass, CryptoHashFlag) {
+				checkCryptoHash(pass, v.Pos(), currentVal)
+			}
 		}
 	})
 
 	return nil, nil
 }
 
+func lookupFlag(pass *analysis.Pass, name string) bool {
+	return pass.Analyzer.Flags.Lookup(name).Value.(flag.Getter).Get().(bool)
+}
+
 func checkHTTPMethod(pass *analysis.Pass, basicLit *ast.BasicLit) {
-	currentVal := getBasicLiValue(basicLit)
+	currentVal := getBasicLitValue(basicLit)
 
 	newVal, ok := httpMethod[currentVal]
 	if !ok {
@@ -87,7 +136,7 @@ func checkHTTPMethod(pass *analysis.Pass, basicLit *ast.BasicLit) {
 }
 
 func checkHTTPStatusCode(pass *analysis.Pass, basicLit *ast.BasicLit) {
-	currentVal := getBasicLiValue(basicLit)
+	currentVal := getBasicLitValue(basicLit)
 
 	newVal, ok := httpStatusCode[currentVal]
 	if !ok {
@@ -155,7 +204,7 @@ func getBasicLit(ce *ast.CallExpr, count, idx int, typ token.Token) *ast.BasicLi
 	return basicLit
 }
 
-func getBasicLiValue(basicLit *ast.BasicLit) string {
+func getBasicLitValue(basicLit *ast.BasicLit) string {
 	return strings.Trim(basicLit.Value, "\"")
 }
 
