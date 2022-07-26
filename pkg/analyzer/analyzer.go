@@ -1,13 +1,9 @@
 package analyzer
 
 import (
-	"crypto"
 	"go/ast"
 	"go/token"
-	"net/http"
-	"strconv"
 	"strings"
-	"time"
 
 	"golang.org/x/tools/go/analysis"
 	"golang.org/x/tools/go/analysis/passes/inspect"
@@ -18,229 +14,151 @@ import (
 func New() *analysis.Analyzer {
 	return &analysis.Analyzer{
 		Name:     "usestdlibvars",
-		Doc:      "Detect possibility use variables/constants from stdlib",
+		Doc:      "Detect the possibility to use constants/variables from the stdlib.",
 		Run:      run,
 		Requires: []*analysis.Analyzer{inspect.Analyzer},
 	}
 }
 
-func run(p *analysis.Pass) (interface{}, error) {
-	insp := p.ResultOf[inspect.Analyzer].(*inspector.Inspector)
+func run(pass *analysis.Pass) (interface{}, error) {
+	insp := pass.ResultOf[inspect.Analyzer].(*inspector.Inspector)
+
 	filter := []ast.Node{
 		(*ast.BasicLit)(nil),
 		(*ast.CallExpr)(nil),
 	}
+
 	insp.Preorder(filter, func(n ast.Node) {
 		switch v := n.(type) {
-		case *ast.BasicLit:
-			variable(p, v, timeWeekday, timeMonth, timeParseLayout, cryptoHash)
 		case *ast.CallExpr:
-			funcArg(p, v, "WriteHeader", 1, 0, token.INT, httpStatusCode)
-			funcArg(p, v, "NewRequest", 3, 0, token.STRING, httpMethod)
-			funcArg(p, v, "NewRequestWithContext", 4, 1, token.STRING, httpMethod)
+			selectorExpr, ok := v.Fun.(*ast.SelectorExpr)
+			if !ok {
+				return
+			}
+
+			switch selectorExpr.Sel.Name {
+			case "WriteHeader":
+				basicLit := getBasicLit(v, 1, 0, token.INT)
+				if basicLit == nil {
+					return
+				}
+
+				checkHTTPStatusCode(pass, basicLit)
+
+			case "NewRequest":
+				basicLit := getBasicLit(v, 3, 0, token.STRING)
+				if basicLit == nil {
+					return
+				}
+
+				checkHTTPMethod(pass, basicLit)
+
+			case "NewRequestWithContext":
+				basicLit := getBasicLit(v, 4, 1, token.STRING)
+				if basicLit == nil {
+					return
+				}
+
+				checkHTTPMethod(pass, basicLit)
+			}
+
+		case *ast.BasicLit:
+			currentVal := getBasicLiValue(v)
+
+			checkTimeWeekday(pass, v.Pos(), currentVal)
+			checkTimeMonth(pass, v.Pos(), currentVal)
+			checkTimeLayout(pass, v.Pos(), currentVal)
+			checkCryptoHash(pass, v.Pos(), currentVal)
 		}
 	})
+
 	return nil, nil
 }
 
-// variable finds possibility in like variable or constant use variables/constants from stdlib
-func variable(p *analysis.Pass, bl *ast.BasicLit, dictionaries ...map[string]string) {
-	stdlibVars(p, bl, dictionaries...)
-}
+func checkHTTPMethod(pass *analysis.Pass, basicLit *ast.BasicLit) {
+	currentVal := getBasicLiValue(basicLit)
 
-// funcArg finds possibility use variables/constants from stdlib in selected function argument
-// name - name of function
-// count - count of argument in function
-// idx - argument in which will be use variables/constants from stdlib
-// typ - argument type
-// dict - dictionary of variables/constants from stdlib
-func funcArg(p *analysis.Pass, ce *ast.CallExpr, name string, count, idx int, typ token.Token, dict map[string]string) {
-	selectorExpr, ok := ce.Fun.(*ast.SelectorExpr)
+	newVal, ok := httpMethod[currentVal]
 	if !ok {
 		return
 	}
-	if selectorExpr.Sel.Name != name {
+
+	report(pass, basicLit.Pos(), newVal, currentVal)
+}
+
+func checkHTTPStatusCode(pass *analysis.Pass, basicLit *ast.BasicLit) {
+	currentVal := getBasicLiValue(basicLit)
+
+	newVal, ok := httpStatusCode[currentVal]
+	if !ok {
 		return
 	}
+
+	report(pass, basicLit.Pos(), newVal, currentVal)
+}
+
+func checkTimeWeekday(pass *analysis.Pass, pos token.Pos, currentVal string) {
+	newVal, ok := timeWeekday[currentVal]
+	if !ok {
+		return
+	}
+
+	report(pass, pos, newVal, currentVal)
+}
+
+func checkTimeMonth(pass *analysis.Pass, pos token.Pos, currentVal string) {
+	newVal, ok := timeMonth[currentVal]
+	if !ok {
+		return
+	}
+
+	report(pass, pos, newVal, currentVal)
+}
+
+func checkTimeLayout(pass *analysis.Pass, pos token.Pos, currentVal string) {
+	newVal, ok := timeLayout[currentVal]
+	if !ok {
+		return
+	}
+
+	report(pass, pos, newVal, currentVal)
+}
+
+func checkCryptoHash(pass *analysis.Pass, pos token.Pos, currentVal string) {
+	newVal, ok := cryptoHash[currentVal]
+	if !ok {
+		return
+	}
+
+	report(pass, pos, newVal, currentVal)
+}
+
+// getBasicLit gets the *ast.BasicLit of a function argument.
+//
+// - count: expected number of argument in function
+// - idx: index of the argument to get the *ast.BasicLit
+// - typ: argument type
+func getBasicLit(ce *ast.CallExpr, count, idx int, typ token.Token) *ast.BasicLit {
 	if len(ce.Args) != count {
-		return
+		return nil
 	}
+
 	basicLit, ok := ce.Args[idx].(*ast.BasicLit)
 	if !ok {
-		return
+		return nil
 	}
+
 	if basicLit.Kind != typ {
-		return
+		return nil
 	}
-	stdlibVars(p, basicLit, dict)
+
+	return basicLit
 }
 
-func stdlibVars(p *analysis.Pass, bl *ast.BasicLit, dictionaries ...map[string]string) {
-	oldVal := strings.Trim(bl.Value, "\"")
-	for _, dict := range dictionaries {
-		newVal, ok := dict[oldVal]
-		if !ok {
-			continue
-		}
-		report(p, bl.Pos(), newVal, oldVal)
-	}
+func getBasicLiValue(basicLit *ast.BasicLit) string {
+	return strings.Trim(basicLit.Value, "\"")
 }
 
-func report(p *analysis.Pass, pos token.Pos, newVal, oldVal string) {
-	p.Reportf(
-		pos,
-		`can use %s instead "%s"`,
-		newVal,
-		oldVal,
-	)
+func report(p *analysis.Pass, pos token.Pos, newVal, currentVal string) {
+	p.Reportf(pos, `%q can be replaced by %s`, currentVal, newVal)
 }
-
-var (
-	cryptoHash = map[string]string{
-		crypto.MD4.String():         "crypto.MD4.String()",
-		crypto.MD5.String():         "crypto.MD5.String()",
-		crypto.SHA1.String():        "crypto.SHA1.String()",
-		crypto.SHA224.String():      "crypto.SHA224.String()",
-		crypto.SHA256.String():      "crypto.SHA256.String()",
-		crypto.SHA384.String():      "crypto.SHA384.String()",
-		crypto.SHA512.String():      "crypto.SHA512.String()",
-		crypto.MD5SHA1.String():     "crypto.MD5SHA1.String()",
-		crypto.RIPEMD160.String():   "crypto.RIPEMD160.String()",
-		crypto.SHA3_224.String():    "crypto.SHA3_224.String()",
-		crypto.SHA3_256.String():    "crypto.SHA3_256.String()",
-		crypto.SHA3_384.String():    "crypto.SHA3_384.String()",
-		crypto.SHA3_512.String():    "crypto.SHA3_512.String()",
-		crypto.SHA512_224.String():  "crypto.SHA512_224.String()",
-		crypto.SHA512_256.String():  "crypto.SHA512_256.String()",
-		crypto.BLAKE2s_256.String(): "crypto.BLAKE2s_256.String()",
-		crypto.BLAKE2b_256.String(): "crypto.BLAKE2b_256.String()",
-		crypto.BLAKE2b_384.String(): "crypto.BLAKE2b_384.String()",
-		crypto.BLAKE2b_512.String(): "crypto.BLAKE2b_512.String()",
-	}
-)
-
-var (
-	httpMethod = map[string]string{
-		http.MethodGet:     "http.MethodGet",
-		http.MethodHead:    "http.MethodHead",
-		http.MethodPost:    "http.MethodPost",
-		http.MethodPut:     "http.MethodPut",
-		http.MethodPatch:   "http.MethodPatch",
-		http.MethodDelete:  "http.MethodDelete",
-		http.MethodConnect: "http.MethodConnect",
-		http.MethodOptions: "http.MethodOptions",
-		http.MethodTrace:   "http.MethodTrace",
-	}
-	httpStatusCode = map[string]string{
-		strconv.Itoa(http.StatusContinue):           "http.StatusContinue",
-		strconv.Itoa(http.StatusSwitchingProtocols): "http.StatusSwitchingProtocols",
-		strconv.Itoa(http.StatusProcessing):         "http.StatusProcessing",
-		strconv.Itoa(http.StatusEarlyHints):         "http.StatusEarlyHints",
-
-		strconv.Itoa(http.StatusOK):                   "http.StatusOK",
-		strconv.Itoa(http.StatusCreated):              "http.StatusCreated",
-		strconv.Itoa(http.StatusAccepted):             "http.StatusAccepted",
-		strconv.Itoa(http.StatusNonAuthoritativeInfo): "http.StatusNonAuthoritativeInfo",
-		strconv.Itoa(http.StatusNoContent):            "http.StatusNoContent",
-		strconv.Itoa(http.StatusResetContent):         "http.StatusResetContent",
-		strconv.Itoa(http.StatusPartialContent):       "http.StatusPartialContent",
-		strconv.Itoa(http.StatusMultiStatus):          "http.StatusMultiStatus",
-		strconv.Itoa(http.StatusAlreadyReported):      "http.StatusAlreadyReported",
-		strconv.Itoa(http.StatusIMUsed):               "http.StatusIMUsed",
-
-		strconv.Itoa(http.StatusMultipleChoices):   "http.StatusMultipleChoices",
-		strconv.Itoa(http.StatusMovedPermanently):  "http.StatusMovedPermanently",
-		strconv.Itoa(http.StatusFound):             "http.StatusFound",
-		strconv.Itoa(http.StatusSeeOther):          "http.StatusSeeOther",
-		strconv.Itoa(http.StatusNotModified):       "http.StatusNotModified",
-		strconv.Itoa(http.StatusUseProxy):          "http.StatusUseProxy",
-		strconv.Itoa(http.StatusTemporaryRedirect): "http.StatusTemporaryRedirect",
-		strconv.Itoa(http.StatusPermanentRedirect): "http.StatusPermanentRedirect",
-
-		strconv.Itoa(http.StatusBadRequest):                   "http.StatusBadRequest",
-		strconv.Itoa(http.StatusUnauthorized):                 "http.StatusUnauthorized",
-		strconv.Itoa(http.StatusPaymentRequired):              "http.StatusPaymentRequired",
-		strconv.Itoa(http.StatusForbidden):                    "http.StatusForbidden",
-		strconv.Itoa(http.StatusNotFound):                     "http.StatusNotFound",
-		strconv.Itoa(http.StatusMethodNotAllowed):             "http.StatusMethodNotAllowed",
-		strconv.Itoa(http.StatusNotAcceptable):                "http.StatusNotAcceptable",
-		strconv.Itoa(http.StatusProxyAuthRequired):            "http.StatusProxyAuthRequired",
-		strconv.Itoa(http.StatusRequestTimeout):               "http.StatusRequestTimeout",
-		strconv.Itoa(http.StatusConflict):                     "http.StatusConflict",
-		strconv.Itoa(http.StatusGone):                         "http.StatusGone",
-		strconv.Itoa(http.StatusLengthRequired):               "http.StatusLengthRequired",
-		strconv.Itoa(http.StatusPreconditionFailed):           "http.StatusPreconditionFailed",
-		strconv.Itoa(http.StatusRequestEntityTooLarge):        "http.StatusRequestEntityTooLarge",
-		strconv.Itoa(http.StatusRequestURITooLong):            "http.StatusRequestURITooLong",
-		strconv.Itoa(http.StatusUnsupportedMediaType):         "http.StatusUnsupportedMediaType",
-		strconv.Itoa(http.StatusRequestedRangeNotSatisfiable): "http.StatusRequestedRangeNotSatisfiable",
-		strconv.Itoa(http.StatusExpectationFailed):            "http.StatusExpectationFailed",
-		strconv.Itoa(http.StatusTeapot):                       "http.StatusTeapot",
-		strconv.Itoa(http.StatusMisdirectedRequest):           "http.StatusMisdirectedRequest",
-		strconv.Itoa(http.StatusUnprocessableEntity):          "http.StatusUnprocessableEntity",
-		strconv.Itoa(http.StatusLocked):                       "http.StatusLocked",
-		strconv.Itoa(http.StatusFailedDependency):             "http.StatusFailedDependency",
-		strconv.Itoa(http.StatusTooEarly):                     "http.StatusTooEarly",
-		strconv.Itoa(http.StatusUpgradeRequired):              "http.StatusUpgradeRequired",
-		strconv.Itoa(http.StatusPreconditionRequired):         "http.StatusPreconditionRequired",
-		strconv.Itoa(http.StatusTooManyRequests):              "http.StatusTooManyRequests",
-		strconv.Itoa(http.StatusRequestHeaderFieldsTooLarge):  "http.StatusRequestHeaderFieldsTooLarge",
-		strconv.Itoa(http.StatusUnavailableForLegalReasons):   "http.StatusUnavailableForLegalReasons",
-
-		strconv.Itoa(http.StatusInternalServerError):           "http.StatusInternalServerError",
-		strconv.Itoa(http.StatusNotImplemented):                "http.StatusNotImplemented",
-		strconv.Itoa(http.StatusBadGateway):                    "http.StatusBadGateway",
-		strconv.Itoa(http.StatusServiceUnavailable):            "http.StatusServiceUnavailable",
-		strconv.Itoa(http.StatusGatewayTimeout):                "http.StatusGatewayTimeout",
-		strconv.Itoa(http.StatusHTTPVersionNotSupported):       "http.StatusHTTPVersionNotSupported",
-		strconv.Itoa(http.StatusVariantAlsoNegotiates):         "http.StatusVariantAlsoNegotiates",
-		strconv.Itoa(http.StatusInsufficientStorage):           "http.StatusInsufficientStorage",
-		strconv.Itoa(http.StatusLoopDetected):                  "http.StatusLoopDetected",
-		strconv.Itoa(http.StatusNotExtended):                   "http.StatusNotExtended",
-		strconv.Itoa(http.StatusNetworkAuthenticationRequired): "http.StatusNetworkAuthenticationRequired",
-	}
-)
-
-var (
-	timeWeekday = map[string]string{
-		time.Sunday.String():    "time.Sunday.String()",
-		time.Monday.String():    "time.Monday.String()",
-		time.Tuesday.String():   "time.Tuesday.String()",
-		time.Wednesday.String(): "time.Wednesday.String()",
-		time.Thursday.String():  "time.Thursday.String()",
-		time.Friday.String():    "time.Friday.String()",
-		time.Saturday.String():  "time.Saturday.String()",
-	}
-	timeMonth = map[string]string{
-		time.January.String():   "time.January.String()",
-		time.February.String():  "time.February.String()",
-		time.March.String():     "time.March.String()",
-		time.April.String():     "time.April.String()",
-		time.May.String():       "time.May.String()",
-		time.June.String():      "time.June.String()",
-		time.July.String():      "time.July.String()",
-		time.August.String():    "time.August.String()",
-		time.September.String(): "time.September.String()",
-		time.October.String():   "time.October.String()",
-		time.November.String():  "time.November.String()",
-		time.December.String():  "time.December.String()",
-	}
-	timeParseLayout = map[string]string{
-		time.Layout:      "time.Layout",
-		time.ANSIC:       "time.ANSIC",
-		time.UnixDate:    "time.UnixDate",
-		time.RubyDate:    "time.RubyDate",
-		time.RFC822:      "time.RFC822",
-		time.RFC822Z:     "time.RFC822Z",
-		time.RFC850:      "time.RFC850",
-		time.RFC1123:     "time.RFC1123",
-		time.RFC1123Z:    "time.RFC1123Z",
-		time.RFC3339:     "time.RFC3339",
-		time.RFC3339Nano: "time.RFC3339Nano",
-		time.Kitchen:     "time.Kitchen",
-		time.Stamp:       "time.Stamp",
-		time.StampMilli:  "time.StampMilli",
-		time.StampMicro:  "time.StampMicro",
-		time.StampNano:   "time.StampNano",
-	}
-)
