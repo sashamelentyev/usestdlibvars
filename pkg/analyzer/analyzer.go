@@ -128,58 +128,46 @@ func checkHTTPMethod(pass *analysis.Pass, basicLit *ast.BasicLit) {
 	currentVal := getBasicLitValue(basicLit)
 
 	newVal, ok := httpMethod[currentVal]
-	if !ok {
-		return
+	if ok {
+		report(pass, basicLit.Pos(), newVal, currentVal)
 	}
-
-	report(pass, basicLit.Pos(), newVal, currentVal)
 }
 
 func checkHTTPStatusCode(pass *analysis.Pass, basicLit *ast.BasicLit) {
 	currentVal := getBasicLitValue(basicLit)
 
 	newVal, ok := httpStatusCode[currentVal]
-	if !ok {
-		return
+	if ok {
+		report(pass, basicLit.Pos(), newVal, currentVal)
 	}
-
-	report(pass, basicLit.Pos(), newVal, currentVal)
 }
 
 func checkTimeWeekday(pass *analysis.Pass, pos token.Pos, currentVal string) {
 	newVal, ok := timeWeekday[currentVal]
-	if !ok {
-		return
+	if ok {
+		report(pass, pos, newVal, currentVal)
 	}
-
-	report(pass, pos, newVal, currentVal)
 }
 
 func checkTimeMonth(pass *analysis.Pass, pos token.Pos, currentVal string) {
 	newVal, ok := timeMonth[currentVal]
-	if !ok {
-		return
+	if ok {
+		report(pass, pos, newVal, currentVal)
 	}
-
-	report(pass, pos, newVal, currentVal)
 }
 
 func checkTimeLayout(pass *analysis.Pass, pos token.Pos, currentVal string) {
 	newVal, ok := timeLayout[currentVal]
-	if !ok {
-		return
+	if ok {
+		report(pass, pos, newVal, currentVal)
 	}
-
-	report(pass, pos, newVal, currentVal)
 }
 
 func checkCryptoHash(pass *analysis.Pass, pos token.Pos, currentVal string) {
 	newVal, ok := cryptoHash[currentVal]
-	if !ok {
-		return
+	if ok {
+		report(pass, pos, newVal, currentVal)
 	}
-
-	report(pass, pos, newVal, currentVal)
 }
 
 // getBasicLit gets the *ast.BasicLit of a function argument.
