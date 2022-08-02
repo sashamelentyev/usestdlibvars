@@ -50,6 +50,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 	filter := []ast.Node{
 		(*ast.BasicLit)(nil),
 		(*ast.CallExpr)(nil),
+		(*ast.CompositeLit)(nil),
 	}
 
 	insp.Preorder(filter, func(n ast.Node) {
@@ -66,7 +67,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 					return
 				}
 
-				basicLit := getBasicLit(v, 1, 0, token.INT)
+				basicLit := getBasicLitFromArgs(v.Args, 1, 0, token.INT)
 				if basicLit == nil {
 					return
 				}
@@ -78,7 +79,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 					return
 				}
 
-				basicLit := getBasicLit(v, 3, 0, token.STRING)
+				basicLit := getBasicLitFromArgs(v.Args, 3, 0, token.STRING)
 				if basicLit == nil {
 					return
 				}
@@ -90,7 +91,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 					return
 				}
 
-				basicLit := getBasicLit(v, 4, 1, token.STRING)
+				basicLit := getBasicLitFromArgs(v.Args, 4, 1, token.STRING)
 				if basicLit == nil {
 					return
 				}
@@ -119,6 +120,30 @@ func run(pass *analysis.Pass) (interface{}, error) {
 
 			if lookupFlag(pass, DefaultRPCPathFlag) {
 				checkDefaultRPCPath(pass, v.Pos(), currentVal)
+			}
+
+		case *ast.CompositeLit:
+			selectorExpr, ok := v.Type.(*ast.SelectorExpr)
+			if !ok {
+				return
+			}
+
+			ident, ok := selectorExpr.X.(*ast.Ident)
+			if !ok {
+				return
+			}
+
+			if ident.Name == "http" {
+				switch selectorExpr.Sel.Name {
+				case "Request":
+					if basicLit := getBasicLitFromElts(v.Elts, "Method"); basicLit != nil {
+						checkHTTPMethod(pass, basicLit)
+					}
+				case "Response":
+					if basicLit := getBasicLitFromElts(v.Elts, "StatusCode"); basicLit != nil {
+						checkHTTPStatusCode(pass, basicLit)
+					}
+				}
 			}
 		}
 	})
@@ -183,17 +208,17 @@ func checkDefaultRPCPath(pass *analysis.Pass, pos token.Pos, currentVal string) 
 	}
 }
 
-// getBasicLit gets the *ast.BasicLit of a function argument.
+// getBasicLitFromArgs gets the *ast.BasicLit of a function argument.
 //
 // - count: expected number of argument in function
 // - idx: index of the argument to get the *ast.BasicLit
 // - typ: argument type
-func getBasicLit(ce *ast.CallExpr, count, idx int, typ token.Token) *ast.BasicLit {
-	if len(ce.Args) != count {
+func getBasicLitFromArgs(args []ast.Expr, count, idx int, typ token.Token) *ast.BasicLit {
+	if len(args) != count {
 		return nil
 	}
 
-	basicLit, ok := ce.Args[idx].(*ast.BasicLit)
+	basicLit, ok := args[idx].(*ast.BasicLit)
 	if !ok {
 		return nil
 	}
@@ -203,6 +228,31 @@ func getBasicLit(ce *ast.CallExpr, count, idx int, typ token.Token) *ast.BasicLi
 	}
 
 	return basicLit
+}
+
+// getBasicLitFromElts gets the *ast.BasicLit of a struct elements.
+//
+// - key: name of key in struct
+func getBasicLitFromElts(elts []ast.Expr, key string) *ast.BasicLit {
+	for _, e := range elts {
+		expr, ok := e.(*ast.KeyValueExpr)
+		if !ok {
+			continue
+		}
+		i, ok := expr.Key.(*ast.Ident)
+		if !ok {
+			continue
+		}
+		if i.Name != key {
+			continue
+		}
+		basicLit, ok := expr.Value.(*ast.BasicLit)
+		if !ok {
+			continue
+		}
+		return basicLit
+	}
+	return nil
 }
 
 func getBasicLitValue(basicLit *ast.BasicLit) string {

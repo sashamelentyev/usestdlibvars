@@ -28,3 +28,18 @@ func _GET_2() {
 func _GET_3() {
 	_, _ = http.NewRequestWithContext(nil, "GET", "", nil) // want `"GET" can be replaced by http\.MethodGet`
 }
+
+func _GET_4() {
+	_ = &http.Request{
+		Method: "GET", // want `"GET" can be replaced by http\.MethodGet`
+		Response: &http.Response{
+			StatusCode: 200, // want `"200" can be replaced by http\.StatusOK`
+		},
+	}
+}
+
+func _GET_5() {
+	_ = &http.Response{
+		StatusCode: 200, // want `"200" can be replaced by http\.StatusOK`
+	}
+}
