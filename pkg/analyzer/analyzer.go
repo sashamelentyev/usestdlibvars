@@ -127,10 +127,19 @@ func run(pass *analysis.Pass) (interface{}, error) {
 			if ident.Name == "http" {
 				switch selectorExpr.Sel.Name {
 				case "Request":
+					if !lookupFlag(pass, HTTPMethodFlag) {
+						return
+					}
+
 					if basicLit := getBasicLitFromElts(n.Elts, "Method"); basicLit != nil {
 						checkHTTPMethod(pass, basicLit)
 					}
+
 				case "Response":
+					if !lookupFlag(pass, HTTPStatusCodeFlag) {
+						return
+					}
+
 					if basicLit := getBasicLitFromElts(n.Elts, "StatusCode"); basicLit != nil {
 						checkHTTPStatusCode(pass, basicLit)
 					}
@@ -149,8 +158,7 @@ func lookupFlag(pass *analysis.Pass, name string) bool {
 func checkHTTPMethod(pass *analysis.Pass, basicLit *ast.BasicLit) {
 	currentVal := getBasicLitValue(basicLit)
 
-	newVal, ok := httpMethod[currentVal]
-	if ok {
+	if newVal, ok := httpMethod[currentVal]; ok {
 		report(pass, basicLit.Pos(), newVal, currentVal)
 	}
 }
@@ -158,43 +166,37 @@ func checkHTTPMethod(pass *analysis.Pass, basicLit *ast.BasicLit) {
 func checkHTTPStatusCode(pass *analysis.Pass, basicLit *ast.BasicLit) {
 	currentVal := getBasicLitValue(basicLit)
 
-	newVal, ok := httpStatusCode[currentVal]
-	if ok {
+	if newVal, ok := httpStatusCode[currentVal]; ok {
 		report(pass, basicLit.Pos(), newVal, currentVal)
 	}
 }
 
 func checkTimeWeekday(pass *analysis.Pass, pos token.Pos, currentVal string) {
-	newVal, ok := timeWeekday[currentVal]
-	if ok {
+	if newVal, ok := timeWeekday[currentVal]; ok {
 		report(pass, pos, newVal, currentVal)
 	}
 }
 
 func checkTimeMonth(pass *analysis.Pass, pos token.Pos, currentVal string) {
-	newVal, ok := timeMonth[currentVal]
-	if ok {
+	if newVal, ok := timeMonth[currentVal]; ok {
 		report(pass, pos, newVal, currentVal)
 	}
 }
 
 func checkTimeLayout(pass *analysis.Pass, pos token.Pos, currentVal string) {
-	newVal, ok := timeLayout[currentVal]
-	if ok {
+	if newVal, ok := timeLayout[currentVal]; ok {
 		report(pass, pos, newVal, currentVal)
 	}
 }
 
 func checkCryptoHash(pass *analysis.Pass, pos token.Pos, currentVal string) {
-	newVal, ok := cryptoHash[currentVal]
-	if ok {
+	if newVal, ok := cryptoHash[currentVal]; ok {
 		report(pass, pos, newVal, currentVal)
 	}
 }
 
 func checkDefaultRPCPath(pass *analysis.Pass, pos token.Pos, currentVal string) {
-	newVal, ok := defaultRPCPath[currentVal]
-	if ok {
+	if newVal, ok := defaultRPCPath[currentVal]; ok {
 		report(pass, pos, newVal, currentVal)
 	}
 }
@@ -230,18 +232,16 @@ func getBasicLitFromElts(elts []ast.Expr, key string) *ast.BasicLit {
 		if !ok {
 			continue
 		}
-		i, ok := expr.Key.(*ast.Ident)
+		ident, ok := expr.Key.(*ast.Ident)
 		if !ok {
 			continue
 		}
-		if i.Name != key {
+		if ident.Name != key {
 			continue
 		}
-		basicLit, ok := expr.Value.(*ast.BasicLit)
-		if !ok {
-			continue
+		if basicLit, ok := expr.Value.(*ast.BasicLit); ok {
+			return basicLit
 		}
-		return basicLit
 	}
 	return nil
 }
