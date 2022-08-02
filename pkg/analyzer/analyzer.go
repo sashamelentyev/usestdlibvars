@@ -53,10 +53,10 @@ func run(pass *analysis.Pass) (interface{}, error) {
 		(*ast.CompositeLit)(nil),
 	}
 
-	insp.Preorder(filter, func(n ast.Node) {
-		switch v := n.(type) {
+	insp.Preorder(filter, func(node ast.Node) {
+		switch n := node.(type) {
 		case *ast.CallExpr:
-			selectorExpr, ok := v.Fun.(*ast.SelectorExpr)
+			selectorExpr, ok := n.Fun.(*ast.SelectorExpr)
 			if !ok {
 				return
 			}
@@ -67,63 +67,54 @@ func run(pass *analysis.Pass) (interface{}, error) {
 					return
 				}
 
-				basicLit := getBasicLitFromArgs(v.Args, 1, 0, token.INT)
-				if basicLit == nil {
-					return
+				if basicLit := getBasicLitFromArgs(n.Args, 1, 0, token.INT); basicLit != nil {
+					checkHTTPStatusCode(pass, basicLit)
 				}
-
-				checkHTTPStatusCode(pass, basicLit)
 
 			case "NewRequest":
 				if !lookupFlag(pass, HTTPMethodFlag) {
 					return
 				}
 
-				basicLit := getBasicLitFromArgs(v.Args, 3, 0, token.STRING)
-				if basicLit == nil {
-					return
+				if basicLit := getBasicLitFromArgs(n.Args, 3, 0, token.STRING); basicLit != nil {
+					checkHTTPMethod(pass, basicLit)
 				}
-
-				checkHTTPMethod(pass, basicLit)
 
 			case "NewRequestWithContext":
 				if !lookupFlag(pass, HTTPMethodFlag) {
 					return
 				}
 
-				basicLit := getBasicLitFromArgs(v.Args, 4, 1, token.STRING)
-				if basicLit == nil {
-					return
+				if basicLit := getBasicLitFromArgs(n.Args, 4, 1, token.STRING); basicLit != nil {
+					checkHTTPMethod(pass, basicLit)
 				}
-
-				checkHTTPMethod(pass, basicLit)
 			}
 
 		case *ast.BasicLit:
-			currentVal := getBasicLitValue(v)
+			currentVal := getBasicLitValue(n)
 
 			if lookupFlag(pass, TimeWeekdayFlag) {
-				checkTimeWeekday(pass, v.Pos(), currentVal)
+				checkTimeWeekday(pass, n.Pos(), currentVal)
 			}
 
 			if lookupFlag(pass, TimeMonthFlag) {
-				checkTimeMonth(pass, v.Pos(), currentVal)
+				checkTimeMonth(pass, n.Pos(), currentVal)
 			}
 
 			if lookupFlag(pass, TimeLayoutFlag) {
-				checkTimeLayout(pass, v.Pos(), currentVal)
+				checkTimeLayout(pass, n.Pos(), currentVal)
 			}
 
 			if lookupFlag(pass, CryptoHashFlag) {
-				checkCryptoHash(pass, v.Pos(), currentVal)
+				checkCryptoHash(pass, n.Pos(), currentVal)
 			}
 
 			if lookupFlag(pass, DefaultRPCPathFlag) {
-				checkDefaultRPCPath(pass, v.Pos(), currentVal)
+				checkDefaultRPCPath(pass, n.Pos(), currentVal)
 			}
 
 		case *ast.CompositeLit:
-			selectorExpr, ok := v.Type.(*ast.SelectorExpr)
+			selectorExpr, ok := n.Type.(*ast.SelectorExpr)
 			if !ok {
 				return
 			}
@@ -136,11 +127,11 @@ func run(pass *analysis.Pass) (interface{}, error) {
 			if ident.Name == "http" {
 				switch selectorExpr.Sel.Name {
 				case "Request":
-					if basicLit := getBasicLitFromElts(v.Elts, "Method"); basicLit != nil {
+					if basicLit := getBasicLitFromElts(n.Elts, "Method"); basicLit != nil {
 						checkHTTPMethod(pass, basicLit)
 					}
 				case "Response":
-					if basicLit := getBasicLitFromElts(v.Elts, "StatusCode"); basicLit != nil {
+					if basicLit := getBasicLitFromElts(n.Elts, "StatusCode"); basicLit != nil {
 						checkHTTPStatusCode(pass, basicLit)
 					}
 				}
@@ -259,6 +250,6 @@ func getBasicLitValue(basicLit *ast.BasicLit) string {
 	return strings.Trim(basicLit.Value, "\"")
 }
 
-func report(p *analysis.Pass, pos token.Pos, newVal, currentVal string) {
-	p.Reportf(pos, `%q can be replaced by %s`, currentVal, newVal)
+func report(pass *analysis.Pass, pos token.Pos, newVal, currentVal string) {
+	pass.Reportf(pos, `%q can be replaced by %s`, currentVal, newVal)
 }
