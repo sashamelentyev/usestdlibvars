@@ -48,8 +48,8 @@ func run(pass *analysis.Pass) (interface{}, error) {
 	insp := pass.ResultOf[inspect.Analyzer].(*inspector.Inspector)
 
 	filter := []ast.Node{
-		(*ast.BasicLit)(nil),
 		(*ast.CallExpr)(nil),
+		(*ast.BasicLit)(nil),
 		(*ast.CompositeLit)(nil),
 	}
 
@@ -203,9 +203,10 @@ func checkDefaultRPCPath(pass *analysis.Pass, pos token.Pos, currentVal string) 
 
 // getBasicLitFromArgs gets the *ast.BasicLit of a function argument.
 //
-// - count: expected number of argument in function
-// - idx: index of the argument to get the *ast.BasicLit
-// - typ: argument type
+// Arguments:
+//   - count - expected number of argument in function
+//   - idx - index of the argument to get the *ast.BasicLit
+//   - typ - argument type
 func getBasicLitFromArgs(args []ast.Expr, count, idx int, typ token.Token) *ast.BasicLit {
 	if len(args) != count {
 		return nil
@@ -225,7 +226,8 @@ func getBasicLitFromArgs(args []ast.Expr, count, idx int, typ token.Token) *ast.
 
 // getBasicLitFromElts gets the *ast.BasicLit of a struct elements.
 //
-// - key: name of key in struct
+// Arguments:
+//   - key: name of key in struct
 func getBasicLitFromElts(elts []ast.Expr, key string) *ast.BasicLit {
 	for _, e := range elts {
 		expr, ok := e.(*ast.KeyValueExpr)
