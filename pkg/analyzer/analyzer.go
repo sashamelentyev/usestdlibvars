@@ -159,7 +159,7 @@ func checkHTTPMethod(pass *analysis.Pass, basicLit *ast.BasicLit) {
 	currentVal := getBasicLitValue(basicLit)
 
 	if newVal, ok := httpMethod[currentVal]; ok {
-		report(pass, basicLit.Pos(), newVal, currentVal)
+		report(pass, basicLit.Pos(), currentVal, newVal)
 	}
 }
 
@@ -167,37 +167,37 @@ func checkHTTPStatusCode(pass *analysis.Pass, basicLit *ast.BasicLit) {
 	currentVal := getBasicLitValue(basicLit)
 
 	if newVal, ok := httpStatusCode[currentVal]; ok {
-		report(pass, basicLit.Pos(), newVal, currentVal)
+		report(pass, basicLit.Pos(), currentVal, newVal)
 	}
 }
 
 func checkTimeWeekday(pass *analysis.Pass, pos token.Pos, currentVal string) {
 	if newVal, ok := timeWeekday[currentVal]; ok {
-		report(pass, pos, newVal, currentVal)
+		report(pass, pos, currentVal, newVal)
 	}
 }
 
 func checkTimeMonth(pass *analysis.Pass, pos token.Pos, currentVal string) {
 	if newVal, ok := timeMonth[currentVal]; ok {
-		report(pass, pos, newVal, currentVal)
+		report(pass, pos, currentVal, newVal)
 	}
 }
 
 func checkTimeLayout(pass *analysis.Pass, pos token.Pos, currentVal string) {
 	if newVal, ok := timeLayout[currentVal]; ok {
-		report(pass, pos, newVal, currentVal)
+		report(pass, pos, currentVal, newVal)
 	}
 }
 
 func checkCryptoHash(pass *analysis.Pass, pos token.Pos, currentVal string) {
 	if newVal, ok := cryptoHash[currentVal]; ok {
-		report(pass, pos, newVal, currentVal)
+		report(pass, pos, currentVal, newVal)
 	}
 }
 
 func checkDefaultRPCPath(pass *analysis.Pass, pos token.Pos, currentVal string) {
 	if newVal, ok := defaultRPCPath[currentVal]; ok {
-		report(pass, pos, newVal, currentVal)
+		report(pass, pos, currentVal, newVal)
 	}
 }
 
@@ -248,10 +248,11 @@ func getBasicLitFromElts(elts []ast.Expr, key string) *ast.BasicLit {
 	return nil
 }
 
+// getBasicLitValue returns BasicLit value as string without quotes
 func getBasicLitValue(basicLit *ast.BasicLit) string {
 	return strings.Trim(basicLit.Value, "\"")
 }
 
-func report(pass *analysis.Pass, pos token.Pos, newVal, currentVal string) {
+func report(pass *analysis.Pass, pos token.Pos, currentVal, newVal string) {
 	pass.Reportf(pos, `%q can be replaced by %s`, currentVal, newVal)
 }
