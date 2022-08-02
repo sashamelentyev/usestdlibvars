@@ -4,14 +4,14 @@ A linter that detect the possibility to use variables/constants from the Go stan
 
 ## Install
 
-```
+```bash
 go install github.com/sashamelentyev/usestdlibvars
 ```
 
 ## Usage
 
 ```console
-$ usestdlibvars -h                                                     
+$ usestdlibvars -h
 usestdlibvars: A linter that detect the possibility to use variables/constants from the Go standard library.
 
 Usage: usestdlibvars [-flag] [package]
@@ -29,6 +29,8 @@ Flags:
         suggest the use of crypto.Hash
   -debug string
         debug flags, any subset of "fpstv"
+  -default-rpc-path
+        suggest the use of rpc.DefaultXXPath
   -fix
         apply all suggested fixes
   -flags
@@ -56,7 +58,6 @@ Flags:
   -trace string
         write trace log to this file
   -v    no effect (deprecated)
-
 ```
 
 ## Examples
