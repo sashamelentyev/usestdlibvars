@@ -18,6 +18,7 @@ const (
 	CryptoHashFlag     = "crypto-hash"
 	HTTPMethodFlag     = "http-method"
 	HTTPStatusCodeFlag = "http-status-code"
+	DefaultRPCPathFlag = "default-rpc-path"
 )
 
 // New returns new usestdlibvars analyzer.
@@ -39,6 +40,7 @@ func flags() flag.FlagSet {
 	flags.Bool(TimeMonthFlag, false, "suggest the use of time.Month")
 	flags.Bool(TimeLayoutFlag, false, "suggest the use of time.Layout")
 	flags.Bool(CryptoHashFlag, false, "suggest the use of crypto.Hash")
+	flags.Bool(DefaultRPCPathFlag, false, "suggest the use of rpc.DefaultXXPath")
 	return *flags
 }
 
@@ -114,6 +116,10 @@ func run(pass *analysis.Pass) (interface{}, error) {
 			if lookupFlag(pass, CryptoHashFlag) {
 				checkCryptoHash(pass, v.Pos(), currentVal)
 			}
+
+			if lookupFlag(pass, DefaultRPCPathFlag) {
+				checkDefaultRPCPath(pass, v.Pos(), currentVal)
+			}
 		}
 	})
 
@@ -165,6 +171,13 @@ func checkTimeLayout(pass *analysis.Pass, pos token.Pos, currentVal string) {
 
 func checkCryptoHash(pass *analysis.Pass, pos token.Pos, currentVal string) {
 	newVal, ok := cryptoHash[currentVal]
+	if ok {
+		report(pass, pos, newVal, currentVal)
+	}
+}
+
+func checkDefaultRPCPath(pass *analysis.Pass, pos token.Pos, currentVal string) {
+	newVal, ok := defaultRPCPath[currentVal]
 	if ok {
 		report(pass, pos, newVal, currentVal)
 	}
