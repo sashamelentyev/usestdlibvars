@@ -3,6 +3,7 @@ package analyzer
 import (
 	"crypto"
 	"net/http"
+	"net/rpc"
 	"strconv"
 	"time"
 )
@@ -110,6 +111,11 @@ var (
 		strconv.Itoa(http.StatusNetworkAuthenticationRequired): "http.StatusNetworkAuthenticationRequired",
 	}
 )
+
+var defaultRPCPath = map[string]string{
+	rpc.DefaultRPCPath:   "rpc.DefaultRPCPath",
+	rpc.DefaultDebugPath: "rpc.DefaultDebugPath",
+}
 
 var (
 	timeWeekday = map[string]string{
