@@ -65,3 +65,7 @@ Flags:
 ```bash
 usestdlibvars ./...
 ```
+
+## Sponsors
+
+[<img src="https://evrone.com/logo/evrone-sponsored-logo.png">](https://evrone.com/?utm_source=usestdlibvars)
