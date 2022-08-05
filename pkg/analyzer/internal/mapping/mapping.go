@@ -1,4 +1,4 @@
-package analyzer
+package mapping
 
 import (
 	"crypto"
@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-var cryptoHash = map[string]string{
+var CryptoHash = map[string]string{
 	crypto.MD4.String():         "crypto.MD4.String()",
 	crypto.MD5.String():         "crypto.MD5.String()",
 	crypto.SHA1.String():        "crypto.SHA1.String()",
@@ -30,7 +30,7 @@ var cryptoHash = map[string]string{
 	crypto.BLAKE2b_512.String(): "crypto.BLAKE2b_512.String()",
 }
 
-var httpMethod = map[string]string{
+var HTTPMethod = map[string]string{
 	http.MethodGet:     "http.MethodGet",
 	http.MethodHead:    "http.MethodHead",
 	http.MethodPost:    "http.MethodPost",
@@ -42,7 +42,7 @@ var httpMethod = map[string]string{
 	http.MethodTrace:   "http.MethodTrace",
 }
 
-var httpStatusCode = map[string]string{
+var HTTPStatusCode = map[string]string{
 	strconv.Itoa(http.StatusContinue):           "http.StatusContinue",
 	strconv.Itoa(http.StatusSwitchingProtocols): "http.StatusSwitchingProtocols",
 	strconv.Itoa(http.StatusProcessing):         "http.StatusProcessing",
@@ -111,12 +111,12 @@ var httpStatusCode = map[string]string{
 	strconv.Itoa(http.StatusNetworkAuthenticationRequired): "http.StatusNetworkAuthenticationRequired",
 }
 
-var defaultRPCPath = map[string]string{
+var DefaultRPCPath = map[string]string{
 	rpc.DefaultRPCPath:   "rpc.DefaultRPCPath",
 	rpc.DefaultDebugPath: "rpc.DefaultDebugPath",
 }
 
-var timeWeekday = map[string]string{
+var TimeWeekday = map[string]string{
 	time.Sunday.String():    "time.Sunday.String()",
 	time.Monday.String():    "time.Monday.String()",
 	time.Tuesday.String():   "time.Tuesday.String()",
@@ -126,7 +126,7 @@ var timeWeekday = map[string]string{
 	time.Saturday.String():  "time.Saturday.String()",
 }
 
-var timeMonth = map[string]string{
+var TimeMonth = map[string]string{
 	time.January.String():   "time.January.String()",
 	time.February.String():  "time.February.String()",
 	time.March.String():     "time.March.String()",
@@ -141,7 +141,7 @@ var timeMonth = map[string]string{
 	time.December.String():  "time.December.String()",
 }
 
-var timeLayout = map[string]string{
+var TimeLayout = map[string]string{
 	time.Layout:      "time.Layout",
 	time.ANSIC:       "time.ANSIC",
 	time.UnixDate:    "time.UnixDate",

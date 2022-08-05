@@ -34,9 +34,6 @@ jobs:
       - name: Go Mod
         run: go mod download
 
-      - name: Go Generate
-        run: go generate ./... && git diff --exit-code
-
       - name: Go Build
         run: go build -v ./...
 

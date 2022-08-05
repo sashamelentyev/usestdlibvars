@@ -9,6 +9,8 @@ import (
 	"golang.org/x/tools/go/analysis"
 	"golang.org/x/tools/go/analysis/passes/inspect"
 	"golang.org/x/tools/go/ast/inspector"
+
+	"github.com/sashamelentyev/usestdlibvars/pkg/analyzer/internal/mapping"
 )
 
 const (
@@ -158,7 +160,7 @@ func lookupFlag(pass *analysis.Pass, name string) bool {
 func checkHTTPMethod(pass *analysis.Pass, basicLit *ast.BasicLit) {
 	currentVal := getBasicLitValue(basicLit)
 
-	if newVal, ok := httpMethod[currentVal]; ok {
+	if newVal, ok := mapping.HTTPMethod[currentVal]; ok {
 		report(pass, basicLit.Pos(), currentVal, newVal)
 	}
 }
@@ -166,37 +168,37 @@ func checkHTTPMethod(pass *analysis.Pass, basicLit *ast.BasicLit) {
 func checkHTTPStatusCode(pass *analysis.Pass, basicLit *ast.BasicLit) {
 	currentVal := getBasicLitValue(basicLit)
 
-	if newVal, ok := httpStatusCode[currentVal]; ok {
+	if newVal, ok := mapping.HTTPStatusCode[currentVal]; ok {
 		report(pass, basicLit.Pos(), currentVal, newVal)
 	}
 }
 
 func checkTimeWeekday(pass *analysis.Pass, pos token.Pos, currentVal string) {
-	if newVal, ok := timeWeekday[currentVal]; ok {
+	if newVal, ok := mapping.TimeWeekday[currentVal]; ok {
 		report(pass, pos, currentVal, newVal)
 	}
 }
 
 func checkTimeMonth(pass *analysis.Pass, pos token.Pos, currentVal string) {
-	if newVal, ok := timeMonth[currentVal]; ok {
+	if newVal, ok := mapping.TimeMonth[currentVal]; ok {
 		report(pass, pos, currentVal, newVal)
 	}
 }
 
 func checkTimeLayout(pass *analysis.Pass, pos token.Pos, currentVal string) {
-	if newVal, ok := timeLayout[currentVal]; ok {
+	if newVal, ok := mapping.TimeLayout[currentVal]; ok {
 		report(pass, pos, currentVal, newVal)
 	}
 }
 
 func checkCryptoHash(pass *analysis.Pass, pos token.Pos, currentVal string) {
-	if newVal, ok := cryptoHash[currentVal]; ok {
+	if newVal, ok := mapping.CryptoHash[currentVal]; ok {
 		report(pass, pos, currentVal, newVal)
 	}
 }
 
 func checkDefaultRPCPath(pass *analysis.Pass, pos token.Pos, currentVal string) {
-	if newVal, ok := defaultRPCPath[currentVal]; ok {
+	if newVal, ok := mapping.DefaultRPCPath[currentVal]; ok {
 		report(pass, pos, currentVal, newVal)
 	}
 }

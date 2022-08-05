@@ -6,6 +6,8 @@ import (
 	"github.com/sashamelentyev/usestdlibvars/pkg/analyzer"
 )
 
+//go:generate go run pkg/analyzer/internal/gen.go
+
 func main() {
 	singlechecker.Main(analyzer.New())
 }
