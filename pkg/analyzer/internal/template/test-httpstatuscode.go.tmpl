@@ -24,8 +24,23 @@ func _() {
 
 {{ range $key, $value := .Mapping }}
 func _() {
+	var w http.ResponseWriter
+	w.WriteHeader({{ $value }})
+}
+{{ end -}}
+
+{{ range $key, $value := .Mapping }}
+func _() {
 	_ = &http.Response{
 		StatusCode: {{ $key }}, // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+	}
+}
+{{ end -}}
+
+{{ range $key, $value := .Mapping }}
+func _() {
+	_ = &http.Response{
+		StatusCode: {{ $value }},
 	}
 }
 {{ end -}}
