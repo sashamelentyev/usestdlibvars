@@ -10,6 +10,7 @@ import (
 	"log"
 	"os"
 	"regexp"
+	"strings"
 	"text/template"
 
 	"github.com/sashamelentyev/usestdlibvars/pkg/analyzer/internal/mapping"
@@ -21,7 +22,10 @@ var templateDir embed.FS
 func main() {
 	t := template.Must(
 		template.New("template").
-			Funcs(map[string]any{"quoteMeta": regexp.QuoteMeta}).
+			Funcs(map[string]any{
+				"quoteMeta": regexp.QuoteMeta,
+				"lower":     strings.ToLower,
+			}).
 			ParseFS(templateDir, "template/*.tmpl"),
 	)
 
@@ -72,6 +76,12 @@ func main() {
 			packageName:  "time_test",
 			templateName: "test-template.go.tmpl",
 			fileName:     "pkg/analyzer/testdata/src/a/time/layout.go",
+		},
+		{
+			mapping:      mapping.HTTPMethod,
+			packageName:  "http_test",
+			templateName: "test-issue32.go.tmpl",
+			fileName:     "pkg/analyzer/testdata/src/a/http/issue32.go",
 		},
 	}
 
