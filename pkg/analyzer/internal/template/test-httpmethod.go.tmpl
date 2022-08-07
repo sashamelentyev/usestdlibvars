@@ -18,13 +18,13 @@ const (
 
 func _() {
 {{- range $key, $value := .Mapping }}
-	_, _ = http.NewRequest("{{ $key }}", "", nil) // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+	_, _ = http.NewRequest("{{ $key }}", "", http.NoBody) // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
 {{- end }}
 }
 
 func _() {
 {{- range $key, $value := .Mapping }}
-	_, _ = http.NewRequestWithContext(nil, "{{ $key }}", "", nil) // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+	_, _ = http.NewRequestWithContext(nil, "{{ $key }}", "", http.NoBody) // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
 {{- end }}
 }
 

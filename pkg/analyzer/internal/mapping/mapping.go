@@ -159,3 +159,7 @@ var TimeLayout = map[string]string{
 	time.StampMicro:  "time.StampMicro",
 	time.StampNano:   "time.StampNano",
 }
+
+var HTTPNoBody = map[string]string{
+	"nil": "http.NoBody",
+}
