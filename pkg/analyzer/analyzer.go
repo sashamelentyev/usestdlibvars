@@ -55,6 +55,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 		(*ast.CallExpr)(nil),
 		(*ast.BasicLit)(nil),
 		(*ast.CompositeLit)(nil),
+		(*ast.IfStmt)(nil),
 	}
 
 	insp.Preorder(filter, func(node ast.Node) {
@@ -157,6 +158,28 @@ func run(pass *analysis.Pass) (interface{}, error) {
 					}
 				}
 			}
+
+		case *ast.IfStmt:
+			binaryExpr, ok := n.Cond.(*ast.BinaryExpr)
+			if !ok {
+				return
+			}
+
+			selectorExpr, ok := binaryExpr.X.(*ast.SelectorExpr)
+			if !ok {
+				return
+			}
+
+			if selectorExpr.Sel.Name != "StatusCode" {
+				return
+			}
+
+			basicLit, ok := binaryExpr.Y.(*ast.BasicLit)
+			if !ok {
+				return
+			}
+
+			checkHTTPStatusCode(pass, basicLit)
 		}
 	})
 

@@ -29,3 +29,31 @@ func _() {
 	}
 }
 {{ end -}}
+
+{{ range $key, $value := .Mapping }}
+func _() error {
+    resp, err := http.DefaultClient.Do(&http.Request{})
+    if err != nil {
+        return err
+    }
+    defer func() { _ = resp.Body.Close() }()
+    if resp.StatusCode == {{ $key }} { // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+        return nil
+    }
+    return nil
+}
+{{ end -}}
+
+{{ range $key, $value := .Mapping }}
+func _() error {
+    resp, err := http.DefaultClient.Do(&http.Request{})
+    if err != nil {
+        return err
+    }
+    defer func() { _ = resp.Body.Close() }()
+    if resp.StatusCode == {{ $value }} {
+        return nil
+    }
+    return nil
+}
+{{ end -}}
