@@ -1559,3 +1559,747 @@ func _() error {
 	}
 	return nil
 }
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusContinue {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusSwitchingProtocols {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusProcessing {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusEarlyHints {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusOK {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusCreated {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusAccepted {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusNonAuthoritativeInfo {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusNoContent {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusResetContent {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusPartialContent {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusMultiStatus {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusAlreadyReported {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusIMUsed {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusMultipleChoices {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusMovedPermanently {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusFound {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusSeeOther {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusNotModified {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusUseProxy {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusTemporaryRedirect {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusPermanentRedirect {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusBadRequest {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusUnauthorized {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusPaymentRequired {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusForbidden {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusNotFound {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusMethodNotAllowed {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusNotAcceptable {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusProxyAuthRequired {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusRequestTimeout {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusConflict {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusGone {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusLengthRequired {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusPreconditionFailed {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusRequestEntityTooLarge {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusRequestURITooLong {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusUnsupportedMediaType {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusRequestedRangeNotSatisfiable {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusExpectationFailed {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusTeapot {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusMisdirectedRequest {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusUnprocessableEntity {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusLocked {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusFailedDependency {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusTooEarly {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusUpgradeRequired {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusPreconditionRequired {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusTooManyRequests {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusRequestHeaderFieldsTooLarge {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusUnavailableForLegalReasons {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusInternalServerError {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusNotImplemented {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusBadGateway {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusServiceUnavailable {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusGatewayTimeout {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusHTTPVersionNotSupported {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusVariantAlsoNegotiates {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusInsufficientStorage {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusLoopDetected {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusNotExtended {
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == http.StatusNetworkAuthenticationRequired {
+		return nil
+	}
+	return nil
+}
