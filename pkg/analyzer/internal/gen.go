@@ -83,6 +83,12 @@ func main() {
 			templateName: "test-issue32.go.tmpl",
 			fileName:     "pkg/analyzer/testdata/src/a/http/issue32.go",
 		},
+		{
+			mapping:      mapping.HTTPNoBody,
+			packageName:  "http_test",
+			templateName: "test-httpnobody.go.tmpl",
+			fileName:     "pkg/analyzer/testdata/src/a/http/nobody.go",
+		},
 	}
 
 	for _, operation := range operations {

@@ -20,6 +20,7 @@ const (
 	CryptoHashFlag     = "crypto-hash"
 	HTTPMethodFlag     = "http-method"
 	HTTPStatusCodeFlag = "http-status-code"
+	HTTPNoBodyFlag     = "http-no-body"
 	DefaultRPCPathFlag = "default-rpc-path"
 )
 
@@ -38,6 +39,7 @@ func flags() flag.FlagSet {
 	flags := flag.NewFlagSet("", flag.ExitOnError)
 	flags.Bool(HTTPMethodFlag, true, "suggest the use of http.MethodXX")
 	flags.Bool(HTTPStatusCodeFlag, true, "suggest the use of http.StatusXX")
+	flags.Bool(HTTPNoBodyFlag, false, "suggest the use of http.NoBody")
 	flags.Bool(TimeWeekdayFlag, false, "suggest the use of time.Weekday")
 	flags.Bool(TimeMonthFlag, false, "suggest the use of time.Month")
 	flags.Bool(TimeLayoutFlag, false, "suggest the use of time.Layout")
@@ -74,21 +76,29 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				}
 
 			case "NewRequest":
-				if !lookupFlag(pass, HTTPMethodFlag) {
-					return
+				if lookupFlag(pass, HTTPMethodFlag) {
+					if basicLit := getBasicLitFromArgs(n.Args, 3, 0, token.STRING); basicLit != nil {
+						checkHTTPMethod(pass, basicLit)
+					}
 				}
 
-				if basicLit := getBasicLitFromArgs(n.Args, 3, 0, token.STRING); basicLit != nil {
-					checkHTTPMethod(pass, basicLit)
+				if lookupFlag(pass, HTTPNoBodyFlag) {
+					if ident := getIdentFromArgs(n.Args, 3, 2); ident != nil {
+						checkHTTPNoBody(pass, ident)
+					}
 				}
 
 			case "NewRequestWithContext":
-				if !lookupFlag(pass, HTTPMethodFlag) {
-					return
+				if lookupFlag(pass, HTTPMethodFlag) {
+					if basicLit := getBasicLitFromArgs(n.Args, 4, 1, token.STRING); basicLit != nil {
+						checkHTTPMethod(pass, basicLit)
+					}
 				}
 
-				if basicLit := getBasicLitFromArgs(n.Args, 4, 1, token.STRING); basicLit != nil {
-					checkHTTPMethod(pass, basicLit)
+				if lookupFlag(pass, HTTPNoBodyFlag) {
+					if ident := getIdentFromArgs(n.Args, 4, 3); ident != nil {
+						checkHTTPNoBody(pass, ident)
+					}
 				}
 			}
 
@@ -173,6 +183,14 @@ func checkHTTPStatusCode(pass *analysis.Pass, basicLit *ast.BasicLit) {
 	}
 }
 
+func checkHTTPNoBody(pass *analysis.Pass, ident *ast.Ident) {
+	currentVal := ident.Name
+
+	if newVal, ok := mapping.HTTPNoBody[currentVal]; ok {
+		report(pass, ident.Pos(), currentVal, newVal)
+	}
+}
+
 func checkTimeWeekday(pass *analysis.Pass, pos token.Pos, currentVal string) {
 	if newVal, ok := mapping.TimeWeekday[currentVal]; ok {
 		report(pass, pos, currentVal, newVal)
@@ -224,6 +242,24 @@ func getBasicLitFromArgs(args []ast.Expr, count, idx int, typ token.Token) *ast.
 	}
 
 	return basicLit
+}
+
+// getIdentFromArgs gets the *ast.Ident of a function argument.
+//
+// Arguments:
+//   - count - expected number of argument in function
+//   - idx - index of the argument to get the *ast.Ident
+func getIdentFromArgs(args []ast.Expr, count, idx int) *ast.Ident {
+	if len(args) != count {
+		return nil
+	}
+
+	ident, ok := args[idx].(*ast.Ident)
+	if !ok {
+		return nil
+	}
+
+	return ident
 }
 
 // getBasicLitFromElts gets the *ast.BasicLit of a struct elements.

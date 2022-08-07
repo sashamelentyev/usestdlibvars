@@ -29,27 +29,27 @@ const (
 )
 
 func _() {
-	_, _ = http.NewRequest("connect", "", nil) // want `"CONNECT" can be replaced by http\.MethodConnect`
-	_, _ = http.NewRequest("delete", "", nil)  // want `"DELETE" can be replaced by http\.MethodDelete`
-	_, _ = http.NewRequest("get", "", nil)     // want `"GET" can be replaced by http\.MethodGet`
-	_, _ = http.NewRequest("head", "", nil)    // want `"HEAD" can be replaced by http\.MethodHead`
-	_, _ = http.NewRequest("options", "", nil) // want `"OPTIONS" can be replaced by http\.MethodOptions`
-	_, _ = http.NewRequest("patch", "", nil)   // want `"PATCH" can be replaced by http\.MethodPatch`
-	_, _ = http.NewRequest("post", "", nil)    // want `"POST" can be replaced by http\.MethodPost`
-	_, _ = http.NewRequest("put", "", nil)     // want `"PUT" can be replaced by http\.MethodPut`
-	_, _ = http.NewRequest("trace", "", nil)   // want `"TRACE" can be replaced by http\.MethodTrace`
+	_, _ = http.NewRequest("connect", "", http.NoBody) // want `"CONNECT" can be replaced by http\.MethodConnect`
+	_, _ = http.NewRequest("delete", "", http.NoBody)  // want `"DELETE" can be replaced by http\.MethodDelete`
+	_, _ = http.NewRequest("get", "", http.NoBody)     // want `"GET" can be replaced by http\.MethodGet`
+	_, _ = http.NewRequest("head", "", http.NoBody)    // want `"HEAD" can be replaced by http\.MethodHead`
+	_, _ = http.NewRequest("options", "", http.NoBody) // want `"OPTIONS" can be replaced by http\.MethodOptions`
+	_, _ = http.NewRequest("patch", "", http.NoBody)   // want `"PATCH" can be replaced by http\.MethodPatch`
+	_, _ = http.NewRequest("post", "", http.NoBody)    // want `"POST" can be replaced by http\.MethodPost`
+	_, _ = http.NewRequest("put", "", http.NoBody)     // want `"PUT" can be replaced by http\.MethodPut`
+	_, _ = http.NewRequest("trace", "", http.NoBody)   // want `"TRACE" can be replaced by http\.MethodTrace`
 }
 
 func _() {
-	_, _ = http.NewRequestWithContext(nil, "connect", "", nil) // want `"CONNECT" can be replaced by http\.MethodConnect`
-	_, _ = http.NewRequestWithContext(nil, "delete", "", nil)  // want `"DELETE" can be replaced by http\.MethodDelete`
-	_, _ = http.NewRequestWithContext(nil, "get", "", nil)     // want `"GET" can be replaced by http\.MethodGet`
-	_, _ = http.NewRequestWithContext(nil, "head", "", nil)    // want `"HEAD" can be replaced by http\.MethodHead`
-	_, _ = http.NewRequestWithContext(nil, "options", "", nil) // want `"OPTIONS" can be replaced by http\.MethodOptions`
-	_, _ = http.NewRequestWithContext(nil, "patch", "", nil)   // want `"PATCH" can be replaced by http\.MethodPatch`
-	_, _ = http.NewRequestWithContext(nil, "post", "", nil)    // want `"POST" can be replaced by http\.MethodPost`
-	_, _ = http.NewRequestWithContext(nil, "put", "", nil)     // want `"PUT" can be replaced by http\.MethodPut`
-	_, _ = http.NewRequestWithContext(nil, "trace", "", nil)   // want `"TRACE" can be replaced by http\.MethodTrace`
+	_, _ = http.NewRequestWithContext(nil, "connect", "", http.NoBody) // want `"CONNECT" can be replaced by http\.MethodConnect`
+	_, _ = http.NewRequestWithContext(nil, "delete", "", http.NoBody)  // want `"DELETE" can be replaced by http\.MethodDelete`
+	_, _ = http.NewRequestWithContext(nil, "get", "", http.NoBody)     // want `"GET" can be replaced by http\.MethodGet`
+	_, _ = http.NewRequestWithContext(nil, "head", "", http.NoBody)    // want `"HEAD" can be replaced by http\.MethodHead`
+	_, _ = http.NewRequestWithContext(nil, "options", "", http.NoBody) // want `"OPTIONS" can be replaced by http\.MethodOptions`
+	_, _ = http.NewRequestWithContext(nil, "patch", "", http.NoBody)   // want `"PATCH" can be replaced by http\.MethodPatch`
+	_, _ = http.NewRequestWithContext(nil, "post", "", http.NoBody)    // want `"POST" can be replaced by http\.MethodPost`
+	_, _ = http.NewRequestWithContext(nil, "put", "", http.NoBody)     // want `"PUT" can be replaced by http\.MethodPut`
+	_, _ = http.NewRequestWithContext(nil, "trace", "", http.NoBody)   // want `"TRACE" can be replaced by http\.MethodTrace`
 }
 
 func _() {
