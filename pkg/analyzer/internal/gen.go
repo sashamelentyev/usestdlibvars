@@ -24,7 +24,7 @@ func main() {
 		template.New("template").
 			Funcs(map[string]any{
 				"quoteMeta": regexp.QuoteMeta,
-				"lower":     strings.ToLower,
+				"toLower":   strings.ToLower,
 			}).
 			ParseFS(templateDir, "template/*.tmpl"),
 	)

@@ -6,32 +6,32 @@ import "net/http"
 
 var (
 {{- range $key, $value := .Mapping }}
-	_ = "{{ lower $key }}"
+	_ = "{{ toLower $key }}"
 {{- end }}
 )
 
 const (
 {{- range $key, $value := .Mapping }}
-	_ = "{{ lower $key }}"
+	_ = "{{ toLower $key }}"
 {{- end }}
 )
 
 func _() {
 {{- range $key, $value := .Mapping }}
-	_, _ = http.NewRequest("{{ lower $key }}", "", http.NoBody) // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+	_, _ = http.NewRequest("{{ toLower $key }}", "", http.NoBody) // want `"{{ quoteMeta (toLower $key) }}" can be replaced by {{ quoteMeta $value }}`
 {{- end }}
 }
 
 func _() {
 {{- range $key, $value := .Mapping }}
-	_, _ = http.NewRequestWithContext(nil, "{{ lower $key }}", "", http.NoBody) // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+	_, _ = http.NewRequestWithContext(nil, "{{ toLower $key }}", "", http.NoBody) // want `"{{ quoteMeta (toLower $key) }}" can be replaced by {{ quoteMeta $value }}`
 {{- end }}
 }
 
 func _() {
 {{- range $key, $value := .Mapping }}
 	_ = &http.Request{
-		Method: "{{ lower $key }}", // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+		Method: "{{ toLower $key }}", // want `"{{ quoteMeta (toLower $key) }}" can be replaced by {{ quoteMeta $value }}`
 	}
 {{- end }}
 }
