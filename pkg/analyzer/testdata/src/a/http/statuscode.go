@@ -815,3 +815,747 @@ func _() {
 		StatusCode: 511, // want `"511" can be replaced by http\.StatusNetworkAuthenticationRequired`
 	}
 }
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 100 { // want `"100" can be replaced by http\.StatusContinue`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 101 { // want `"101" can be replaced by http\.StatusSwitchingProtocols`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 102 { // want `"102" can be replaced by http\.StatusProcessing`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 103 { // want `"103" can be replaced by http\.StatusEarlyHints`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 200 { // want `"200" can be replaced by http\.StatusOK`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 201 { // want `"201" can be replaced by http\.StatusCreated`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 202 { // want `"202" can be replaced by http\.StatusAccepted`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 203 { // want `"203" can be replaced by http\.StatusNonAuthoritativeInfo`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 204 { // want `"204" can be replaced by http\.StatusNoContent`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 205 { // want `"205" can be replaced by http\.StatusResetContent`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 206 { // want `"206" can be replaced by http\.StatusPartialContent`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 207 { // want `"207" can be replaced by http\.StatusMultiStatus`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 208 { // want `"208" can be replaced by http\.StatusAlreadyReported`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 226 { // want `"226" can be replaced by http\.StatusIMUsed`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 300 { // want `"300" can be replaced by http\.StatusMultipleChoices`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 301 { // want `"301" can be replaced by http\.StatusMovedPermanently`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 302 { // want `"302" can be replaced by http\.StatusFound`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 303 { // want `"303" can be replaced by http\.StatusSeeOther`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 304 { // want `"304" can be replaced by http\.StatusNotModified`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 305 { // want `"305" can be replaced by http\.StatusUseProxy`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 307 { // want `"307" can be replaced by http\.StatusTemporaryRedirect`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 308 { // want `"308" can be replaced by http\.StatusPermanentRedirect`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 400 { // want `"400" can be replaced by http\.StatusBadRequest`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 401 { // want `"401" can be replaced by http\.StatusUnauthorized`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 402 { // want `"402" can be replaced by http\.StatusPaymentRequired`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 403 { // want `"403" can be replaced by http\.StatusForbidden`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 404 { // want `"404" can be replaced by http\.StatusNotFound`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 405 { // want `"405" can be replaced by http\.StatusMethodNotAllowed`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 406 { // want `"406" can be replaced by http\.StatusNotAcceptable`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 407 { // want `"407" can be replaced by http\.StatusProxyAuthRequired`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 408 { // want `"408" can be replaced by http\.StatusRequestTimeout`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 409 { // want `"409" can be replaced by http\.StatusConflict`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 410 { // want `"410" can be replaced by http\.StatusGone`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 411 { // want `"411" can be replaced by http\.StatusLengthRequired`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 412 { // want `"412" can be replaced by http\.StatusPreconditionFailed`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 413 { // want `"413" can be replaced by http\.StatusRequestEntityTooLarge`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 414 { // want `"414" can be replaced by http\.StatusRequestURITooLong`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 415 { // want `"415" can be replaced by http\.StatusUnsupportedMediaType`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 416 { // want `"416" can be replaced by http\.StatusRequestedRangeNotSatisfiable`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 417 { // want `"417" can be replaced by http\.StatusExpectationFailed`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 418 { // want `"418" can be replaced by http\.StatusTeapot`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 421 { // want `"421" can be replaced by http\.StatusMisdirectedRequest`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 422 { // want `"422" can be replaced by http\.StatusUnprocessableEntity`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 423 { // want `"423" can be replaced by http\.StatusLocked`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 424 { // want `"424" can be replaced by http\.StatusFailedDependency`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 425 { // want `"425" can be replaced by http\.StatusTooEarly`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 426 { // want `"426" can be replaced by http\.StatusUpgradeRequired`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 428 { // want `"428" can be replaced by http\.StatusPreconditionRequired`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 429 { // want `"429" can be replaced by http\.StatusTooManyRequests`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 431 { // want `"431" can be replaced by http\.StatusRequestHeaderFieldsTooLarge`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 451 { // want `"451" can be replaced by http\.StatusUnavailableForLegalReasons`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 500 { // want `"500" can be replaced by http\.StatusInternalServerError`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 501 { // want `"501" can be replaced by http\.StatusNotImplemented`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 502 { // want `"502" can be replaced by http\.StatusBadGateway`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 503 { // want `"503" can be replaced by http\.StatusServiceUnavailable`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 504 { // want `"504" can be replaced by http\.StatusGatewayTimeout`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 505 { // want `"505" can be replaced by http\.StatusHTTPVersionNotSupported`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 506 { // want `"506" can be replaced by http\.StatusVariantAlsoNegotiates`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 507 { // want `"507" can be replaced by http\.StatusInsufficientStorage`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 508 { // want `"508" can be replaced by http\.StatusLoopDetected`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 510 { // want `"510" can be replaced by http\.StatusNotExtended`
+		return nil
+	}
+	return nil
+}
+
+func _() error {
+	resp, err := http.DefaultClient.Do(&http.Request{})
+	if err != nil {
+		return err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode == 511 { // want `"511" can be replaced by http\.StatusNetworkAuthenticationRequired`
+		return nil
+	}
+	return nil
+}
