@@ -20,7 +20,7 @@ const (
 	CryptoHashFlag     = "crypto-hash"
 	HTTPMethodFlag     = "http-method"
 	HTTPStatusCodeFlag = "http-status-code"
-	HTTPNoBody         = "http-no-body"
+	HTTPNoBodyFlag     = "http-no-body"
 	DefaultRPCPathFlag = "default-rpc-path"
 )
 
@@ -39,7 +39,7 @@ func flags() flag.FlagSet {
 	flags := flag.NewFlagSet("", flag.ExitOnError)
 	flags.Bool(HTTPMethodFlag, true, "suggest the use of http.MethodXX")
 	flags.Bool(HTTPStatusCodeFlag, true, "suggest the use of http.StatusXX")
-	flags.Bool(HTTPNoBody, false, "suggest the use of http.NoBody")
+	flags.Bool(HTTPNoBodyFlag, false, "suggest the use of http.NoBody")
 	flags.Bool(TimeWeekdayFlag, false, "suggest the use of time.Weekday")
 	flags.Bool(TimeMonthFlag, false, "suggest the use of time.Month")
 	flags.Bool(TimeLayoutFlag, false, "suggest the use of time.Layout")
@@ -82,7 +82,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 					}
 				}
 
-				if lookupFlag(pass, HTTPNoBody) {
+				if lookupFlag(pass, HTTPNoBodyFlag) {
 					if ident := getIdentFromArgs(n.Args, 3, 2); ident != nil {
 						checkHTTPNoBody(pass, ident)
 					}
@@ -95,7 +95,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 					}
 				}
 
-				if lookupFlag(pass, HTTPNoBody) {
+				if lookupFlag(pass, HTTPNoBodyFlag) {
 					if ident := getIdentFromArgs(n.Args, 4, 3); ident != nil {
 						checkHTTPNoBody(pass, ident)
 					}

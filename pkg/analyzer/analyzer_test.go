@@ -33,7 +33,7 @@ func TestUseStdlibVars(t *testing.T) {
 	if err := a.Flags.Set(analyzer.DefaultRPCPathFlag, "true"); err != nil {
 		t.Error(err)
 	}
-	if err := a.Flags.Set(analyzer.HTTPNoBody, "true"); err != nil {
+	if err := a.Flags.Set(analyzer.HTTPNoBodyFlag, "true"); err != nil {
 		t.Error(err)
 	}
 
