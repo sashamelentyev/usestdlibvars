@@ -445,6 +445,316 @@ func _() {
 }
 
 func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusContinue)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusSwitchingProtocols)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusProcessing)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusEarlyHints)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusOK)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusCreated)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusAccepted)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusNonAuthoritativeInfo)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusNoContent)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusResetContent)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusPartialContent)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusMultiStatus)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusAlreadyReported)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusIMUsed)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusMultipleChoices)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusMovedPermanently)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusFound)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusSeeOther)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusNotModified)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusUseProxy)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusTemporaryRedirect)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusPermanentRedirect)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusBadRequest)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusUnauthorized)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusPaymentRequired)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusForbidden)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusNotFound)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusMethodNotAllowed)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusNotAcceptable)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusProxyAuthRequired)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusRequestTimeout)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusConflict)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusGone)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusLengthRequired)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusPreconditionFailed)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusRequestEntityTooLarge)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusRequestURITooLong)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusUnsupportedMediaType)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusRequestedRangeNotSatisfiable)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusExpectationFailed)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusTeapot)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusMisdirectedRequest)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusUnprocessableEntity)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusLocked)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusFailedDependency)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusTooEarly)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusUpgradeRequired)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusPreconditionRequired)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusTooManyRequests)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusRequestHeaderFieldsTooLarge)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusUnavailableForLegalReasons)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusInternalServerError)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusNotImplemented)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusBadGateway)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusServiceUnavailable)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusGatewayTimeout)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusHTTPVersionNotSupported)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusVariantAlsoNegotiates)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusInsufficientStorage)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusLoopDetected)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusNotExtended)
+}
+
+func _() {
+	var w http.ResponseWriter
+	w.WriteHeader(http.StatusNetworkAuthenticationRequired)
+}
+
+func _() {
 	_ = &http.Response{
 		StatusCode: 100, // want `"100" can be replaced by http\.StatusContinue`
 	}
@@ -813,6 +1123,378 @@ func _() {
 func _() {
 	_ = &http.Response{
 		StatusCode: 511, // want `"511" can be replaced by http\.StatusNetworkAuthenticationRequired`
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusContinue,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusSwitchingProtocols,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusProcessing,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusEarlyHints,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusOK,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusCreated,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusAccepted,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusNonAuthoritativeInfo,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusNoContent,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusResetContent,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusPartialContent,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusMultiStatus,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusAlreadyReported,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusIMUsed,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusMultipleChoices,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusMovedPermanently,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusFound,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusSeeOther,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusNotModified,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusUseProxy,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusTemporaryRedirect,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusPermanentRedirect,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusBadRequest,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusUnauthorized,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusPaymentRequired,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusForbidden,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusNotFound,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusMethodNotAllowed,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusNotAcceptable,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusProxyAuthRequired,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusRequestTimeout,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusConflict,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusGone,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusLengthRequired,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusPreconditionFailed,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusRequestEntityTooLarge,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusRequestURITooLong,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusUnsupportedMediaType,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusRequestedRangeNotSatisfiable,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusExpectationFailed,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusTeapot,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusMisdirectedRequest,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusUnprocessableEntity,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusLocked,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusFailedDependency,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusTooEarly,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusUpgradeRequired,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusPreconditionRequired,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusTooManyRequests,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusRequestHeaderFieldsTooLarge,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusUnavailableForLegalReasons,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusInternalServerError,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusNotImplemented,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusBadGateway,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusServiceUnavailable,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusGatewayTimeout,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusHTTPVersionNotSupported,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusVariantAlsoNegotiates,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusInsufficientStorage,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusLoopDetected,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusNotExtended,
+	}
+}
+
+func _() {
+	_ = &http.Response{
+		StatusCode: http.StatusNetworkAuthenticationRequired,
 	}
 }
 
