@@ -64,8 +64,41 @@ Flags:
 
 ## Examples
 
+```go
+package response
+
+import (
+	"bytes"
+	"encoding/json"
+	"net/http"
+)
+
+// JSON marshals 'v' to JSON, automatically escaping HTML and setting the
+// Content-Type as application/json.
+func JSON(w http.ResponseWriter, status int, v any) {
+	var buf bytes.Buffer
+	enc := json.NewEncoder(&buf)
+	enc.SetEscapeHTML(true)
+	if err := enc.Encode(v); err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json;charset=UTF-8")
+	w.WriteHeader(status)
+	if _, err := w.Write(buf.Bytes()); err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+}
+```
+
 ```bash
 usestdlibvars ./...
+```
+
+```console
+response.go:16:30: "500" can be replaced by http.StatusInternalServerError
+response.go:22:30: "500" can be replaced by http.StatusInternalServerError
 ```
 
 ## Sponsors
