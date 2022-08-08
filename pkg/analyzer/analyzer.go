@@ -24,6 +24,8 @@ const (
 	DefaultRPCPathFlag = "default-rpc-path"
 )
 
+const statusCode = "StatusCode"
+
 // New returns new usestdlibvars analyzer.
 func New() *analysis.Analyzer {
 	return &analysis.Analyzer{
@@ -153,7 +155,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 						return
 					}
 
-					if basicLit := getBasicLitFromElts(n.Elts, "StatusCode"); basicLit != nil {
+					if basicLit := getBasicLitFromElts(n.Elts, statusCode); basicLit != nil {
 						checkHTTPStatusCode(pass, basicLit)
 					}
 				}
@@ -170,7 +172,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				return
 			}
 
-			if selectorExpr.Sel.Name != "StatusCode" {
+			if selectorExpr.Sel.Name != statusCode {
 				return
 			}
 
