@@ -64,7 +64,7 @@ Flags:
 
 ## Examples
 
-```go
+```go {.line-numbers}
 package response
 
 import (
