@@ -23,11 +23,6 @@ const (
 	DefaultRPCPathFlag = "default-rpc-path"
 )
 
-const (
-	httpStr       = "http"
-	statusCodeStr = "StatusCode"
-)
-
 // New returns new usestdlibvars analyzer.
 func New() *analysis.Analyzer {
 	return &analysis.Analyzer{
@@ -75,7 +70,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 			}
 
 			switch ident.Name {
-			case httpStr:
+			case "http":
 				switch selectorExpr.Sel.Name {
 				case "NewRequest":
 					if !lookupFlag(pass, HTTPMethodFlag) {
@@ -150,7 +145,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				return
 			}
 
-			if ident.Name == httpStr {
+			if ident.Name == "http" {
 				switch selectorExpr.Sel.Name {
 				case "Request":
 					if !lookupFlag(pass, HTTPMethodFlag) {
@@ -166,7 +161,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 						return
 					}
 
-					if basicLit := getBasicLitFromElts(n.Elts, statusCodeStr); basicLit != nil {
+					if basicLit := getBasicLitFromElts(n.Elts, "StatusCode"); basicLit != nil {
 						checkHTTPStatusCode(pass, basicLit)
 					}
 				}
@@ -183,7 +178,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				return
 			}
 
-			if selectorExpr.Sel.Name != statusCodeStr {
+			if selectorExpr.Sel.Name != "StatusCode" {
 				return
 			}
 
