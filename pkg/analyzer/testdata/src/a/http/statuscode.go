@@ -2985,3 +2985,623 @@ func _() error {
 	}
 	return nil
 }
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 100) // want `"100" can be replaced by http\.StatusContinue`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 101) // want `"101" can be replaced by http\.StatusSwitchingProtocols`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 102) // want `"102" can be replaced by http\.StatusProcessing`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 103) // want `"103" can be replaced by http\.StatusEarlyHints`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 200) // want `"200" can be replaced by http\.StatusOK`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 201) // want `"201" can be replaced by http\.StatusCreated`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 202) // want `"202" can be replaced by http\.StatusAccepted`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 203) // want `"203" can be replaced by http\.StatusNonAuthoritativeInfo`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 204) // want `"204" can be replaced by http\.StatusNoContent`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 205) // want `"205" can be replaced by http\.StatusResetContent`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 206) // want `"206" can be replaced by http\.StatusPartialContent`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 207) // want `"207" can be replaced by http\.StatusMultiStatus`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 208) // want `"208" can be replaced by http\.StatusAlreadyReported`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 226) // want `"226" can be replaced by http\.StatusIMUsed`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 300) // want `"300" can be replaced by http\.StatusMultipleChoices`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 301) // want `"301" can be replaced by http\.StatusMovedPermanently`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 302) // want `"302" can be replaced by http\.StatusFound`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 303) // want `"303" can be replaced by http\.StatusSeeOther`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 304) // want `"304" can be replaced by http\.StatusNotModified`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 305) // want `"305" can be replaced by http\.StatusUseProxy`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 307) // want `"307" can be replaced by http\.StatusTemporaryRedirect`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 308) // want `"308" can be replaced by http\.StatusPermanentRedirect`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 400) // want `"400" can be replaced by http\.StatusBadRequest`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 401) // want `"401" can be replaced by http\.StatusUnauthorized`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 402) // want `"402" can be replaced by http\.StatusPaymentRequired`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 403) // want `"403" can be replaced by http\.StatusForbidden`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 404) // want `"404" can be replaced by http\.StatusNotFound`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 405) // want `"405" can be replaced by http\.StatusMethodNotAllowed`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 406) // want `"406" can be replaced by http\.StatusNotAcceptable`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 407) // want `"407" can be replaced by http\.StatusProxyAuthRequired`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 408) // want `"408" can be replaced by http\.StatusRequestTimeout`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 409) // want `"409" can be replaced by http\.StatusConflict`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 410) // want `"410" can be replaced by http\.StatusGone`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 411) // want `"411" can be replaced by http\.StatusLengthRequired`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 412) // want `"412" can be replaced by http\.StatusPreconditionFailed`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 413) // want `"413" can be replaced by http\.StatusRequestEntityTooLarge`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 414) // want `"414" can be replaced by http\.StatusRequestURITooLong`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 415) // want `"415" can be replaced by http\.StatusUnsupportedMediaType`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 416) // want `"416" can be replaced by http\.StatusRequestedRangeNotSatisfiable`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 417) // want `"417" can be replaced by http\.StatusExpectationFailed`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 418) // want `"418" can be replaced by http\.StatusTeapot`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 421) // want `"421" can be replaced by http\.StatusMisdirectedRequest`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 422) // want `"422" can be replaced by http\.StatusUnprocessableEntity`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 423) // want `"423" can be replaced by http\.StatusLocked`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 424) // want `"424" can be replaced by http\.StatusFailedDependency`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 425) // want `"425" can be replaced by http\.StatusTooEarly`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 426) // want `"426" can be replaced by http\.StatusUpgradeRequired`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 428) // want `"428" can be replaced by http\.StatusPreconditionRequired`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 429) // want `"429" can be replaced by http\.StatusTooManyRequests`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 431) // want `"431" can be replaced by http\.StatusRequestHeaderFieldsTooLarge`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 451) // want `"451" can be replaced by http\.StatusUnavailableForLegalReasons`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 500) // want `"500" can be replaced by http\.StatusInternalServerError`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 501) // want `"501" can be replaced by http\.StatusNotImplemented`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 502) // want `"502" can be replaced by http\.StatusBadGateway`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 503) // want `"503" can be replaced by http\.StatusServiceUnavailable`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 504) // want `"504" can be replaced by http\.StatusGatewayTimeout`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 505) // want `"505" can be replaced by http\.StatusHTTPVersionNotSupported`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 506) // want `"506" can be replaced by http\.StatusVariantAlsoNegotiates`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 507) // want `"507" can be replaced by http\.StatusInsufficientStorage`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 508) // want `"508" can be replaced by http\.StatusLoopDetected`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 510) // want `"510" can be replaced by http\.StatusNotExtended`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", 511) // want `"511" can be replaced by http\.StatusNetworkAuthenticationRequired`
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusContinue)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusSwitchingProtocols)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusProcessing)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusEarlyHints)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusOK)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusCreated)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusAccepted)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusNonAuthoritativeInfo)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusNoContent)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusResetContent)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusPartialContent)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusMultiStatus)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusAlreadyReported)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusIMUsed)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusMultipleChoices)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusMovedPermanently)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusFound)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusSeeOther)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusNotModified)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusUseProxy)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusTemporaryRedirect)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusPermanentRedirect)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusBadRequest)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusUnauthorized)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusPaymentRequired)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusForbidden)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusNotFound)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusMethodNotAllowed)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusNotAcceptable)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusProxyAuthRequired)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusRequestTimeout)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusConflict)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusGone)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusLengthRequired)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusPreconditionFailed)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusRequestEntityTooLarge)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusRequestURITooLong)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusUnsupportedMediaType)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusRequestedRangeNotSatisfiable)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusExpectationFailed)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusTeapot)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusMisdirectedRequest)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusUnprocessableEntity)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusLocked)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusFailedDependency)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusTooEarly)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusUpgradeRequired)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusPreconditionRequired)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusTooManyRequests)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusRequestHeaderFieldsTooLarge)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusUnavailableForLegalReasons)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusInternalServerError)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusNotImplemented)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusBadGateway)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusServiceUnavailable)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusGatewayTimeout)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusHTTPVersionNotSupported)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusVariantAlsoNegotiates)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusInsufficientStorage)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusLoopDetected)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusNotExtended)
+}
+
+func _() {
+	var w http.ResponseWriter
+	http.Error(w, "", http.StatusNetworkAuthenticationRequired)
+}
