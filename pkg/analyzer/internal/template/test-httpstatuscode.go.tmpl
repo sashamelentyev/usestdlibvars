@@ -72,3 +72,18 @@ func _() error {
     return nil
 }
 {{ end -}}
+
+
+{{ range $key, $value := .Mapping }}
+func _() {
+    var w http.ResponseWriter
+    http.Error(w, "", {{ $key }}) // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+}
+{{ end -}}
+
+{{ range $key, $value := .Mapping }}
+func _() {
+    var w http.ResponseWriter
+    http.Error(w, "", {{ $value }})
+}
+{{ end -}}
