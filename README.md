@@ -75,7 +75,7 @@ import (
 
 // JSON marshals 'v' to JSON, automatically escaping HTML and setting the
 // Content-Type as application/json.
-func JSON(w http.ResponseWriter, status int, v any) {
+func JSON(w http.ResponseWriter, statusCode int, v any) {
 	var buf bytes.Buffer
 	enc := json.NewEncoder(&buf)
 	enc.SetEscapeHTML(true)
@@ -83,8 +83,8 @@ func JSON(w http.ResponseWriter, status int, v any) {
 		http.Error(w, err.Error(), 500)
 		return
 	}
-	w.Header().Set("Content-Type", "application/json;charset=UTF-8")
-	w.WriteHeader(status)
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.WriteHeader(statusCode)
 	if _, err := w.Write(buf.Bytes()); err != nil {
 		http.Error(w, err.Error(), 500)
 		return
