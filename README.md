@@ -99,8 +99,8 @@ usestdlibvars ./...
 ```
 
 ```console
-response.go:16:30: "500" can be replaced by http.StatusInternalServerError
-response.go:22:30: "500" can be replaced by http.StatusInternalServerError
+response.go:18:30: "500" can be replaced by http.StatusInternalServerError
+response.go:24:30: "500" can be replaced by http.StatusInternalServerError
 ```
 
 ## Sponsors
