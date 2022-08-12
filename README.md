@@ -73,9 +73,9 @@ import (
 	"net/http"
 )
 
-// JSON marshals 'v' to JSON, automatically escaping HTML and setting the
-// Content-Type header as application/json.
-func JSON(w http.ResponseWriter, statusCode int, v any) {
+// JSON marshals "v" to JSON, automatically escaping HTML, setting the
+// Content-Type header as application/json and status code.
+func JSON(w http.ResponseWriter, v any, statusCode int) {
 	var buf bytes.Buffer
 	enc := json.NewEncoder(&buf)
 	enc.SetEscapeHTML(true)
