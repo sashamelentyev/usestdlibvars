@@ -214,6 +214,10 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				return
 			}
 
+			if !lookupFlag(pass, HTTPStatusCodeFlag) {
+				return
+			}
+
 			checkHTTPStatusCode(pass, basicLit)
 		}
 	})
