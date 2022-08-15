@@ -4845,3 +4845,499 @@ func _() {
 	var r *http.Request
 	http.Redirect(w, r, "", http.StatusNetworkAuthenticationRequired)
 }
+
+func _() {
+	http.RedirectHandler("", 100) // want `"100" can be replaced by http\.StatusContinue`
+}
+
+func _() {
+	http.RedirectHandler("", 101) // want `"101" can be replaced by http\.StatusSwitchingProtocols`
+}
+
+func _() {
+	http.RedirectHandler("", 102) // want `"102" can be replaced by http\.StatusProcessing`
+}
+
+func _() {
+	http.RedirectHandler("", 103) // want `"103" can be replaced by http\.StatusEarlyHints`
+}
+
+func _() {
+	http.RedirectHandler("", 200) // want `"200" can be replaced by http\.StatusOK`
+}
+
+func _() {
+	http.RedirectHandler("", 201) // want `"201" can be replaced by http\.StatusCreated`
+}
+
+func _() {
+	http.RedirectHandler("", 202) // want `"202" can be replaced by http\.StatusAccepted`
+}
+
+func _() {
+	http.RedirectHandler("", 203) // want `"203" can be replaced by http\.StatusNonAuthoritativeInfo`
+}
+
+func _() {
+	http.RedirectHandler("", 204) // want `"204" can be replaced by http\.StatusNoContent`
+}
+
+func _() {
+	http.RedirectHandler("", 205) // want `"205" can be replaced by http\.StatusResetContent`
+}
+
+func _() {
+	http.RedirectHandler("", 206) // want `"206" can be replaced by http\.StatusPartialContent`
+}
+
+func _() {
+	http.RedirectHandler("", 207) // want `"207" can be replaced by http\.StatusMultiStatus`
+}
+
+func _() {
+	http.RedirectHandler("", 208) // want `"208" can be replaced by http\.StatusAlreadyReported`
+}
+
+func _() {
+	http.RedirectHandler("", 226) // want `"226" can be replaced by http\.StatusIMUsed`
+}
+
+func _() {
+	http.RedirectHandler("", 300) // want `"300" can be replaced by http\.StatusMultipleChoices`
+}
+
+func _() {
+	http.RedirectHandler("", 301) // want `"301" can be replaced by http\.StatusMovedPermanently`
+}
+
+func _() {
+	http.RedirectHandler("", 302) // want `"302" can be replaced by http\.StatusFound`
+}
+
+func _() {
+	http.RedirectHandler("", 303) // want `"303" can be replaced by http\.StatusSeeOther`
+}
+
+func _() {
+	http.RedirectHandler("", 304) // want `"304" can be replaced by http\.StatusNotModified`
+}
+
+func _() {
+	http.RedirectHandler("", 305) // want `"305" can be replaced by http\.StatusUseProxy`
+}
+
+func _() {
+	http.RedirectHandler("", 307) // want `"307" can be replaced by http\.StatusTemporaryRedirect`
+}
+
+func _() {
+	http.RedirectHandler("", 308) // want `"308" can be replaced by http\.StatusPermanentRedirect`
+}
+
+func _() {
+	http.RedirectHandler("", 400) // want `"400" can be replaced by http\.StatusBadRequest`
+}
+
+func _() {
+	http.RedirectHandler("", 401) // want `"401" can be replaced by http\.StatusUnauthorized`
+}
+
+func _() {
+	http.RedirectHandler("", 402) // want `"402" can be replaced by http\.StatusPaymentRequired`
+}
+
+func _() {
+	http.RedirectHandler("", 403) // want `"403" can be replaced by http\.StatusForbidden`
+}
+
+func _() {
+	http.RedirectHandler("", 404) // want `"404" can be replaced by http\.StatusNotFound`
+}
+
+func _() {
+	http.RedirectHandler("", 405) // want `"405" can be replaced by http\.StatusMethodNotAllowed`
+}
+
+func _() {
+	http.RedirectHandler("", 406) // want `"406" can be replaced by http\.StatusNotAcceptable`
+}
+
+func _() {
+	http.RedirectHandler("", 407) // want `"407" can be replaced by http\.StatusProxyAuthRequired`
+}
+
+func _() {
+	http.RedirectHandler("", 408) // want `"408" can be replaced by http\.StatusRequestTimeout`
+}
+
+func _() {
+	http.RedirectHandler("", 409) // want `"409" can be replaced by http\.StatusConflict`
+}
+
+func _() {
+	http.RedirectHandler("", 410) // want `"410" can be replaced by http\.StatusGone`
+}
+
+func _() {
+	http.RedirectHandler("", 411) // want `"411" can be replaced by http\.StatusLengthRequired`
+}
+
+func _() {
+	http.RedirectHandler("", 412) // want `"412" can be replaced by http\.StatusPreconditionFailed`
+}
+
+func _() {
+	http.RedirectHandler("", 413) // want `"413" can be replaced by http\.StatusRequestEntityTooLarge`
+}
+
+func _() {
+	http.RedirectHandler("", 414) // want `"414" can be replaced by http\.StatusRequestURITooLong`
+}
+
+func _() {
+	http.RedirectHandler("", 415) // want `"415" can be replaced by http\.StatusUnsupportedMediaType`
+}
+
+func _() {
+	http.RedirectHandler("", 416) // want `"416" can be replaced by http\.StatusRequestedRangeNotSatisfiable`
+}
+
+func _() {
+	http.RedirectHandler("", 417) // want `"417" can be replaced by http\.StatusExpectationFailed`
+}
+
+func _() {
+	http.RedirectHandler("", 418) // want `"418" can be replaced by http\.StatusTeapot`
+}
+
+func _() {
+	http.RedirectHandler("", 421) // want `"421" can be replaced by http\.StatusMisdirectedRequest`
+}
+
+func _() {
+	http.RedirectHandler("", 422) // want `"422" can be replaced by http\.StatusUnprocessableEntity`
+}
+
+func _() {
+	http.RedirectHandler("", 423) // want `"423" can be replaced by http\.StatusLocked`
+}
+
+func _() {
+	http.RedirectHandler("", 424) // want `"424" can be replaced by http\.StatusFailedDependency`
+}
+
+func _() {
+	http.RedirectHandler("", 425) // want `"425" can be replaced by http\.StatusTooEarly`
+}
+
+func _() {
+	http.RedirectHandler("", 426) // want `"426" can be replaced by http\.StatusUpgradeRequired`
+}
+
+func _() {
+	http.RedirectHandler("", 428) // want `"428" can be replaced by http\.StatusPreconditionRequired`
+}
+
+func _() {
+	http.RedirectHandler("", 429) // want `"429" can be replaced by http\.StatusTooManyRequests`
+}
+
+func _() {
+	http.RedirectHandler("", 431) // want `"431" can be replaced by http\.StatusRequestHeaderFieldsTooLarge`
+}
+
+func _() {
+	http.RedirectHandler("", 451) // want `"451" can be replaced by http\.StatusUnavailableForLegalReasons`
+}
+
+func _() {
+	http.RedirectHandler("", 500) // want `"500" can be replaced by http\.StatusInternalServerError`
+}
+
+func _() {
+	http.RedirectHandler("", 501) // want `"501" can be replaced by http\.StatusNotImplemented`
+}
+
+func _() {
+	http.RedirectHandler("", 502) // want `"502" can be replaced by http\.StatusBadGateway`
+}
+
+func _() {
+	http.RedirectHandler("", 503) // want `"503" can be replaced by http\.StatusServiceUnavailable`
+}
+
+func _() {
+	http.RedirectHandler("", 504) // want `"504" can be replaced by http\.StatusGatewayTimeout`
+}
+
+func _() {
+	http.RedirectHandler("", 505) // want `"505" can be replaced by http\.StatusHTTPVersionNotSupported`
+}
+
+func _() {
+	http.RedirectHandler("", 506) // want `"506" can be replaced by http\.StatusVariantAlsoNegotiates`
+}
+
+func _() {
+	http.RedirectHandler("", 507) // want `"507" can be replaced by http\.StatusInsufficientStorage`
+}
+
+func _() {
+	http.RedirectHandler("", 508) // want `"508" can be replaced by http\.StatusLoopDetected`
+}
+
+func _() {
+	http.RedirectHandler("", 510) // want `"510" can be replaced by http\.StatusNotExtended`
+}
+
+func _() {
+	http.RedirectHandler("", 511) // want `"511" can be replaced by http\.StatusNetworkAuthenticationRequired`
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusContinue)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusSwitchingProtocols)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusProcessing)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusEarlyHints)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusOK)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusCreated)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusAccepted)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusNonAuthoritativeInfo)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusNoContent)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusResetContent)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusPartialContent)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusMultiStatus)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusAlreadyReported)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusIMUsed)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusMultipleChoices)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusMovedPermanently)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusFound)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusSeeOther)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusNotModified)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusUseProxy)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusTemporaryRedirect)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusPermanentRedirect)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusBadRequest)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusUnauthorized)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusPaymentRequired)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusForbidden)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusNotFound)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusMethodNotAllowed)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusNotAcceptable)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusProxyAuthRequired)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusRequestTimeout)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusConflict)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusGone)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusLengthRequired)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusPreconditionFailed)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusRequestEntityTooLarge)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusRequestURITooLong)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusUnsupportedMediaType)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusRequestedRangeNotSatisfiable)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusExpectationFailed)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusTeapot)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusMisdirectedRequest)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusUnprocessableEntity)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusLocked)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusFailedDependency)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusTooEarly)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusUpgradeRequired)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusPreconditionRequired)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusTooManyRequests)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusRequestHeaderFieldsTooLarge)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusUnavailableForLegalReasons)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusInternalServerError)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusNotImplemented)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusBadGateway)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusServiceUnavailable)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusGatewayTimeout)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusHTTPVersionNotSupported)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusVariantAlsoNegotiates)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusInsufficientStorage)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusLoopDetected)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusNotExtended)
+}
+
+func _() {
+	http.RedirectHandler("", http.StatusNetworkAuthenticationRequired)
+}
