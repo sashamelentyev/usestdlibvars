@@ -107,6 +107,15 @@ func run(pass *analysis.Pass) (interface{}, error) {
 					if basicLit := getBasicLitFromArgs(n.Args, 1, 0, token.INT); basicLit != nil {
 						checkHTTPStatusCode(pass, basicLit)
 					}
+
+				case "Redirect":
+					if !lookupFlag(pass, HTTPStatusCodeFlag) {
+						return
+					}
+
+					if basicLit := getBasicLitFromArgs(n.Args, 4, 3, token.INT); basicLit != nil {
+						checkHTTPStatusCode(pass, basicLit)
+					}
 				}
 			default:
 				if selectorExpr.Sel.Name == "WriteHeader" {

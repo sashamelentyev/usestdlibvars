@@ -98,3 +98,19 @@ func _() {
     http.StatusText({{ $value }})
 }
 {{ end -}}
+
+{{ range $key, $value := .Mapping }}
+func _() {
+    var w http.ResponseWriter
+    var r *http.Request
+    http.Redirect(w, r, "", {{ $key }}) // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+}
+{{ end -}}
+
+{{ range $key, $value := .Mapping }}
+func _() {
+    var w http.ResponseWriter
+    var r *http.Request
+    http.Redirect(w, r, "", {{ $value }})
+}
+{{ end -}}
