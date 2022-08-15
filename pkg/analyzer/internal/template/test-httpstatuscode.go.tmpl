@@ -114,3 +114,15 @@ func _() {
     http.Redirect(w, r, "", {{ $value }})
 }
 {{ end -}}
+
+{{ range $key, $value := .Mapping }}
+func _() {
+    http.RedirectHandler("", {{ $key }}) // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+}
+{{ end -}}
+
+{{ range $key, $value := .Mapping }}
+func _() {
+    http.RedirectHandler("", {{ $value }})
+}
+{{ end -}}
