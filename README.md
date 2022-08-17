@@ -37,8 +37,6 @@ Flags:
         print analyzer flags in JSON
   -http-method
         suggest the use of http.MethodXX (default true)
-  -http-no-body
-        suggest the use of http.NoBody
   -http-status-code
         suggest the use of http.StatusXX (default true)
   -json
