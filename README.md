@@ -72,10 +72,10 @@ import (
 )
 
 // JSON marshals v to JSON, automatically escaping HTML,
-// setting the Content-Type header as application/json,
+// setting the Content-Type header as "application/json; charset=utf-8",
 // sends an HTTP response header with the provided statusCode and
 // writes the marshaled v as bytes to the connection as part of an HTTP reply.
-func JSON(w http.ResponseWriter, v any, statusCode int) {
+func JSON(w http.ResponseWriter, statusCode int, v any) {
 	var buf bytes.Buffer
 	enc := json.NewEncoder(&buf)
 	enc.SetEscapeHTML(true)
