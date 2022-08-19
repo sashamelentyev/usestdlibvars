@@ -205,20 +205,25 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				return
 			}
 
-			if selectorExpr.Sel.Name != "StatusCode" {
-				return
-			}
-
 			basicLit, ok := binaryExpr.Y.(*ast.BasicLit)
 			if !ok {
 				return
 			}
 
-			if !lookupFlag(pass, HTTPStatusCodeFlag) {
-				return
-			}
+			switch selectorExpr.Sel.Name {
+			case "StatusCode":
+				if !lookupFlag(pass, HTTPStatusCodeFlag) {
+					return
+				}
 
-			checkHTTPStatusCode(pass, basicLit)
+				checkHTTPStatusCode(pass, basicLit)
+			case "Method":
+				if !lookupFlag(pass, HTTPMethodFlag) {
+					return
+				}
+
+				checkHTTPMethod(pass, basicLit)
+			}
 		}
 	})
 
