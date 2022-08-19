@@ -63,3 +63,23 @@ func _() error {
     return nil
 }
 {{ end -}}
+
+{{ range $key, $value := .Mapping }}
+func _() {
+    var r http.Request
+    switch r.Method {
+    case "{{ $key }}": // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+      return
+    }
+}
+{{ end -}}
+
+{{ range $key, $value := .Mapping }}
+func _() {
+    var r http.Request
+    switch r.Method {
+    case {{ $value }}:
+      return
+    }
+}
+{{ end -}}

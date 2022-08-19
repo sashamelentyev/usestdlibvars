@@ -126,3 +126,24 @@ func _() {
     http.RedirectHandler("", {{ $value }})
 }
 {{ end -}}
+
+
+{{ range $key, $value := .Mapping }}
+func _() {
+    var resp http.Response
+    switch resp.StatusCode {
+    case {{ $key }}: // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+      return
+    }
+}
+{{ end -}}
+
+{{ range $key, $value := .Mapping }}
+func _() {
+    var resp http.Response
+    switch resp.StatusCode {
+    case {{ $value }}:
+      return
+    }
+}
+{{ end -}}
