@@ -5341,3 +5341,995 @@ func _() {
 func _() {
 	http.RedirectHandler("", http.StatusNetworkAuthenticationRequired)
 }
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 100: // want `"100" can be replaced by http\.StatusContinue`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 101: // want `"101" can be replaced by http\.StatusSwitchingProtocols`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 102: // want `"102" can be replaced by http\.StatusProcessing`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 103: // want `"103" can be replaced by http\.StatusEarlyHints`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 200: // want `"200" can be replaced by http\.StatusOK`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 201: // want `"201" can be replaced by http\.StatusCreated`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 202: // want `"202" can be replaced by http\.StatusAccepted`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 203: // want `"203" can be replaced by http\.StatusNonAuthoritativeInfo`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 204: // want `"204" can be replaced by http\.StatusNoContent`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 205: // want `"205" can be replaced by http\.StatusResetContent`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 206: // want `"206" can be replaced by http\.StatusPartialContent`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 207: // want `"207" can be replaced by http\.StatusMultiStatus`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 208: // want `"208" can be replaced by http\.StatusAlreadyReported`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 226: // want `"226" can be replaced by http\.StatusIMUsed`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 300: // want `"300" can be replaced by http\.StatusMultipleChoices`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 301: // want `"301" can be replaced by http\.StatusMovedPermanently`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 302: // want `"302" can be replaced by http\.StatusFound`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 303: // want `"303" can be replaced by http\.StatusSeeOther`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 304: // want `"304" can be replaced by http\.StatusNotModified`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 305: // want `"305" can be replaced by http\.StatusUseProxy`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 307: // want `"307" can be replaced by http\.StatusTemporaryRedirect`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 308: // want `"308" can be replaced by http\.StatusPermanentRedirect`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 400: // want `"400" can be replaced by http\.StatusBadRequest`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 401: // want `"401" can be replaced by http\.StatusUnauthorized`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 402: // want `"402" can be replaced by http\.StatusPaymentRequired`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 403: // want `"403" can be replaced by http\.StatusForbidden`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 404: // want `"404" can be replaced by http\.StatusNotFound`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 405: // want `"405" can be replaced by http\.StatusMethodNotAllowed`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 406: // want `"406" can be replaced by http\.StatusNotAcceptable`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 407: // want `"407" can be replaced by http\.StatusProxyAuthRequired`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 408: // want `"408" can be replaced by http\.StatusRequestTimeout`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 409: // want `"409" can be replaced by http\.StatusConflict`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 410: // want `"410" can be replaced by http\.StatusGone`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 411: // want `"411" can be replaced by http\.StatusLengthRequired`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 412: // want `"412" can be replaced by http\.StatusPreconditionFailed`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 413: // want `"413" can be replaced by http\.StatusRequestEntityTooLarge`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 414: // want `"414" can be replaced by http\.StatusRequestURITooLong`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 415: // want `"415" can be replaced by http\.StatusUnsupportedMediaType`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 416: // want `"416" can be replaced by http\.StatusRequestedRangeNotSatisfiable`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 417: // want `"417" can be replaced by http\.StatusExpectationFailed`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 418: // want `"418" can be replaced by http\.StatusTeapot`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 421: // want `"421" can be replaced by http\.StatusMisdirectedRequest`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 422: // want `"422" can be replaced by http\.StatusUnprocessableEntity`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 423: // want `"423" can be replaced by http\.StatusLocked`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 424: // want `"424" can be replaced by http\.StatusFailedDependency`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 425: // want `"425" can be replaced by http\.StatusTooEarly`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 426: // want `"426" can be replaced by http\.StatusUpgradeRequired`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 428: // want `"428" can be replaced by http\.StatusPreconditionRequired`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 429: // want `"429" can be replaced by http\.StatusTooManyRequests`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 431: // want `"431" can be replaced by http\.StatusRequestHeaderFieldsTooLarge`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 451: // want `"451" can be replaced by http\.StatusUnavailableForLegalReasons`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 500: // want `"500" can be replaced by http\.StatusInternalServerError`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 501: // want `"501" can be replaced by http\.StatusNotImplemented`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 502: // want `"502" can be replaced by http\.StatusBadGateway`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 503: // want `"503" can be replaced by http\.StatusServiceUnavailable`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 504: // want `"504" can be replaced by http\.StatusGatewayTimeout`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 505: // want `"505" can be replaced by http\.StatusHTTPVersionNotSupported`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 506: // want `"506" can be replaced by http\.StatusVariantAlsoNegotiates`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 507: // want `"507" can be replaced by http\.StatusInsufficientStorage`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 508: // want `"508" can be replaced by http\.StatusLoopDetected`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 510: // want `"510" can be replaced by http\.StatusNotExtended`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case 511: // want `"511" can be replaced by http\.StatusNetworkAuthenticationRequired`
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusContinue:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusSwitchingProtocols:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusProcessing:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusEarlyHints:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusOK:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusCreated:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusAccepted:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusNonAuthoritativeInfo:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusNoContent:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusResetContent:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusPartialContent:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusMultiStatus:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusAlreadyReported:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusIMUsed:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusMultipleChoices:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusMovedPermanently:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusFound:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusSeeOther:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusNotModified:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusUseProxy:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusTemporaryRedirect:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusPermanentRedirect:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusBadRequest:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusUnauthorized:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusPaymentRequired:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusForbidden:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusNotFound:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusMethodNotAllowed:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusNotAcceptable:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusProxyAuthRequired:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusRequestTimeout:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusConflict:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusGone:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusLengthRequired:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusPreconditionFailed:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusRequestEntityTooLarge:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusRequestURITooLong:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusUnsupportedMediaType:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusRequestedRangeNotSatisfiable:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusExpectationFailed:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusTeapot:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusMisdirectedRequest:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusUnprocessableEntity:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusLocked:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusFailedDependency:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusTooEarly:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusUpgradeRequired:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusPreconditionRequired:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusTooManyRequests:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusRequestHeaderFieldsTooLarge:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusUnavailableForLegalReasons:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusInternalServerError:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusNotImplemented:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusBadGateway:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusServiceUnavailable:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusGatewayTimeout:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusHTTPVersionNotSupported:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusVariantAlsoNegotiates:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusInsufficientStorage:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusLoopDetected:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusNotExtended:
+		return
+	}
+}
+
+func _() {
+	var resp http.Response
+	switch resp.StatusCode {
+	case http.StatusNetworkAuthenticationRequired:
+		return
+	}
+}
