@@ -228,38 +228,79 @@ func run(pass *analysis.Pass) (interface{}, error) {
 
 		case *ast.SwitchStmt:
 			selectorExpr, ok := n.Tag.(*ast.SelectorExpr)
-			if !ok {
-				return
-			}
+			if ok {
+				var checkFunc func(pass *analysis.Pass, basicLit *ast.BasicLit)
 
-			var checkFunc func(pass *analysis.Pass, basicLit *ast.BasicLit)
+				switch selectorExpr.Sel.Name {
+				case "StatusCode":
+					if !lookupFlag(pass, HTTPStatusCodeFlag) {
+						return
+					}
 
-			switch selectorExpr.Sel.Name {
-			case "StatusCode":
-				if !lookupFlag(pass, HTTPStatusCodeFlag) {
+					checkFunc = checkHTTPStatusCode
+				case "Method":
+					if !lookupFlag(pass, HTTPMethodFlag) {
+						return
+					}
+
+					checkFunc = checkHTTPMethod
+				default:
 					return
 				}
-				checkFunc = checkHTTPStatusCode
-			case "Method":
-				if !lookupFlag(pass, HTTPMethodFlag) {
-					return
-				}
-				checkFunc = checkHTTPMethod
-			default:
-				return
-			}
 
-			for _, stmt := range n.Body.List {
-				caseClause, ok := stmt.(*ast.CaseClause)
-				if !ok {
-					continue
-				}
-				for _, expr := range caseClause.List {
-					basicLit, ok := expr.(*ast.BasicLit)
+				for _, stmt := range n.Body.List {
+					caseClause, ok := stmt.(*ast.CaseClause)
 					if !ok {
 						continue
 					}
-					checkFunc(pass, basicLit)
+
+					for _, expr := range caseClause.List {
+						basicLit, ok := expr.(*ast.BasicLit)
+						if !ok {
+							continue
+						}
+
+						checkFunc(pass, basicLit)
+					}
+				}
+			} else {
+				for _, stmt := range n.Body.List {
+					caseClause, ok := stmt.(*ast.CaseClause)
+					if !ok {
+						continue
+					}
+
+					for _, expr := range caseClause.List {
+						binaryExpr, ok := expr.(*ast.BinaryExpr)
+						if !ok {
+							continue
+						}
+
+						selectorExpr, ok := binaryExpr.X.(*ast.SelectorExpr)
+						if !ok {
+							continue
+						}
+
+						basicLit, ok := binaryExpr.Y.(*ast.BasicLit)
+						if !ok {
+							continue
+						}
+
+						switch selectorExpr.Sel.Name {
+						case "StatusCode":
+							if !lookupFlag(pass, HTTPStatusCodeFlag) {
+								continue
+							}
+
+							checkHTTPStatusCode(pass, basicLit)
+						case "Method":
+							if !lookupFlag(pass, HTTPMethodFlag) {
+								continue
+							}
+
+							checkHTTPMethod(pass, basicLit)
+						}
+					}
 				}
 			}
 		}

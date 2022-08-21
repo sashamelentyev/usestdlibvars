@@ -441,3 +441,147 @@ func _() {
 		return
 	}
 }
+
+func _() {
+	var r http.Request
+	switch {
+	case r.Method == "CONNECT": // want `"CONNECT" can be replaced by http\.MethodConnect`
+		return
+	}
+}
+
+func _() {
+	var r http.Request
+	switch {
+	case r.Method == "DELETE": // want `"DELETE" can be replaced by http\.MethodDelete`
+		return
+	}
+}
+
+func _() {
+	var r http.Request
+	switch {
+	case r.Method == "GET": // want `"GET" can be replaced by http\.MethodGet`
+		return
+	}
+}
+
+func _() {
+	var r http.Request
+	switch {
+	case r.Method == "HEAD": // want `"HEAD" can be replaced by http\.MethodHead`
+		return
+	}
+}
+
+func _() {
+	var r http.Request
+	switch {
+	case r.Method == "OPTIONS": // want `"OPTIONS" can be replaced by http\.MethodOptions`
+		return
+	}
+}
+
+func _() {
+	var r http.Request
+	switch {
+	case r.Method == "PATCH": // want `"PATCH" can be replaced by http\.MethodPatch`
+		return
+	}
+}
+
+func _() {
+	var r http.Request
+	switch {
+	case r.Method == "POST": // want `"POST" can be replaced by http\.MethodPost`
+		return
+	}
+}
+
+func _() {
+	var r http.Request
+	switch {
+	case r.Method == "PUT": // want `"PUT" can be replaced by http\.MethodPut`
+		return
+	}
+}
+
+func _() {
+	var r http.Request
+	switch {
+	case r.Method == "TRACE": // want `"TRACE" can be replaced by http\.MethodTrace`
+		return
+	}
+}
+
+func _() {
+	var r http.Request
+	switch {
+	case r.Method == http.MethodConnect:
+		return
+	}
+}
+
+func _() {
+	var r http.Request
+	switch {
+	case r.Method == http.MethodDelete:
+		return
+	}
+}
+
+func _() {
+	var r http.Request
+	switch {
+	case r.Method == http.MethodGet:
+		return
+	}
+}
+
+func _() {
+	var r http.Request
+	switch {
+	case r.Method == http.MethodHead:
+		return
+	}
+}
+
+func _() {
+	var r http.Request
+	switch {
+	case r.Method == http.MethodOptions:
+		return
+	}
+}
+
+func _() {
+	var r http.Request
+	switch {
+	case r.Method == http.MethodPatch:
+		return
+	}
+}
+
+func _() {
+	var r http.Request
+	switch {
+	case r.Method == http.MethodPost:
+		return
+	}
+}
+
+func _() {
+	var r http.Request
+	switch {
+	case r.Method == http.MethodPut:
+		return
+	}
+}
+
+func _() {
+	var r http.Request
+	switch {
+	case r.Method == http.MethodTrace:
+		return
+	}
+}
