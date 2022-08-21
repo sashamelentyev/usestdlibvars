@@ -83,3 +83,23 @@ func _() {
     }
 }
 {{ end -}}
+
+{{ range $key, $value := .Mapping }}
+func _() {
+    var r http.Request
+    switch {
+    case r.Method == "{{ $key }}": // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+      return
+    }
+}
+{{ end -}}
+
+{{ range $key, $value := .Mapping }}
+func _() {
+    var r http.Request
+    switch {
+    case r.Method == {{ $value }}:
+      return
+    }
+}
+{{ end -}}

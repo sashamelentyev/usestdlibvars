@@ -127,7 +127,6 @@ func _() {
 }
 {{ end -}}
 
-
 {{ range $key, $value := .Mapping }}
 func _() {
     var resp http.Response
@@ -143,6 +142,26 @@ func _() {
     var resp http.Response
     switch resp.StatusCode {
     case {{ $value }}:
+      return
+    }
+}
+{{ end -}}
+
+{{ range $key, $value := .Mapping }}
+func _() {
+    var resp http.Response
+    switch {
+    case resp.StatusCode == {{ $key }}: // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+      return
+    }
+}
+{{ end -}}
+
+{{ range $key, $value := .Mapping }}
+func _() {
+    var resp http.Response
+    switch {
+    case resp.StatusCode == {{ $value }}:
       return
     }
 }
