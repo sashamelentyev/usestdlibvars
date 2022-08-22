@@ -140,26 +140,24 @@ func run(pass *analysis.Pass) (interface{}, error) {
 			}
 
 		case *ast.BasicLit:
-			currentVal := getBasicLitValue(n)
-
 			if lookupFlag(pass, TimeWeekdayFlag) {
-				checkTimeWeekday(pass, n.Pos(), currentVal)
+				checkTimeWeekday(pass, n)
 			}
 
 			if lookupFlag(pass, TimeMonthFlag) {
-				checkTimeMonth(pass, n.Pos(), currentVal)
+				checkTimeMonth(pass, n)
 			}
 
 			if lookupFlag(pass, TimeLayoutFlag) {
-				checkTimeLayout(pass, n.Pos(), currentVal)
+				checkTimeLayout(pass, n)
 			}
 
 			if lookupFlag(pass, CryptoHashFlag) {
-				checkCryptoHash(pass, n.Pos(), currentVal)
+				checkCryptoHash(pass, n)
 			}
 
 			if lookupFlag(pass, DefaultRPCPathFlag) {
-				checkDefaultRPCPath(pass, n.Pos(), currentVal)
+				checkDefaultRPCPath(pass, n)
 			}
 
 		case *ast.CompositeLit:
@@ -329,33 +327,43 @@ func checkHTTPStatusCode(pass *analysis.Pass, basicLit *ast.BasicLit) {
 	}
 }
 
-func checkTimeWeekday(pass *analysis.Pass, pos token.Pos, currentVal string) {
+func checkTimeWeekday(pass *analysis.Pass, basicLit *ast.BasicLit) {
+	currentVal := getBasicLitValue(basicLit)
+
 	if newVal, ok := mapping.TimeWeekday[currentVal]; ok {
-		report(pass, pos, currentVal, newVal)
+		report(pass, basicLit.Pos(), currentVal, newVal)
 	}
 }
 
-func checkTimeMonth(pass *analysis.Pass, pos token.Pos, currentVal string) {
+func checkTimeMonth(pass *analysis.Pass, basicLit *ast.BasicLit) {
+	currentVal := getBasicLitValue(basicLit)
+
 	if newVal, ok := mapping.TimeMonth[currentVal]; ok {
-		report(pass, pos, currentVal, newVal)
+		report(pass, basicLit.Pos(), currentVal, newVal)
 	}
 }
 
-func checkTimeLayout(pass *analysis.Pass, pos token.Pos, currentVal string) {
+func checkTimeLayout(pass *analysis.Pass, basicLit *ast.BasicLit) {
+	currentVal := getBasicLitValue(basicLit)
+
 	if newVal, ok := mapping.TimeLayout[currentVal]; ok {
-		report(pass, pos, currentVal, newVal)
+		report(pass, basicLit.Pos(), currentVal, newVal)
 	}
 }
 
-func checkCryptoHash(pass *analysis.Pass, pos token.Pos, currentVal string) {
+func checkCryptoHash(pass *analysis.Pass, basicLit *ast.BasicLit) {
+	currentVal := getBasicLitValue(basicLit)
+
 	if newVal, ok := mapping.CryptoHash[currentVal]; ok {
-		report(pass, pos, currentVal, newVal)
+		report(pass, basicLit.Pos(), currentVal, newVal)
 	}
 }
 
-func checkDefaultRPCPath(pass *analysis.Pass, pos token.Pos, currentVal string) {
+func checkDefaultRPCPath(pass *analysis.Pass, basicLit *ast.BasicLit) {
+	currentVal := getBasicLitValue(basicLit)
+
 	if newVal, ok := mapping.DefaultRPCPath[currentVal]; ok {
-		report(pass, pos, currentVal, newVal)
+		report(pass, basicLit.Pos(), currentVal, newVal)
 	}
 }
 
@@ -387,8 +395,8 @@ func getBasicLitFromArgs(args []ast.Expr, count, idx int, typ token.Token) *ast.
 // Arguments:
 //   - key: name of key in struct
 func getBasicLitFromElts(elts []ast.Expr, key string) *ast.BasicLit {
-	for _, e := range elts {
-		expr, ok := e.(*ast.KeyValueExpr)
+	for i := range elts {
+		expr, ok := elts[i].(*ast.KeyValueExpr)
 		if !ok {
 			continue
 		}
