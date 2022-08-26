@@ -219,6 +219,7 @@ func pkgFunArgs(pass *analysis.Pass, pkg *ast.Ident, fun *ast.SelectorExpr, args
 	switch pkg.Name {
 	case "http":
 		switch fun.Sel.Name {
+		// http.NewRequest(http.MethodGet, "localhost", http.NoBody)
 		case "NewRequest":
 			if !lookupFlag(pass, HTTPMethodFlag) {
 				return
@@ -228,6 +229,7 @@ func pkgFunArgs(pass *analysis.Pass, pkg *ast.Ident, fun *ast.SelectorExpr, args
 				checkHTTPMethod(pass, basicLit)
 			}
 
+		// http.NewRequestWithContext(context.Background(), http.MethodGet, "localhost", http.NoBody)
 		case "NewRequestWithContext":
 			if !lookupFlag(pass, HTTPMethodFlag) {
 				return
@@ -237,6 +239,7 @@ func pkgFunArgs(pass *analysis.Pass, pkg *ast.Ident, fun *ast.SelectorExpr, args
 				checkHTTPMethod(pass, basicLit)
 			}
 
+		// http.Error(w, err, http.StatusInternalServerError)
 		case "Error":
 			if !lookupFlag(pass, HTTPStatusCodeFlag) {
 				return
@@ -246,6 +249,7 @@ func pkgFunArgs(pass *analysis.Pass, pkg *ast.Ident, fun *ast.SelectorExpr, args
 				checkHTTPStatusCode(pass, basicLit)
 			}
 
+		// http.StatusText(http.StatusOK)
 		case "StatusText":
 			if !lookupFlag(pass, HTTPStatusCodeFlag) {
 				return
@@ -255,6 +259,7 @@ func pkgFunArgs(pass *analysis.Pass, pkg *ast.Ident, fun *ast.SelectorExpr, args
 				checkHTTPStatusCode(pass, basicLit)
 			}
 
+		// http.Redirect(w, r, "localhost", http.StatusMovedPermanently)
 		case "Redirect":
 			if !lookupFlag(pass, HTTPStatusCodeFlag) {
 				return
@@ -264,6 +269,7 @@ func pkgFunArgs(pass *analysis.Pass, pkg *ast.Ident, fun *ast.SelectorExpr, args
 				checkHTTPStatusCode(pass, basicLit)
 			}
 
+		// http.RedirectHandler("localhost", http.StatusMovedPermanently)
 		case "RedirectHandler":
 			if !lookupFlag(pass, HTTPStatusCodeFlag) {
 				return
@@ -274,6 +280,7 @@ func pkgFunArgs(pass *analysis.Pass, pkg *ast.Ident, fun *ast.SelectorExpr, args
 			}
 		}
 	default:
+		// w.WriteHeader(http.StatusOk)
 		if fun.Sel.Name == "WriteHeader" {
 			if !lookupFlag(pass, HTTPStatusCodeFlag) {
 				return
