@@ -65,12 +65,12 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				return
 			}
 
-			pkg, ok := fun.X.(*ast.Ident)
+			x, ok := fun.X.(*ast.Ident)
 			if !ok {
 				return
 			}
 
-			pkgFunArgs(pass, pkg, fun, n.Args)
+			funArgs(pass, x, fun, n.Args)
 
 		case *ast.BasicLit:
 			if lookupFlag(pass, TimeWeekdayFlag) {
@@ -214,9 +214,9 @@ func run(pass *analysis.Pass) (interface{}, error) {
 	return nil, nil
 }
 
-// pkgFunArgs checks arguments of function from package.
-func pkgFunArgs(pass *analysis.Pass, pkg *ast.Ident, fun *ast.SelectorExpr, args []ast.Expr) {
-	switch pkg.Name {
+// funArgs checks arguments of function or method.
+func funArgs(pass *analysis.Pass, x *ast.Ident, fun *ast.SelectorExpr, args []ast.Expr) {
+	switch x.Name {
 	case "http":
 		switch fun.Sel.Name {
 		// http.NewRequest(http.MethodGet, "localhost", http.NoBody)
