@@ -142,7 +142,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				return
 			}
 
-			ifstmt(pass, x, y)
+			ifStmt(pass, x, y)
 
 		case *ast.SwitchStmt:
 			selectorExpr, ok := n.Tag.(*ast.SelectorExpr)
@@ -204,7 +204,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 							continue
 						}
 
-						ifstmt(pass, x, y)
+						ifStmt(pass, x, y)
 					}
 				}
 			}
@@ -293,8 +293,8 @@ func funArgs(pass *analysis.Pass, x *ast.Ident, fun *ast.SelectorExpr, args []as
 	}
 }
 
-// ifstmt checks X and Y in if-statement.
-func ifstmt(pass *analysis.Pass, x *ast.SelectorExpr, y *ast.BasicLit) {
+// ifStmt checks X and Y in if-statement.
+func ifStmt(pass *analysis.Pass, x *ast.SelectorExpr, y *ast.BasicLit) {
 	switch x.Sel.Name {
 	case "StatusCode":
 		if !lookupFlag(pass, HTTPStatusCodeFlag) {
