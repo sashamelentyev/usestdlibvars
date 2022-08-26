@@ -60,84 +60,17 @@ func run(pass *analysis.Pass) (interface{}, error) {
 	insp.Preorder(types, func(node ast.Node) {
 		switch n := node.(type) {
 		case *ast.CallExpr:
-			selectorExpr, ok := n.Fun.(*ast.SelectorExpr)
+			fun, ok := n.Fun.(*ast.SelectorExpr)
 			if !ok {
 				return
 			}
 
-			ident, ok := selectorExpr.X.(*ast.Ident)
+			pkg, ok := fun.X.(*ast.Ident)
 			if !ok {
 				return
 			}
 
-			switch ident.Name {
-			case "http":
-				switch selectorExpr.Sel.Name {
-				case "NewRequest":
-					if !lookupFlag(pass, HTTPMethodFlag) {
-						return
-					}
-
-					if basicLit := getBasicLitFromArgs(n.Args, 3, 0, token.STRING); basicLit != nil {
-						checkHTTPMethod(pass, basicLit)
-					}
-
-				case "NewRequestWithContext":
-					if !lookupFlag(pass, HTTPMethodFlag) {
-						return
-					}
-
-					if basicLit := getBasicLitFromArgs(n.Args, 4, 1, token.STRING); basicLit != nil {
-						checkHTTPMethod(pass, basicLit)
-					}
-
-				case "Error":
-					if !lookupFlag(pass, HTTPStatusCodeFlag) {
-						return
-					}
-
-					if basicLit := getBasicLitFromArgs(n.Args, 3, 2, token.INT); basicLit != nil {
-						checkHTTPStatusCode(pass, basicLit)
-					}
-
-				case "StatusText":
-					if !lookupFlag(pass, HTTPStatusCodeFlag) {
-						return
-					}
-
-					if basicLit := getBasicLitFromArgs(n.Args, 1, 0, token.INT); basicLit != nil {
-						checkHTTPStatusCode(pass, basicLit)
-					}
-
-				case "Redirect":
-					if !lookupFlag(pass, HTTPStatusCodeFlag) {
-						return
-					}
-
-					if basicLit := getBasicLitFromArgs(n.Args, 4, 3, token.INT); basicLit != nil {
-						checkHTTPStatusCode(pass, basicLit)
-					}
-
-				case "RedirectHandler":
-					if !lookupFlag(pass, HTTPStatusCodeFlag) {
-						return
-					}
-
-					if basicLit := getBasicLitFromArgs(n.Args, 2, 1, token.INT); basicLit != nil {
-						checkHTTPStatusCode(pass, basicLit)
-					}
-				}
-			default:
-				if selectorExpr.Sel.Name == "WriteHeader" {
-					if !lookupFlag(pass, HTTPStatusCodeFlag) {
-						return
-					}
-
-					if basicLit := getBasicLitFromArgs(n.Args, 1, 0, token.INT); basicLit != nil {
-						checkHTTPStatusCode(pass, basicLit)
-					}
-				}
-			}
+			pkgFunArgs(pass, pkg, fun, n.Args)
 
 		case *ast.BasicLit:
 			if lookupFlag(pass, TimeWeekdayFlag) {
@@ -281,6 +214,79 @@ func run(pass *analysis.Pass) (interface{}, error) {
 	return nil, nil
 }
 
+// pkgFunArgs checks arguments of function from package.
+func pkgFunArgs(pass *analysis.Pass, pkg *ast.Ident, fun *ast.SelectorExpr, args []ast.Expr) {
+	switch pkg.Name {
+	case "http":
+		switch fun.Sel.Name {
+		case "NewRequest":
+			if !lookupFlag(pass, HTTPMethodFlag) {
+				return
+			}
+
+			if basicLit := getBasicLitFromArgs(args, 3, 0, token.STRING); basicLit != nil {
+				checkHTTPMethod(pass, basicLit)
+			}
+
+		case "NewRequestWithContext":
+			if !lookupFlag(pass, HTTPMethodFlag) {
+				return
+			}
+
+			if basicLit := getBasicLitFromArgs(args, 4, 1, token.STRING); basicLit != nil {
+				checkHTTPMethod(pass, basicLit)
+			}
+
+		case "Error":
+			if !lookupFlag(pass, HTTPStatusCodeFlag) {
+				return
+			}
+
+			if basicLit := getBasicLitFromArgs(args, 3, 2, token.INT); basicLit != nil {
+				checkHTTPStatusCode(pass, basicLit)
+			}
+
+		case "StatusText":
+			if !lookupFlag(pass, HTTPStatusCodeFlag) {
+				return
+			}
+
+			if basicLit := getBasicLitFromArgs(args, 1, 0, token.INT); basicLit != nil {
+				checkHTTPStatusCode(pass, basicLit)
+			}
+
+		case "Redirect":
+			if !lookupFlag(pass, HTTPStatusCodeFlag) {
+				return
+			}
+
+			if basicLit := getBasicLitFromArgs(args, 4, 3, token.INT); basicLit != nil {
+				checkHTTPStatusCode(pass, basicLit)
+			}
+
+		case "RedirectHandler":
+			if !lookupFlag(pass, HTTPStatusCodeFlag) {
+				return
+			}
+
+			if basicLit := getBasicLitFromArgs(args, 2, 1, token.INT); basicLit != nil {
+				checkHTTPStatusCode(pass, basicLit)
+			}
+		}
+	default:
+		if fun.Sel.Name == "WriteHeader" {
+			if !lookupFlag(pass, HTTPStatusCodeFlag) {
+				return
+			}
+
+			if basicLit := getBasicLitFromArgs(args, 1, 0, token.INT); basicLit != nil {
+				checkHTTPStatusCode(pass, basicLit)
+			}
+		}
+	}
+}
+
+// ifstmt checks X and Y in if-statement.
 func ifstmt(pass *analysis.Pass, x *ast.SelectorExpr, y *ast.BasicLit) {
 	switch x.Sel.Name {
 	case "StatusCode":
