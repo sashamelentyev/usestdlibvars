@@ -46,6 +46,22 @@ func _() {
 {{ end -}}
 
 {{ range $key, $value := .Mapping }}
+func _() {
+	_ = http.Response{
+		StatusCode: {{ $key }}, // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+	}
+}
+{{ end -}}
+
+{{ range $key, $value := .Mapping }}
+func _() {
+	_ = http.Response{
+		StatusCode: {{ $value }},
+	}
+}
+{{ end -}}
+
+{{ range $key, $value := .Mapping }}
 func _() error {
     resp, err := http.DefaultClient.Do(&http.Request{})
     if err != nil {
