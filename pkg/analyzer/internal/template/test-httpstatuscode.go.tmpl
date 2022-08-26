@@ -70,6 +70,8 @@ func _() error {
     defer func() { _ = resp.Body.Close() }()
     if resp.StatusCode == {{ $key }} { // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
         return nil
+    } else if resp.StatusCode == {{ $key }} { // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+        return nil
     }
     return nil
 }
@@ -83,6 +85,8 @@ func _() error {
     }
     defer func() { _ = resp.Body.Close() }()
     if resp.StatusCode == {{ $value }} {
+        return nil
+    } else if resp.StatusCode == {{ $value }} {
         return nil
     }
     return nil
