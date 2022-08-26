@@ -49,7 +49,7 @@ func flags() flag.FlagSet {
 func run(pass *analysis.Pass) (interface{}, error) {
 	insp := pass.ResultOf[inspect.Analyzer].(*inspector.Inspector)
 
-	filter := []ast.Node{
+	types := []ast.Node{
 		(*ast.CallExpr)(nil),
 		(*ast.BasicLit)(nil),
 		(*ast.CompositeLit)(nil),
@@ -57,7 +57,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 		(*ast.SwitchStmt)(nil),
 	}
 
-	insp.Preorder(filter, func(node ast.Node) {
+	insp.Preorder(types, func(node ast.Node) {
 		switch n := node.(type) {
 		case *ast.CallExpr:
 			selectorExpr, ok := n.Fun.(*ast.SelectorExpr)
@@ -194,35 +194,22 @@ func run(pass *analysis.Pass) (interface{}, error) {
 			}
 
 		case *ast.IfStmt:
-			binaryExpr, ok := n.Cond.(*ast.BinaryExpr)
+			cond, ok := n.Cond.(*ast.BinaryExpr)
 			if !ok {
 				return
 			}
 
-			selectorExpr, ok := binaryExpr.X.(*ast.SelectorExpr)
+			x, ok := cond.X.(*ast.SelectorExpr)
 			if !ok {
 				return
 			}
 
-			basicLit, ok := binaryExpr.Y.(*ast.BasicLit)
+			y, ok := cond.Y.(*ast.BasicLit)
 			if !ok {
 				return
 			}
 
-			switch selectorExpr.Sel.Name {
-			case "StatusCode":
-				if !lookupFlag(pass, HTTPStatusCodeFlag) {
-					return
-				}
-
-				checkHTTPStatusCode(pass, basicLit)
-			case "Method":
-				if !lookupFlag(pass, HTTPMethodFlag) {
-					return
-				}
-
-				checkHTTPMethod(pass, basicLit)
-			}
+			ifstmt(pass, x, y)
 
 		case *ast.SwitchStmt:
 			selectorExpr, ok := n.Tag.(*ast.SelectorExpr)
@@ -305,6 +292,23 @@ func run(pass *analysis.Pass) (interface{}, error) {
 	})
 
 	return nil, nil
+}
+
+func ifstmt(pass *analysis.Pass, x *ast.SelectorExpr, y *ast.BasicLit) {
+	switch x.Sel.Name {
+	case "StatusCode":
+		if !lookupFlag(pass, HTTPStatusCodeFlag) {
+			return
+		}
+
+		checkHTTPStatusCode(pass, y)
+	case "Method":
+		if !lookupFlag(pass, HTTPMethodFlag) {
+			return
+		}
+
+		checkHTTPMethod(pass, y)
+	}
 }
 
 func lookupFlag(pass *analysis.Pass, name string) bool {
