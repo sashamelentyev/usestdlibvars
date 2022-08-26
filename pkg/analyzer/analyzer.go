@@ -256,35 +256,22 @@ func run(pass *analysis.Pass) (interface{}, error) {
 					}
 
 					for _, expr := range caseClause.List {
-						binaryExpr, ok := expr.(*ast.BinaryExpr)
+						e, ok := expr.(*ast.BinaryExpr)
 						if !ok {
 							continue
 						}
 
-						selectorExpr, ok := binaryExpr.X.(*ast.SelectorExpr)
+						x, ok := e.X.(*ast.SelectorExpr)
 						if !ok {
 							continue
 						}
 
-						basicLit, ok := binaryExpr.Y.(*ast.BasicLit)
+						y, ok := e.Y.(*ast.BasicLit)
 						if !ok {
 							continue
 						}
 
-						switch selectorExpr.Sel.Name {
-						case "StatusCode":
-							if !lookupFlag(pass, HTTPStatusCodeFlag) {
-								continue
-							}
-
-							checkHTTPStatusCode(pass, basicLit)
-						case "Method":
-							if !lookupFlag(pass, HTTPMethodFlag) {
-								continue
-							}
-
-							checkHTTPMethod(pass, basicLit)
-						}
+						ifstmt(pass, x, y)
 					}
 				}
 			}
