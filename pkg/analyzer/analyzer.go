@@ -416,7 +416,16 @@ func getBasicLitFromElts(elts []ast.Expr, key string) *ast.BasicLit {
 
 // getBasicLitValue returns BasicLit value as string without quotes
 func getBasicLitValue(basicLit *ast.BasicLit) string {
-	return strings.Trim(basicLit.Value, "\"")
+	var val strings.Builder
+	for i := range basicLit.Value {
+		switch basicLit.Value[i] {
+		case '\\', '"':
+			continue
+		default:
+			val.WriteByte(basicLit.Value[i])
+		}
+	}
+	return val.String()
 }
 
 func report(pass *analysis.Pass, pos token.Pos, currentVal, newVal string) {
