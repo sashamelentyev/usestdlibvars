@@ -420,12 +420,14 @@ func getBasicLitFromElts(elts []ast.Expr, key string) *ast.BasicLit {
 
 // getBasicLitValue returns BasicLit value as string without quotes
 func getBasicLitValue(basicLit *ast.BasicLit) string {
+	if basicLit == nil || len(basicLit.Value) == 0 || basicLit.Value == `""` {
+		return ""
+	}
 	var val strings.Builder
 	for i := range basicLit.Value {
-		switch basicLit.Value[i] {
-		case '\\', '"':
+		if basicLit.Value[i] == '"' {
 			continue
-		default:
+		} else {
 			val.WriteByte(basicLit.Value[i])
 		}
 	}
