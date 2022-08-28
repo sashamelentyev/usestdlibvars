@@ -245,6 +245,7 @@ func ifElseStmt(pass *analysis.Pass, x *ast.SelectorExpr, y *ast.BasicLit) {
 		}
 
 		checkHTTPStatusCode(pass, y)
+
 	case "Method":
 		if !lookupFlag(pass, HTTPMethodFlag) {
 			return
@@ -264,12 +265,14 @@ func switchStmt(pass *analysis.Pass, x *ast.SelectorExpr, cases []ast.Stmt) {
 		}
 
 		checkFunc = checkHTTPStatusCode
+
 	case "Method":
 		if !lookupFlag(pass, HTTPMethodFlag) {
 			return
 		}
 
 		checkFunc = checkHTTPMethod
+
 	default:
 		return
 	}
@@ -407,22 +410,26 @@ func getBasicLitFromArgs(args []ast.Expr, count, idx int, typ token.Token) *ast.
 // Arguments:
 //   - key: name of key in struct
 func getBasicLitFromElts(elts []ast.Expr, key string) *ast.BasicLit {
-	for i := range elts {
-		expr, ok := elts[i].(*ast.KeyValueExpr)
+	for _, e := range elts {
+		expr, ok := e.(*ast.KeyValueExpr)
 		if !ok {
 			continue
 		}
+
 		ident, ok := expr.Key.(*ast.Ident)
 		if !ok {
 			continue
 		}
+
 		if ident.Name != key {
 			continue
 		}
+
 		if basicLit, ok := expr.Value.(*ast.BasicLit); ok {
 			return basicLit
 		}
 	}
+
 	return nil
 }
 
@@ -431,6 +438,7 @@ func getBasicLitValue(basicLit *ast.BasicLit) string {
 	if basicLit == nil || len(basicLit.Value) == 0 || basicLit.Value == `""` {
 		return ""
 	}
+
 	var val strings.Builder
 	for i := range basicLit.Value {
 		if basicLit.Value[i] == '"' {
