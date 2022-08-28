@@ -219,6 +219,7 @@ func funArgs(pass *analysis.Pass, x *ast.Ident, fun *ast.SelectorExpr, args []as
 func typeStructElem(pass *analysis.Pass, pkg *ast.Ident, typ *ast.SelectorExpr, elts []ast.Expr) {
 	if pkg.Name == "http" {
 		switch typ.Sel.Name {
+		// http.Request{Method: http.MethodGet}
 		case "Request":
 			if !lookupFlag(pass, HTTPMethodFlag) {
 				return
@@ -228,6 +229,7 @@ func typeStructElem(pass *analysis.Pass, pkg *ast.Ident, typ *ast.SelectorExpr, 
 				checkHTTPMethod(pass, basicLit)
 			}
 
+		// http.Response{StatusCode: http.StatusOK}
 		case "Response":
 			if !lookupFlag(pass, HTTPStatusCodeFlag) {
 				return
