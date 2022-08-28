@@ -14,6 +14,7 @@ func TestUseStdlibVars(t *testing.T) {
 		"a/http",
 		"a/rpc",
 		"a/time",
+		"a/os",
 	}
 
 	a := analyzer.New()
@@ -31,6 +32,9 @@ func TestUseStdlibVars(t *testing.T) {
 		t.Error(err)
 	}
 	if err := a.Flags.Set(analyzer.DefaultRPCPathFlag, "true"); err != nil {
+		t.Error(err)
+	}
+	if err := a.Flags.Set(analyzer.OSDevNullFlag, "true"); err != nil {
 		t.Error(err)
 	}
 

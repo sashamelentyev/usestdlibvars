@@ -83,6 +83,12 @@ func main() {
 			templateName: "test-issue32.go.tmpl",
 			fileName:     "pkg/analyzer/testdata/src/a/http/issue32.go",
 		},
+		{
+			mapping:      mapping.OSDevNull,
+			packageName:  "os_test",
+			templateName: "test-template.go.tmpl",
+			fileName:     "pkg/analyzer/testdata/src/a/os/devnull.go",
+		},
 	}
 
 	for _, operation := range operations {
