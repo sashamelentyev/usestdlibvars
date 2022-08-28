@@ -21,6 +21,7 @@ const (
 	HTTPMethodFlag     = "http-method"
 	HTTPStatusCodeFlag = "http-status-code"
 	DefaultRPCPathFlag = "default-rpc-path"
+	OSDevNullFlag      = "os-dev-null"
 )
 
 // New returns new usestdlibvars analyzer.
@@ -43,6 +44,7 @@ func flags() flag.FlagSet {
 	flags.Bool(TimeLayoutFlag, false, "suggest the use of time.Layout")
 	flags.Bool(CryptoHashFlag, false, "suggest the use of crypto.Hash")
 	flags.Bool(DefaultRPCPathFlag, false, "suggest the use of rpc.DefaultXXPath")
+	flags.Bool(OSDevNullFlag, false, "suggest the use of os.DevNull")
 	return *flags
 }
 
@@ -91,6 +93,10 @@ func run(pass *analysis.Pass) (interface{}, error) {
 
 			if lookupFlag(pass, DefaultRPCPathFlag) {
 				checkDefaultRPCPath(pass, n)
+			}
+
+			if lookupFlag(pass, OSDevNullFlag) {
+				checkOSDevNull(pass, n)
 			}
 
 		case *ast.CompositeLit:
@@ -388,6 +394,14 @@ func checkDefaultRPCPath(pass *analysis.Pass, basicLit *ast.BasicLit) {
 	}
 }
 
+func checkOSDevNull(pass *analysis.Pass, basicLit *ast.BasicLit) {
+	currentVal := getBasicLitValue(basicLit)
+
+	if newVal, ok := mapping.OSDevNull[currentVal]; ok {
+		report(pass, basicLit.Pos(), currentVal, newVal)
+	}
+}
+
 // getBasicLitFromArgs gets the *ast.BasicLit of a function argument.
 //
 // Arguments:
@@ -444,7 +458,6 @@ func getBasicLitValue(basicLit *ast.BasicLit) string {
 	if basicLit == nil || len(basicLit.Value) == 0 || basicLit.Value == `""` {
 		return ""
 	}
-
 	var val strings.Builder
 	for i := range basicLit.Value {
 		if basicLit.Value[i] == '"' {

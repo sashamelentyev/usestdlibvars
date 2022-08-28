@@ -4,6 +4,7 @@ import (
 	"crypto"
 	"net/http"
 	"net/rpc"
+	"os"
 	"strconv"
 	"time"
 )
@@ -158,4 +159,8 @@ var TimeLayout = map[string]string{
 	time.StampMilli:  "time.StampMilli",
 	time.StampMicro:  "time.StampMicro",
 	time.StampNano:   "time.StampNano",
+}
+
+var OSDevNull = map[string]string{
+	os.DevNull: os.DevNull,
 }

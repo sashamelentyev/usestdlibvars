@@ -43,6 +43,8 @@ Flags:
         emit JSON output
   -memprofile string
         write memory profile to this file
+  -os-dev-null
+        suggest the use of os.DevNull
   -source
         no effect (deprecated)
   -tags string
