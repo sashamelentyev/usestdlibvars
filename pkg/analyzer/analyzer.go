@@ -142,71 +142,14 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				return
 			}
 
-			ifStmt(pass, x, y)
+			ifElseStmt(pass, x, y)
 
 		case *ast.SwitchStmt:
-			selectorExpr, ok := n.Tag.(*ast.SelectorExpr)
+			x, ok := n.Tag.(*ast.SelectorExpr)
 			if ok {
-				var checkFunc func(pass *analysis.Pass, basicLit *ast.BasicLit)
-
-				switch selectorExpr.Sel.Name {
-				case "StatusCode":
-					if !lookupFlag(pass, HTTPStatusCodeFlag) {
-						return
-					}
-
-					checkFunc = checkHTTPStatusCode
-				case "Method":
-					if !lookupFlag(pass, HTTPMethodFlag) {
-						return
-					}
-
-					checkFunc = checkHTTPMethod
-				default:
-					return
-				}
-
-				for _, stmt := range n.Body.List {
-					caseClause, ok := stmt.(*ast.CaseClause)
-					if !ok {
-						continue
-					}
-
-					for _, expr := range caseClause.List {
-						basicLit, ok := expr.(*ast.BasicLit)
-						if !ok {
-							continue
-						}
-
-						checkFunc(pass, basicLit)
-					}
-				}
+				switchStmt(pass, x, n.Body.List)
 			} else {
-				for _, stmt := range n.Body.List {
-					caseClause, ok := stmt.(*ast.CaseClause)
-					if !ok {
-						continue
-					}
-
-					for _, expr := range caseClause.List {
-						e, ok := expr.(*ast.BinaryExpr)
-						if !ok {
-							continue
-						}
-
-						x, ok := e.X.(*ast.SelectorExpr)
-						if !ok {
-							continue
-						}
-
-						y, ok := e.Y.(*ast.BasicLit)
-						if !ok {
-							continue
-						}
-
-						ifStmt(pass, x, y)
-					}
-				}
+				switchStmtAsIfElseStmt(pass, n.Body.List)
 			}
 		}
 	})
@@ -293,8 +236,8 @@ func funArgs(pass *analysis.Pass, x *ast.Ident, fun *ast.SelectorExpr, args []as
 	}
 }
 
-// ifStmt checks X and Y in if-statement.
-func ifStmt(pass *analysis.Pass, x *ast.SelectorExpr, y *ast.BasicLit) {
+// ifElseStmt checks X and Y in if-else-statement.
+func ifElseStmt(pass *analysis.Pass, x *ast.SelectorExpr, y *ast.BasicLit) {
 	switch x.Sel.Name {
 	case "StatusCode":
 		if !lookupFlag(pass, HTTPStatusCodeFlag) {
@@ -308,6 +251,71 @@ func ifStmt(pass *analysis.Pass, x *ast.SelectorExpr, y *ast.BasicLit) {
 		}
 
 		checkHTTPMethod(pass, y)
+	}
+}
+
+func switchStmt(pass *analysis.Pass, x *ast.SelectorExpr, cases []ast.Stmt) {
+	var checkFunc func(pass *analysis.Pass, basicLit *ast.BasicLit)
+
+	switch x.Sel.Name {
+	case "StatusCode":
+		if !lookupFlag(pass, HTTPStatusCodeFlag) {
+			return
+		}
+
+		checkFunc = checkHTTPStatusCode
+	case "Method":
+		if !lookupFlag(pass, HTTPMethodFlag) {
+			return
+		}
+
+		checkFunc = checkHTTPMethod
+	default:
+		return
+	}
+
+	for _, c := range cases {
+		caseClause, ok := c.(*ast.CaseClause)
+		if !ok {
+			continue
+		}
+
+		for _, expr := range caseClause.List {
+			basicLit, ok := expr.(*ast.BasicLit)
+			if !ok {
+				continue
+			}
+
+			checkFunc(pass, basicLit)
+		}
+	}
+}
+
+func switchStmtAsIfElseStmt(pass *analysis.Pass, cases []ast.Stmt) {
+	for _, c := range cases {
+		caseClause, ok := c.(*ast.CaseClause)
+		if !ok {
+			continue
+		}
+
+		for _, expr := range caseClause.List {
+			e, ok := expr.(*ast.BinaryExpr)
+			if !ok {
+				continue
+			}
+
+			x, ok := e.X.(*ast.SelectorExpr)
+			if !ok {
+				continue
+			}
+
+			y, ok := e.Y.(*ast.BasicLit)
+			if !ok {
+				continue
+			}
+
+			ifElseStmt(pass, x, y)
+		}
 	}
 }
 
