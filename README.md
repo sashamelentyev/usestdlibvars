@@ -29,8 +29,6 @@ Flags:
         suggest the use of crypto.Hash
   -debug string
         debug flags, any subset of "fpstv"
-  -default-rpc-path
-        suggest the use of rpc.DefaultXXPath
   -fix
         apply all suggested fixes
   -flags
@@ -45,6 +43,8 @@ Flags:
         write memory profile to this file
   -os-dev-null
         suggest the use of os.DevNull
+  -rpc-default-path
+        suggest the use of rpc.DefaultXXPath
   -source
         no effect (deprecated)
   -tags string

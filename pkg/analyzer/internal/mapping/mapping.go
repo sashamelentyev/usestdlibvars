@@ -112,7 +112,7 @@ var HTTPStatusCode = map[string]string{
 	strconv.Itoa(http.StatusNetworkAuthenticationRequired): "http.StatusNetworkAuthenticationRequired",
 }
 
-var DefaultRPCPath = map[string]string{
+var RPCDefaultPath = map[string]string{
 	rpc.DefaultRPCPath:   "rpc.DefaultRPCPath",
 	rpc.DefaultDebugPath: "rpc.DefaultDebugPath",
 }

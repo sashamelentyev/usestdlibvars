@@ -31,7 +31,7 @@ func TestUseStdlibVars(t *testing.T) {
 	if err := a.Flags.Set(analyzer.CryptoHashFlag, "true"); err != nil {
 		t.Error(err)
 	}
-	if err := a.Flags.Set(analyzer.DefaultRPCPathFlag, "true"); err != nil {
+	if err := a.Flags.Set(analyzer.RPCDefaultPathFlag, "true"); err != nil {
 		t.Error(err)
 	}
 	if err := a.Flags.Set(analyzer.OSDevNullFlag, "true"); err != nil {

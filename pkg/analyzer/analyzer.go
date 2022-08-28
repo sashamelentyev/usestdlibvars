@@ -20,7 +20,7 @@ const (
 	CryptoHashFlag     = "crypto-hash"
 	HTTPMethodFlag     = "http-method"
 	HTTPStatusCodeFlag = "http-status-code"
-	DefaultRPCPathFlag = "default-rpc-path"
+	RPCDefaultPathFlag = "rpc-default-path"
 	OSDevNullFlag      = "os-dev-null"
 )
 
@@ -43,7 +43,7 @@ func flags() flag.FlagSet {
 	flags.Bool(TimeMonthFlag, false, "suggest the use of time.Month")
 	flags.Bool(TimeLayoutFlag, false, "suggest the use of time.Layout")
 	flags.Bool(CryptoHashFlag, false, "suggest the use of crypto.Hash")
-	flags.Bool(DefaultRPCPathFlag, false, "suggest the use of rpc.DefaultXXPath")
+	flags.Bool(RPCDefaultPathFlag, false, "suggest the use of rpc.DefaultXXPath")
 	flags.Bool(OSDevNullFlag, false, "suggest the use of os.DevNull")
 	return *flags
 }
@@ -91,8 +91,8 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				checkCryptoHash(pass, n)
 			}
 
-			if lookupFlag(pass, DefaultRPCPathFlag) {
-				checkDefaultRPCPath(pass, n)
+			if lookupFlag(pass, RPCDefaultPathFlag) {
+				checkRPCDefaultPath(pass, n)
 			}
 
 			if lookupFlag(pass, OSDevNullFlag) {
@@ -386,10 +386,10 @@ func checkCryptoHash(pass *analysis.Pass, basicLit *ast.BasicLit) {
 	}
 }
 
-func checkDefaultRPCPath(pass *analysis.Pass, basicLit *ast.BasicLit) {
+func checkRPCDefaultPath(pass *analysis.Pass, basicLit *ast.BasicLit) {
 	currentVal := getBasicLitValue(basicLit)
 
-	if newVal, ok := mapping.DefaultRPCPath[currentVal]; ok {
+	if newVal, ok := mapping.RPCDefaultPath[currentVal]; ok {
 		report(pass, basicLit.Pos(), currentVal, newVal)
 	}
 }
