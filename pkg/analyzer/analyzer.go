@@ -94,37 +94,17 @@ func run(pass *analysis.Pass) (interface{}, error) {
 			}
 
 		case *ast.CompositeLit:
-			selectorExpr, ok := n.Type.(*ast.SelectorExpr)
+			typ, ok := n.Type.(*ast.SelectorExpr)
 			if !ok {
 				return
 			}
 
-			ident, ok := selectorExpr.X.(*ast.Ident)
+			pkg, ok := typ.X.(*ast.Ident)
 			if !ok {
 				return
 			}
 
-			if ident.Name == "http" {
-				switch selectorExpr.Sel.Name {
-				case "Request":
-					if !lookupFlag(pass, HTTPMethodFlag) {
-						return
-					}
-
-					if basicLit := getBasicLitFromElts(n.Elts, "Method"); basicLit != nil {
-						checkHTTPMethod(pass, basicLit)
-					}
-
-				case "Response":
-					if !lookupFlag(pass, HTTPStatusCodeFlag) {
-						return
-					}
-
-					if basicLit := getBasicLitFromElts(n.Elts, "StatusCode"); basicLit != nil {
-						checkHTTPStatusCode(pass, basicLit)
-					}
-				}
-			}
+			typeStructElem(pass, pkg, typ, n.Elts)
 
 		case *ast.IfStmt:
 			cond, ok := n.Cond.(*ast.BinaryExpr)
@@ -230,6 +210,30 @@ func funArgs(pass *analysis.Pass, x *ast.Ident, fun *ast.SelectorExpr, args []as
 			}
 
 			if basicLit := getBasicLitFromArgs(args, 1, 0, token.INT); basicLit != nil {
+				checkHTTPStatusCode(pass, basicLit)
+			}
+		}
+	}
+}
+
+func typeStructElem(pass *analysis.Pass, pkg *ast.Ident, typ *ast.SelectorExpr, elts []ast.Expr) {
+	if pkg.Name == "http" {
+		switch typ.Sel.Name {
+		case "Request":
+			if !lookupFlag(pass, HTTPMethodFlag) {
+				return
+			}
+
+			if basicLit := getBasicLitFromElts(elts, "Method"); basicLit != nil {
+				checkHTTPMethod(pass, basicLit)
+			}
+
+		case "Response":
+			if !lookupFlag(pass, HTTPStatusCodeFlag) {
+				return
+			}
+
+			if basicLit := getBasicLitFromElts(elts, "StatusCode"); basicLit != nil {
 				checkHTTPStatusCode(pass, basicLit)
 			}
 		}
