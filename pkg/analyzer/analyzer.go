@@ -222,7 +222,7 @@ func funArgs(pass *analysis.Pass, x *ast.Ident, fun *ast.SelectorExpr, args []as
 	}
 }
 
-// typeElts checks type elements from package
+// typeElts checks elements of type from package
 func typeElts(pass *analysis.Pass, pkg *ast.Ident, typ *ast.SelectorExpr, elts []ast.Expr) {
 	if pkg.Name == "http" {
 		switch typ.Sel.Name {
