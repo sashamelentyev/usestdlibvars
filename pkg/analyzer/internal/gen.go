@@ -54,7 +54,7 @@ func main() {
 			fileName:     "pkg/analyzer/testdata/src/a/http/statuscode.go",
 		},
 		{
-			mapping:      mapping.DefaultRPCPath,
+			mapping:      mapping.RPCDefaultPath,
 			packageName:  "rpc_test",
 			templateName: "test-template.go.tmpl",
 			fileName:     "pkg/analyzer/testdata/src/a/rpc/rpc.go",
