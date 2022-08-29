@@ -162,5 +162,5 @@ var TimeLayout = map[string]string{
 }
 
 var OSDevNull = map[string]string{
-	os.DevNull: os.DevNull,
+	os.DevNull: "os.DevNull",
 }
