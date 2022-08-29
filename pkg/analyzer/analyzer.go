@@ -414,6 +414,10 @@ func getBasicLitFromArgs(args []ast.Expr, count, idx int, typ token.Token) *ast.
 		return nil
 	}
 
+	if idx > count-1 {
+		return nil
+	}
+
 	basicLit, ok := args[idx].(*ast.BasicLit)
 	if !ok {
 		return nil
