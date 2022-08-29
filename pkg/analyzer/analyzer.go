@@ -110,7 +110,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				return
 			}
 
-			typeStructElem(pass, pkg, typ, n.Elts)
+			typeElem(pass, pkg, typ, n.Elts)
 
 		case *ast.IfStmt:
 			cond, ok := n.Cond.(*ast.BinaryExpr)
@@ -222,7 +222,8 @@ func funArgs(pass *analysis.Pass, x *ast.Ident, fun *ast.SelectorExpr, args []as
 	}
 }
 
-func typeStructElem(pass *analysis.Pass, pkg *ast.Ident, typ *ast.SelectorExpr, elts []ast.Expr) {
+// typeElem checks type element from package
+func typeElem(pass *analysis.Pass, pkg *ast.Ident, typ *ast.SelectorExpr, elts []ast.Expr) {
 	if pkg.Name == "http" {
 		switch typ.Sel.Name {
 		// http.Request{Method: http.MethodGet}
