@@ -105,12 +105,12 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				return
 			}
 
-			pkg, ok := typ.X.(*ast.Ident)
+			x, ok := typ.X.(*ast.Ident)
 			if !ok {
 				return
 			}
 
-			typeElts(pass, pkg, typ, n.Elts)
+			typeElts(pass, x, typ, n.Elts)
 
 		case *ast.IfStmt:
 			cond, ok := n.Cond.(*ast.BinaryExpr)
@@ -222,9 +222,9 @@ func funArgs(pass *analysis.Pass, x *ast.Ident, fun *ast.SelectorExpr, args []as
 	}
 }
 
-// typeElts checks elements of type from package
-func typeElts(pass *analysis.Pass, pkg *ast.Ident, typ *ast.SelectorExpr, elts []ast.Expr) {
-	if pkg.Name == "http" {
+// typeElts checks elements of type.
+func typeElts(pass *analysis.Pass, x *ast.Ident, typ *ast.SelectorExpr, elts []ast.Expr) {
+	if x.Name == "http" {
 		switch typ.Sel.Name {
 		// http.Request{Method: http.MethodGet}
 		case "Request":
