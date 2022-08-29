@@ -464,11 +464,11 @@ func getBasicLitValue(basicLit *ast.BasicLit) string {
 		return ""
 	}
 	var val strings.Builder
-	for i := range basicLit.Value {
-		if basicLit.Value[i] == '"' {
+	for _, r := range basicLit.Value {
+		if r == '"' {
 			continue
 		} else {
-			val.WriteByte(basicLit.Value[i])
+			val.WriteRune(r)
 		}
 	}
 	return val.String()
