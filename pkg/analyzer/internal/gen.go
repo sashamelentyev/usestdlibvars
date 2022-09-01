@@ -89,6 +89,12 @@ func main() {
 			templateName: "test-template.go.tmpl",
 			fileName:     "pkg/analyzer/testdata/src/a/os/devnull.go",
 		},
+		{
+			mapping:      mapping.SQLIsolationLevel,
+			packageName:  "sql_test",
+			templateName: "test-template.go.tmpl",
+			fileName:     "pkg/analyzer/testdata/src/a/sql/isolationlevel.go",
+		},
 	}
 
 	for _, operation := range operations {
