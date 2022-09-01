@@ -47,6 +47,8 @@ Flags:
         suggest the use of rpc.DefaultXXPath
   -source
         no effect (deprecated)
+  -sql-isolation-level
+        suggest the use of sql.LevelXX
   -tags string
         no effect (deprecated)
   -test
