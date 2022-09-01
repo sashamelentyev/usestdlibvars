@@ -14,14 +14,15 @@ import (
 )
 
 const (
-	TimeWeekdayFlag    = "time-weekday"
-	TimeMonthFlag      = "time-month"
-	TimeLayoutFlag     = "time-layout"
-	CryptoHashFlag     = "crypto-hash"
-	HTTPMethodFlag     = "http-method"
-	HTTPStatusCodeFlag = "http-status-code"
-	RPCDefaultPathFlag = "rpc-default-path"
-	OSDevNullFlag      = "os-dev-null"
+	TimeWeekdayFlag       = "time-weekday"
+	TimeMonthFlag         = "time-month"
+	TimeLayoutFlag        = "time-layout"
+	CryptoHashFlag        = "crypto-hash"
+	HTTPMethodFlag        = "http-method"
+	HTTPStatusCodeFlag    = "http-status-code"
+	RPCDefaultPathFlag    = "rpc-default-path"
+	OSDevNullFlag         = "os-dev-null"
+	SQLIsolationLevelFlag = "sql-isolation-level"
 )
 
 // New returns new usestdlibvars analyzer.
@@ -45,6 +46,7 @@ func flags() flag.FlagSet {
 	flags.Bool(CryptoHashFlag, false, "suggest the use of crypto.Hash")
 	flags.Bool(RPCDefaultPathFlag, false, "suggest the use of rpc.DefaultXXPath")
 	flags.Bool(OSDevNullFlag, false, "suggest the use of os.DevNull")
+	flags.Bool(SQLIsolationLevelFlag, false, "suggest the use of sql.LevelXX")
 	return *flags
 }
 
@@ -97,6 +99,10 @@ func run(pass *analysis.Pass) (interface{}, error) {
 
 			if lookupFlag(pass, OSDevNullFlag) {
 				checkOSDevNull(pass, n)
+			}
+
+			if lookupFlag(pass, SQLIsolationLevelFlag) {
+				checkSQLIsolationLevel(pass, n)
 			}
 
 		case *ast.CompositeLit:
@@ -399,6 +405,14 @@ func checkOSDevNull(pass *analysis.Pass, basicLit *ast.BasicLit) {
 	currentVal := getBasicLitValue(basicLit)
 
 	if newVal, ok := mapping.OSDevNull[currentVal]; ok {
+		report(pass, basicLit.Pos(), currentVal, newVal)
+	}
+}
+
+func checkSQLIsolationLevel(pass *analysis.Pass, basicLit *ast.BasicLit) {
+	currentVal := getBasicLitValue(basicLit)
+
+	if newVal, ok := mapping.SQLIsolationLevel[currentVal]; ok {
 		report(pass, basicLit.Pos(), currentVal, newVal)
 	}
 }

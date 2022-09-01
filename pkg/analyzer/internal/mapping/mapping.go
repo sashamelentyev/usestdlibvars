@@ -2,6 +2,7 @@ package mapping
 
 import (
 	"crypto"
+	"database/sql"
 	"net/http"
 	"net/rpc"
 	"os"
@@ -163,4 +164,15 @@ var TimeLayout = map[string]string{
 
 var OSDevNull = map[string]string{
 	os.DevNull: "os.DevNull",
+}
+
+var SQLIsolationLevel = map[string]string{
+	// sql.LevelDefault.String():         "sql.LevelDefault.String()",
+	sql.LevelReadUncommitted.String(): "sql.LevelReadUncommitted.String()",
+	sql.LevelReadCommitted.String():   "sql.LevelReadCommitted.String()",
+	sql.LevelWriteCommitted.String():  "sql.LevelWriteCommitted.String()",
+	sql.LevelRepeatableRead.String():  "sql.LevelRepeatableRead.String()",
+	// sql.LevelSnapshot.String():        "sql.LevelSnapshot.String()",
+	// sql.LevelSerializable.String():    "sql.LevelSerializable.String()",
+	// sql.LevelLinearizable.String():    "sql.LevelLinearizable.String()",
 }

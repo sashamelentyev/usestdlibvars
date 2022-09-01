@@ -15,6 +15,7 @@ func TestUseStdlibVars(t *testing.T) {
 		"a/rpc",
 		"a/time",
 		"a/os",
+		"a/sql",
 	}
 
 	a := analyzer.New()
@@ -35,6 +36,9 @@ func TestUseStdlibVars(t *testing.T) {
 		t.Error(err)
 	}
 	if err := a.Flags.Set(analyzer.OSDevNullFlag, "true"); err != nil {
+		t.Error(err)
+	}
+	if err := a.Flags.Set(analyzer.SQLIsolationLevelFlag, "true"); err != nil {
 		t.Error(err)
 	}
 
