@@ -40,13 +40,13 @@ func flags() flag.FlagSet {
 	flags := flag.NewFlagSet("", flag.ExitOnError)
 	flags.Bool(HTTPMethodFlag, true, "suggest the use of http.MethodXX")
 	flags.Bool(HTTPStatusCodeFlag, true, "suggest the use of http.StatusXX")
-	flags.Bool(TimeWeekdayFlag, false, "suggest the use of time.Weekday")
-	flags.Bool(TimeMonthFlag, false, "suggest the use of time.Month")
+	flags.Bool(TimeWeekdayFlag, false, "suggest the use of time.Weekday.String()")
+	flags.Bool(TimeMonthFlag, false, "suggest the use of time.Month.String()")
 	flags.Bool(TimeLayoutFlag, false, "suggest the use of time.Layout")
-	flags.Bool(CryptoHashFlag, false, "suggest the use of crypto.Hash")
+	flags.Bool(CryptoHashFlag, false, "suggest the use of crypto.Hash.String()")
 	flags.Bool(RPCDefaultPathFlag, false, "suggest the use of rpc.DefaultXXPath")
 	flags.Bool(OSDevNullFlag, false, "suggest the use of os.DevNull")
-	flags.Bool(SQLIsolationLevelFlag, false, "suggest the use of sql.LevelXX")
+	flags.Bool(SQLIsolationLevelFlag, false, "suggest the use of sql.LevelXX.String()")
 	return *flags
 }
 

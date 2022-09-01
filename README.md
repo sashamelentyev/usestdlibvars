@@ -26,7 +26,7 @@ Flags:
   -cpuprofile string
         write CPU profile to this file
   -crypto-hash
-        suggest the use of crypto.Hash
+        suggest the use of crypto.Hash.String()
   -debug string
         debug flags, any subset of "fpstv"
   -fix
@@ -48,7 +48,7 @@ Flags:
   -source
         no effect (deprecated)
   -sql-isolation-level
-        suggest the use of sql.LevelXX
+        suggest the use of sql.LevelXX.String()
   -tags string
         no effect (deprecated)
   -test
@@ -56,9 +56,9 @@ Flags:
   -time-layout
         suggest the use of time.Layout
   -time-month
-        suggest the use of time.Month
+        suggest the use of time.Month.String()
   -time-weekday
-        suggest the use of time.Weekday
+        suggest the use of time.Weekday.String()
   -trace string
         write trace log to this file
   -v    no effect (deprecated)
