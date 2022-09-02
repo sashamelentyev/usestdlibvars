@@ -28,7 +28,7 @@ func TestUseStdlibVars(t *testing.T) {
 	mustNil(t, a.Flags.Set(analyzer.RPCDefaultPathFlag, "true"))
 	mustNil(t, a.Flags.Set(analyzer.OSDevNullFlag, "true"))
 	mustNil(t, a.Flags.Set(analyzer.SQLIsolationLevelFlag, "true"))
-	mustNil(t, a.Flags.Set(analyzer.TLSSignatureScheme, "true"))
+	mustNil(t, a.Flags.Set(analyzer.TLSSignatureSchemeFlag, "true"))
 
 	analysistest.Run(t, analysistest.TestData(), a, pkgs...)
 }
