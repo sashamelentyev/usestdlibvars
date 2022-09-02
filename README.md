@@ -59,6 +59,8 @@ Flags:
         suggest the use of time.Month.String()
   -time-weekday
         suggest the use of time.Weekday.String()
+  -tls-signature-scheme
+        suggest the use of tls.SignatureScheme.String()
   -trace string
         write trace log to this file
   -v    no effect (deprecated)
