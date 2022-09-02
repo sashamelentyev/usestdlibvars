@@ -14,16 +14,16 @@ import (
 )
 
 const (
-	TimeWeekdayFlag       = "time-weekday"
-	TimeMonthFlag         = "time-month"
-	TimeLayoutFlag        = "time-layout"
-	CryptoHashFlag        = "crypto-hash"
-	HTTPMethodFlag        = "http-method"
-	HTTPStatusCodeFlag    = "http-status-code"
-	RPCDefaultPathFlag    = "rpc-default-path"
-	OSDevNullFlag         = "os-dev-null"
-	SQLIsolationLevelFlag = "sql-isolation-level"
-	TLSSignatureScheme    = "tls-signature-scheme"
+	TimeWeekdayFlag        = "time-weekday"
+	TimeMonthFlag          = "time-month"
+	TimeLayoutFlag         = "time-layout"
+	CryptoHashFlag         = "crypto-hash"
+	HTTPMethodFlag         = "http-method"
+	HTTPStatusCodeFlag     = "http-status-code"
+	RPCDefaultPathFlag     = "rpc-default-path"
+	OSDevNullFlag          = "os-dev-null"
+	SQLIsolationLevelFlag  = "sql-isolation-level"
+	TLSSignatureSchemeFlag = "tls-signature-scheme"
 )
 
 // New returns new usestdlibvars analyzer.
@@ -48,7 +48,7 @@ func flags() flag.FlagSet {
 	flags.Bool(RPCDefaultPathFlag, false, "suggest the use of rpc.DefaultXXPath")
 	flags.Bool(OSDevNullFlag, false, "suggest the use of os.DevNull")
 	flags.Bool(SQLIsolationLevelFlag, false, "suggest the use of sql.LevelXX.String()")
-	flags.Bool(TLSSignatureScheme, false, "suggest the use of tls.SignatureScheme.String()")
+	flags.Bool(TLSSignatureSchemeFlag, false, "suggest the use of tls.SignatureScheme.String()")
 	return *flags
 }
 
@@ -107,7 +107,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				checkSQLIsolationLevel(pass, n)
 			}
 
-			if lookupFlag(pass, TLSSignatureScheme) {
+			if lookupFlag(pass, TLSSignatureSchemeFlag) {
 				checkTLSSignatureScheme(pass, n)
 			}
 
