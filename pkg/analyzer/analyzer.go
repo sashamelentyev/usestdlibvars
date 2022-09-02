@@ -23,6 +23,7 @@ const (
 	RPCDefaultPathFlag    = "rpc-default-path"
 	OSDevNullFlag         = "os-dev-null"
 	SQLIsolationLevelFlag = "sql-isolation-level"
+	TLSSignatureScheme    = "tls-signature-scheme"
 )
 
 // New returns new usestdlibvars analyzer.
@@ -47,6 +48,7 @@ func flags() flag.FlagSet {
 	flags.Bool(RPCDefaultPathFlag, false, "suggest the use of rpc.DefaultXXPath")
 	flags.Bool(OSDevNullFlag, false, "suggest the use of os.DevNull")
 	flags.Bool(SQLIsolationLevelFlag, false, "suggest the use of sql.LevelXX.String()")
+	flags.Bool(TLSSignatureScheme, false, "suggest the use of tls.SignatureScheme.String()")
 	return *flags
 }
 
@@ -103,6 +105,10 @@ func run(pass *analysis.Pass) (interface{}, error) {
 
 			if lookupFlag(pass, SQLIsolationLevelFlag) {
 				checkSQLIsolationLevel(pass, n)
+			}
+
+			if lookupFlag(pass, TLSSignatureScheme) {
+				checkTLSSignatureScheme(pass, n)
 			}
 
 		case *ast.CompositeLit:
@@ -413,6 +419,14 @@ func checkSQLIsolationLevel(pass *analysis.Pass, basicLit *ast.BasicLit) {
 	currentVal := getBasicLitValue(basicLit)
 
 	if newVal, ok := mapping.SQLIsolationLevel[currentVal]; ok {
+		report(pass, basicLit.Pos(), currentVal, newVal)
+	}
+}
+
+func checkTLSSignatureScheme(pass *analysis.Pass, basicLit *ast.BasicLit) {
+	currentVal := getBasicLitValue(basicLit)
+
+	if newVal, ok := mapping.TLSSignatureScheme[currentVal]; ok {
 		report(pass, basicLit.Pos(), currentVal, newVal)
 	}
 }

@@ -16,31 +16,26 @@ func TestUseStdlibVars(t *testing.T) {
 		"a/time",
 		"a/os",
 		"a/sql",
+		"a/tls",
 	}
 
 	a := analyzer.New()
 
-	if err := a.Flags.Set(analyzer.TimeWeekdayFlag, "true"); err != nil {
-		t.Error(err)
-	}
-	if err := a.Flags.Set(analyzer.TimeMonthFlag, "true"); err != nil {
-		t.Error(err)
-	}
-	if err := a.Flags.Set(analyzer.TimeLayoutFlag, "true"); err != nil {
-		t.Error(err)
-	}
-	if err := a.Flags.Set(analyzer.CryptoHashFlag, "true"); err != nil {
-		t.Error(err)
-	}
-	if err := a.Flags.Set(analyzer.RPCDefaultPathFlag, "true"); err != nil {
-		t.Error(err)
-	}
-	if err := a.Flags.Set(analyzer.OSDevNullFlag, "true"); err != nil {
-		t.Error(err)
-	}
-	if err := a.Flags.Set(analyzer.SQLIsolationLevelFlag, "true"); err != nil {
-		t.Error(err)
-	}
+	mustNil(t, a.Flags.Set(analyzer.TimeWeekdayFlag, "true"))
+	mustNil(t, a.Flags.Set(analyzer.TimeMonthFlag, "true"))
+	mustNil(t, a.Flags.Set(analyzer.TimeLayoutFlag, "true"))
+	mustNil(t, a.Flags.Set(analyzer.CryptoHashFlag, "true"))
+	mustNil(t, a.Flags.Set(analyzer.RPCDefaultPathFlag, "true"))
+	mustNil(t, a.Flags.Set(analyzer.OSDevNullFlag, "true"))
+	mustNil(t, a.Flags.Set(analyzer.SQLIsolationLevelFlag, "true"))
+	mustNil(t, a.Flags.Set(analyzer.TLSSignatureScheme, "true"))
 
 	analysistest.Run(t, analysistest.TestData(), a, pkgs...)
+}
+
+func mustNil(t *testing.T, err error) {
+	t.Helper()
+	if err != nil {
+		t.Error(err)
+	}
 }

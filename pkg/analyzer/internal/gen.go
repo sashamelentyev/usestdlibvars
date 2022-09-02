@@ -95,6 +95,12 @@ func main() {
 			templateName: "test-template.go.tmpl",
 			fileName:     "pkg/analyzer/testdata/src/a/sql/isolationlevel.go",
 		},
+		{
+			mapping:      mapping.TLSSignatureScheme,
+			packageName:  "sql_test",
+			templateName: "test-template.go.tmpl",
+			fileName:     "pkg/analyzer/testdata/src/a/tls/signaturescheme.go",
+		},
 	}
 
 	for _, operation := range operations {

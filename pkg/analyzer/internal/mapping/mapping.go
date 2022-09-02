@@ -2,6 +2,7 @@ package mapping
 
 import (
 	"crypto"
+	"crypto/tls"
 	"database/sql"
 	"net/http"
 	"net/rpc"
@@ -175,4 +176,19 @@ var SQLIsolationLevel = map[string]string{
 	// sql.LevelSnapshot.String():        "sql.LevelSnapshot.String()",
 	// sql.LevelSerializable.String():    "sql.LevelSerializable.String()",
 	// sql.LevelLinearizable.String():    "sql.LevelLinearizable.String()",
+}
+
+var TLSSignatureScheme = map[string]string{
+	tls.PSSWithSHA256.String():          "tls.PSSWithSHA256.String()",
+	tls.ECDSAWithP256AndSHA256.String(): "tls.ECDSAWithP256AndSHA256.String()",
+	tls.Ed25519.String():                "tls.Ed25519.String()",
+	tls.PSSWithSHA384.String():          "tls.PSSWithSHA384.String()",
+	tls.PSSWithSHA512.String():          "tls.PSSWithSHA512.String()",
+	tls.PKCS1WithSHA256.String():        "tls.PKCS1WithSHA256.String()",
+	tls.PKCS1WithSHA384.String():        "tls.PKCS1WithSHA384.String()",
+	tls.PKCS1WithSHA512.String():        "tls.PKCS1WithSHA512.String()",
+	tls.ECDSAWithP384AndSHA384.String(): "tls.ECDSAWithP384AndSHA384.String()",
+	tls.ECDSAWithP521AndSHA512.String(): "tls.ECDSAWithP521AndSHA512.String()",
+	tls.PKCS1WithSHA1.String():          "tls.PKCS1WithSHA1.String()",
+	tls.ECDSAWithSHA1.String():          "tls.ECDSAWithSHA1.String()",
 }
