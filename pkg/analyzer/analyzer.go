@@ -220,6 +220,16 @@ func funArgs(pass *analysis.Pass, x *ast.Ident, fun *ast.SelectorExpr, args []as
 				checkHTTPStatusCode(pass, basicLit)
 			}
 		}
+	case "httptest":
+		if fun.Sel.Name == "NewRequest" {
+			if !lookupFlag(pass, HTTPMethodFlag) {
+				return
+			}
+
+			if basicLit := getBasicLitFromArgs(args, 3, 0, token.STRING); basicLit != nil {
+				checkHTTPMethod(pass, basicLit)
+			}
+		}
 	default:
 		// w.WriteHeader(http.StatusOk)
 		if fun.Sel.Name == "WriteHeader" {
