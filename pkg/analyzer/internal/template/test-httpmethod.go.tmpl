@@ -2,7 +2,10 @@
 
 package {{ .PackageName }}
 
-import "net/http"
+import (
+    "net/http"
+    "net/http/httptest"
+)
 
 var (
 {{- range $key, $value := .Mapping }}
@@ -103,3 +106,9 @@ func _() {
     }
 }
 {{ end -}}
+
+func _() {
+{{- range $key, $value := .Mapping }}
+	_ = httptest.NewRequest("{{ $key }}", "", http.NoBody) // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+{{- end }}
+}

@@ -2,7 +2,10 @@
 
 package http_test
 
-import "net/http"
+import (
+	"net/http"
+	"net/http/httptest"
+)
 
 var (
 	_ = "CONNECT"
@@ -584,4 +587,15 @@ func _() {
 	case r.Method == http.MethodTrace:
 		return
 	}
+}
+func _() {
+	_ = httptest.NewRequest("CONNECT", "", http.NoBody) // want `"CONNECT" can be replaced by http\.MethodConnect`
+	_ = httptest.NewRequest("DELETE", "", http.NoBody)  // want `"DELETE" can be replaced by http\.MethodDelete`
+	_ = httptest.NewRequest("GET", "", http.NoBody)     // want `"GET" can be replaced by http\.MethodGet`
+	_ = httptest.NewRequest("HEAD", "", http.NoBody)    // want `"HEAD" can be replaced by http\.MethodHead`
+	_ = httptest.NewRequest("OPTIONS", "", http.NoBody) // want `"OPTIONS" can be replaced by http\.MethodOptions`
+	_ = httptest.NewRequest("PATCH", "", http.NoBody)   // want `"PATCH" can be replaced by http\.MethodPatch`
+	_ = httptest.NewRequest("POST", "", http.NoBody)    // want `"POST" can be replaced by http\.MethodPost`
+	_ = httptest.NewRequest("PUT", "", http.NoBody)     // want `"PUT" can be replaced by http\.MethodPut`
+	_ = httptest.NewRequest("TRACE", "", http.NoBody)   // want `"TRACE" can be replaced by http\.MethodTrace`
 }
