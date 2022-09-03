@@ -246,7 +246,8 @@ func funArgs(pass *analysis.Pass, x *ast.Ident, fun *ast.SelectorExpr, args []as
 
 // typeElts checks elements of type.
 func typeElts(pass *analysis.Pass, x *ast.Ident, typ *ast.SelectorExpr, elts []ast.Expr) {
-	if x.Name == "http" {
+	switch x.Name {
+	case "http":
 		switch typ.Sel.Name {
 		// http.Request{Method: http.MethodGet}
 		case "Request":
@@ -265,6 +266,16 @@ func typeElts(pass *analysis.Pass, x *ast.Ident, typ *ast.SelectorExpr, elts []a
 			}
 
 			if basicLit := getBasicLitFromElts(elts, "StatusCode"); basicLit != nil {
+				checkHTTPStatusCode(pass, basicLit)
+			}
+		}
+	case "httptest":
+		if typ.Sel.Name == "ResponseRecorder" {
+			if !lookupFlag(pass, HTTPStatusCodeFlag) {
+				return
+			}
+
+			if basicLit := getBasicLitFromElts(elts, "Code"); basicLit != nil {
 				checkHTTPStatusCode(pass, basicLit)
 			}
 		}

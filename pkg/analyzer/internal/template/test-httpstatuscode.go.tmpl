@@ -2,7 +2,10 @@
 
 package {{ .PackageName }}
 
-import "net/http"
+import (
+    "net/http"
+    "net/http/httptest"
+)
 
 var (
 {{- range $key, $value := .Mapping }}
@@ -184,5 +187,21 @@ func _() {
     case resp.StatusCode == {{ $value }}:
       return
     }
+}
+{{ end -}}
+
+{{ range $key, $value := .Mapping }}
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: {{ $key }}, // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+	}
+}
+{{ end -}}
+
+{{ range $key, $value := .Mapping }}
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: {{ $value }},
+	}
 }
 {{ end -}}

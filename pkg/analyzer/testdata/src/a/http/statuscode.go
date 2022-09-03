@@ -2,7 +2,10 @@
 
 package http_test
 
-import "net/http"
+import (
+	"net/http"
+	"net/http/httptest"
+)
 
 var (
 	_ = 100
@@ -8315,5 +8318,749 @@ func _() {
 	switch {
 	case resp.StatusCode == http.StatusNetworkAuthenticationRequired:
 		return
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 100, // want `"100" can be replaced by http\.StatusContinue`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 101, // want `"101" can be replaced by http\.StatusSwitchingProtocols`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 102, // want `"102" can be replaced by http\.StatusProcessing`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 103, // want `"103" can be replaced by http\.StatusEarlyHints`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 200, // want `"200" can be replaced by http\.StatusOK`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 201, // want `"201" can be replaced by http\.StatusCreated`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 202, // want `"202" can be replaced by http\.StatusAccepted`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 203, // want `"203" can be replaced by http\.StatusNonAuthoritativeInfo`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 204, // want `"204" can be replaced by http\.StatusNoContent`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 205, // want `"205" can be replaced by http\.StatusResetContent`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 206, // want `"206" can be replaced by http\.StatusPartialContent`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 207, // want `"207" can be replaced by http\.StatusMultiStatus`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 208, // want `"208" can be replaced by http\.StatusAlreadyReported`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 226, // want `"226" can be replaced by http\.StatusIMUsed`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 300, // want `"300" can be replaced by http\.StatusMultipleChoices`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 301, // want `"301" can be replaced by http\.StatusMovedPermanently`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 302, // want `"302" can be replaced by http\.StatusFound`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 303, // want `"303" can be replaced by http\.StatusSeeOther`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 304, // want `"304" can be replaced by http\.StatusNotModified`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 305, // want `"305" can be replaced by http\.StatusUseProxy`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 307, // want `"307" can be replaced by http\.StatusTemporaryRedirect`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 308, // want `"308" can be replaced by http\.StatusPermanentRedirect`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 400, // want `"400" can be replaced by http\.StatusBadRequest`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 401, // want `"401" can be replaced by http\.StatusUnauthorized`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 402, // want `"402" can be replaced by http\.StatusPaymentRequired`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 403, // want `"403" can be replaced by http\.StatusForbidden`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 404, // want `"404" can be replaced by http\.StatusNotFound`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 405, // want `"405" can be replaced by http\.StatusMethodNotAllowed`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 406, // want `"406" can be replaced by http\.StatusNotAcceptable`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 407, // want `"407" can be replaced by http\.StatusProxyAuthRequired`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 408, // want `"408" can be replaced by http\.StatusRequestTimeout`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 409, // want `"409" can be replaced by http\.StatusConflict`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 410, // want `"410" can be replaced by http\.StatusGone`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 411, // want `"411" can be replaced by http\.StatusLengthRequired`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 412, // want `"412" can be replaced by http\.StatusPreconditionFailed`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 413, // want `"413" can be replaced by http\.StatusRequestEntityTooLarge`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 414, // want `"414" can be replaced by http\.StatusRequestURITooLong`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 415, // want `"415" can be replaced by http\.StatusUnsupportedMediaType`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 416, // want `"416" can be replaced by http\.StatusRequestedRangeNotSatisfiable`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 417, // want `"417" can be replaced by http\.StatusExpectationFailed`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 418, // want `"418" can be replaced by http\.StatusTeapot`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 421, // want `"421" can be replaced by http\.StatusMisdirectedRequest`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 422, // want `"422" can be replaced by http\.StatusUnprocessableEntity`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 423, // want `"423" can be replaced by http\.StatusLocked`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 424, // want `"424" can be replaced by http\.StatusFailedDependency`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 425, // want `"425" can be replaced by http\.StatusTooEarly`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 426, // want `"426" can be replaced by http\.StatusUpgradeRequired`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 428, // want `"428" can be replaced by http\.StatusPreconditionRequired`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 429, // want `"429" can be replaced by http\.StatusTooManyRequests`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 431, // want `"431" can be replaced by http\.StatusRequestHeaderFieldsTooLarge`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 451, // want `"451" can be replaced by http\.StatusUnavailableForLegalReasons`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 500, // want `"500" can be replaced by http\.StatusInternalServerError`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 501, // want `"501" can be replaced by http\.StatusNotImplemented`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 502, // want `"502" can be replaced by http\.StatusBadGateway`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 503, // want `"503" can be replaced by http\.StatusServiceUnavailable`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 504, // want `"504" can be replaced by http\.StatusGatewayTimeout`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 505, // want `"505" can be replaced by http\.StatusHTTPVersionNotSupported`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 506, // want `"506" can be replaced by http\.StatusVariantAlsoNegotiates`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 507, // want `"507" can be replaced by http\.StatusInsufficientStorage`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 508, // want `"508" can be replaced by http\.StatusLoopDetected`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 510, // want `"510" can be replaced by http\.StatusNotExtended`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: 511, // want `"511" can be replaced by http\.StatusNetworkAuthenticationRequired`
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusContinue,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusSwitchingProtocols,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusProcessing,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusEarlyHints,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusOK,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusCreated,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusAccepted,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusNonAuthoritativeInfo,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusNoContent,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusResetContent,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusPartialContent,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusMultiStatus,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusAlreadyReported,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusIMUsed,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusMultipleChoices,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusMovedPermanently,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusFound,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusSeeOther,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusNotModified,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusUseProxy,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusTemporaryRedirect,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusPermanentRedirect,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusBadRequest,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusUnauthorized,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusPaymentRequired,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusForbidden,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusNotFound,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusMethodNotAllowed,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusNotAcceptable,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusProxyAuthRequired,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusRequestTimeout,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusConflict,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusGone,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusLengthRequired,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusPreconditionFailed,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusRequestEntityTooLarge,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusRequestURITooLong,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusUnsupportedMediaType,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusRequestedRangeNotSatisfiable,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusExpectationFailed,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusTeapot,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusMisdirectedRequest,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusUnprocessableEntity,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusLocked,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusFailedDependency,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusTooEarly,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusUpgradeRequired,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusPreconditionRequired,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusTooManyRequests,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusRequestHeaderFieldsTooLarge,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusUnavailableForLegalReasons,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusInternalServerError,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusNotImplemented,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusBadGateway,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusServiceUnavailable,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusGatewayTimeout,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusHTTPVersionNotSupported,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusVariantAlsoNegotiates,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusInsufficientStorage,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusLoopDetected,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusNotExtended,
+	}
+}
+
+func _() {
+	_ = httptest.ResponseRecorder{
+		Code: http.StatusNetworkAuthenticationRequired,
 	}
 }
