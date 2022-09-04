@@ -79,36 +79,22 @@ func run(pass *analysis.Pass) (interface{}, error) {
 			funArgs(pass, x, fun, n.Args)
 
 		case *ast.BasicLit:
-			if lookupFlag(pass, TimeWeekdayFlag) {
-				checkTimeWeekday(pass, n)
-			}
-
-			if lookupFlag(pass, TimeMonthFlag) {
-				checkTimeMonth(pass, n)
-			}
-
-			if lookupFlag(pass, TimeLayoutFlag) {
-				checkTimeLayout(pass, n)
-			}
-
-			if lookupFlag(pass, CryptoHashFlag) {
-				checkCryptoHash(pass, n)
-			}
-
-			if lookupFlag(pass, RPCDefaultPathFlag) {
-				checkRPCDefaultPath(pass, n)
-			}
-
-			if lookupFlag(pass, OSDevNullFlag) {
-				checkOSDevNull(pass, n)
-			}
-
-			if lookupFlag(pass, SQLIsolationLevelFlag) {
-				checkSQLIsolationLevel(pass, n)
-			}
-
-			if lookupFlag(pass, TLSSignatureSchemeFlag) {
-				checkTLSSignatureScheme(pass, n)
+			for _, c := range []struct {
+				flag  string
+				check func(pass *analysis.Pass, basicLit *ast.BasicLit)
+			}{
+				{flag: TimeWeekdayFlag, check: checkTimeWeekday},
+				{flag: TimeMonthFlag, check: checkTimeMonth},
+				{flag: TimeLayoutFlag, check: checkTimeLayout},
+				{flag: CryptoHashFlag, check: checkCryptoHash},
+				{flag: RPCDefaultPathFlag, check: checkRPCDefaultPath},
+				{flag: OSDevNullFlag, check: checkOSDevNull},
+				{flag: SQLIsolationLevelFlag, check: checkSQLIsolationLevel},
+				{flag: TLSSignatureSchemeFlag, check: checkTLSSignatureScheme},
+			} {
+				if lookupFlag(pass, c.flag) {
+					c.check(pass, n)
+				}
 			}
 
 		case *ast.CompositeLit:
