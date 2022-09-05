@@ -90,7 +90,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				{flag: RPCDefaultPathFlag, checkFunc: checkRPCDefaultPath},
 				{flag: OSDevNullFlag, checkFunc: checkOSDevNull},
 				{flag: SQLIsolationLevelFlag, checkFunc: checkSQLIsolationLevel},
-				{flag: TLSSignatureSchemeFlag, chcheckFunceck: checkTLSSignatureScheme},
+				{flag: TLSSignatureSchemeFlag, checkFunc: checkTLSSignatureScheme},
 			} {
 				if lookupFlag(pass, c.flag) {
 					c.checkFunc(pass, n)
