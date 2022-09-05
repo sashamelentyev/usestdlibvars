@@ -80,20 +80,20 @@ func run(pass *analysis.Pass) (interface{}, error) {
 
 		case *ast.BasicLit:
 			for _, c := range []struct {
-				flag  string
-				check func(pass *analysis.Pass, basicLit *ast.BasicLit)
+				flag      string
+				checkFunc func(pass *analysis.Pass, basicLit *ast.BasicLit)
 			}{
-				{flag: TimeWeekdayFlag, check: checkTimeWeekday},
-				{flag: TimeMonthFlag, check: checkTimeMonth},
-				{flag: TimeLayoutFlag, check: checkTimeLayout},
-				{flag: CryptoHashFlag, check: checkCryptoHash},
-				{flag: RPCDefaultPathFlag, check: checkRPCDefaultPath},
-				{flag: OSDevNullFlag, check: checkOSDevNull},
-				{flag: SQLIsolationLevelFlag, check: checkSQLIsolationLevel},
-				{flag: TLSSignatureSchemeFlag, check: checkTLSSignatureScheme},
+				{flag: TimeWeekdayFlag, checkFunc: checkTimeWeekday},
+				{flag: TimeMonthFlag, checkFunc: checkTimeMonth},
+				{flag: TimeLayoutFlag, checkFunc: checkTimeLayout},
+				{flag: CryptoHashFlag, checkFunc: checkCryptoHash},
+				{flag: RPCDefaultPathFlag, checkFunc: checkRPCDefaultPath},
+				{flag: OSDevNullFlag, checkFunc: checkOSDevNull},
+				{flag: SQLIsolationLevelFlag, checkFunc: checkSQLIsolationLevel},
+				{flag: TLSSignatureSchemeFlag, chcheckFunceck: checkTLSSignatureScheme},
 			} {
 				if lookupFlag(pass, c.flag) {
-					c.check(pass, n)
+					c.checkFunc(pass, n)
 				}
 			}
 
