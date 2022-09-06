@@ -97,9 +97,15 @@ func main() {
 		},
 		{
 			mapping:      mapping.TLSSignatureScheme,
-			packageName:  "sql_test",
+			packageName:  "tls_test",
 			templateName: "test-template.go.tmpl",
 			fileName:     "pkg/analyzer/testdata/src/a/tls/signaturescheme.go",
+		},
+		{
+			mapping:      mapping.ConstantKind,
+			packageName:  "constant_test",
+			templateName: "test-template.go.tmpl",
+			fileName:     "pkg/analyzer/testdata/src/a/constant/kind.go",
 		},
 	}
 

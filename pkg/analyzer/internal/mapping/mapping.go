@@ -4,6 +4,7 @@ import (
 	"crypto"
 	"crypto/tls"
 	"database/sql"
+	"go/constant"
 	"net/http"
 	"net/rpc"
 	"os"
@@ -191,4 +192,13 @@ var TLSSignatureScheme = map[string]string{
 	tls.ECDSAWithP521AndSHA512.String(): "tls.ECDSAWithP521AndSHA512.String()",
 	tls.PKCS1WithSHA1.String():          "tls.PKCS1WithSHA1.String()",
 	tls.ECDSAWithSHA1.String():          "tls.ECDSAWithSHA1.String()",
+}
+
+var ConstantKind = map[string]string{
+	// constant.Unknown.String(): "constant.Unknown.String()",
+	constant.Bool.String():    "constant.Bool.String()",
+	constant.String.String():  "constant..String()",
+	constant.Int.String():     "constant..String()",
+	constant.Float.String():   "constant..String()",
+	constant.Complex.String(): "constant..String()",
 }
