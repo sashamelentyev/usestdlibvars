@@ -1,5 +1,7 @@
 # usestdlibvars
 
+<img align="right" alt="usestdlibvars" src="./assets/uslv_gh_img.png" width="150px" height="150px">
+
 A linter that detect the possibility to use variables/constants from the Go standard library.
 
 ## Install
