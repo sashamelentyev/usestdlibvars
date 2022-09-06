@@ -17,6 +17,7 @@ func TestUseStdlibVars(t *testing.T) {
 		"a/os",
 		"a/sql",
 		"a/tls",
+		"a/constant",
 	}
 
 	a := analyzer.New()
@@ -29,6 +30,7 @@ func TestUseStdlibVars(t *testing.T) {
 	mustNil(t, a.Flags.Set(analyzer.OSDevNullFlag, "true"))
 	mustNil(t, a.Flags.Set(analyzer.SQLIsolationLevelFlag, "true"))
 	mustNil(t, a.Flags.Set(analyzer.TLSSignatureSchemeFlag, "true"))
+	mustNil(t, a.Flags.Set(analyzer.ConstantKindFlag, "true"))
 
 	analysistest.Run(t, analysistest.TestData(), a, pkgs...)
 }

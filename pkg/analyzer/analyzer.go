@@ -24,6 +24,7 @@ const (
 	OSDevNullFlag          = "os-dev-null"
 	SQLIsolationLevelFlag  = "sql-isolation-level"
 	TLSSignatureSchemeFlag = "tls-signature-scheme"
+	ConstantKindFlag       = "constant-kind"
 )
 
 // New returns new usestdlibvars analyzer.
@@ -49,6 +50,7 @@ func flags() flag.FlagSet {
 	flags.Bool(OSDevNullFlag, false, "suggest the use of os.DevNull")
 	flags.Bool(SQLIsolationLevelFlag, false, "suggest the use of sql.LevelXX.String()")
 	flags.Bool(TLSSignatureSchemeFlag, false, "suggest the use of tls.SignatureScheme.String()")
+	flags.Bool(ConstantKindFlag, false, "suggest the use of constant.Kind.String()")
 	return *flags
 }
 
@@ -91,6 +93,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				{flag: OSDevNullFlag, checkFunc: checkOSDevNull},
 				{flag: SQLIsolationLevelFlag, checkFunc: checkSQLIsolationLevel},
 				{flag: TLSSignatureSchemeFlag, checkFunc: checkTLSSignatureScheme},
+				{flag: ConstantKindFlag, checkFunc: checkConstantKind},
 			} {
 				if lookupFlag(pass, c.flag) {
 					c.checkFunc(pass, n)
@@ -434,6 +437,14 @@ func checkTLSSignatureScheme(pass *analysis.Pass, basicLit *ast.BasicLit) {
 	currentVal := getBasicLitValue(basicLit)
 
 	if newVal, ok := mapping.TLSSignatureScheme[currentVal]; ok {
+		report(pass, basicLit.Pos(), currentVal, newVal)
+	}
+}
+
+func checkConstantKind(pass *analysis.Pass, basicLit *ast.BasicLit) {
+	currentVal := getBasicLitValue(basicLit)
+
+	if newVal, ok := mapping.ConstantKind[currentVal]; ok {
 		report(pass, basicLit.Pos(), currentVal, newVal)
 	}
 }
