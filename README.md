@@ -25,6 +25,8 @@ Flags:
         no effect (deprecated)
   -c int
         display offending line with this many lines of context (default -1)
+  -constant-kind
+        suggest the use of constant.Kind.String()
   -cpuprofile string
         write CPU profile to this file
   -crypto-hash
