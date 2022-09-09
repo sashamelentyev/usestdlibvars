@@ -506,9 +506,6 @@ func getBasicLitFromElts(elts []ast.Expr, key string) *ast.BasicLit {
 
 // getBasicLitValue returns BasicLit value as string without quotes
 func getBasicLitValue(basicLit *ast.BasicLit) string {
-	if basicLit == nil || len(basicLit.Value) == 0 || basicLit.Value == `""` {
-		return ""
-	}
 	var val strings.Builder
 	for _, r := range basicLit.Value {
 		if r == '"' {
