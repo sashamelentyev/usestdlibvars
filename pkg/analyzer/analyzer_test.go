@@ -22,7 +22,9 @@ func TestUseStdlibVars(t *testing.T) {
 		analyzer.TLSSignatureSchemeFlag,
 		analyzer.ConstantKindFlag,
 	} {
-		mustNil(t, a.Flags.Set(flag, "true"))
+		if err := a.Flags.Set(flag, "true"); err != nil {
+			t.Fatal(err)
+		}
 	}
 
 	pkgs := []string{
@@ -37,12 +39,4 @@ func TestUseStdlibVars(t *testing.T) {
 	}
 
 	analysistest.Run(t, analysistest.TestData(), a, pkgs...)
-}
-
-func mustNil(t *testing.T, err error) {
-	t.Helper()
-
-	if err != nil {
-		t.Fatal(err)
-	}
 }
