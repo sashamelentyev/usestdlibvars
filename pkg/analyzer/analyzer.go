@@ -518,5 +518,5 @@ func getBasicLitValue(basicLit *ast.BasicLit) string {
 }
 
 func report(pass *analysis.Pass, pos token.Pos, currentVal, newVal string) {
-	pass.Reportf(pos, `%q can be replaced by %s`, currentVal, newVal)
+	pass.Reportf(pos, "%q can be replaced by %s", currentVal, newVal)
 }
