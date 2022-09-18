@@ -31,7 +31,7 @@ const (
 	_ = "TRACE"
 )
 
-func _() {
+var (
 	_, _ = http.NewRequest("CONNECT", "", http.NoBody) // want `"CONNECT" can be replaced by http\.MethodConnect`
 	_, _ = http.NewRequest("DELETE", "", http.NoBody)  // want `"DELETE" can be replaced by http\.MethodDelete`
 	_, _ = http.NewRequest("GET", "", http.NoBody)     // want `"GET" can be replaced by http\.MethodGet`
@@ -41,9 +41,9 @@ func _() {
 	_, _ = http.NewRequest("POST", "", http.NoBody)    // want `"POST" can be replaced by http\.MethodPost`
 	_, _ = http.NewRequest("PUT", "", http.NoBody)     // want `"PUT" can be replaced by http\.MethodPut`
 	_, _ = http.NewRequest("TRACE", "", http.NoBody)   // want `"TRACE" can be replaced by http\.MethodTrace`
-}
+)
 
-func _() {
+var (
 	_, _ = http.NewRequestWithContext(nil, "CONNECT", "", http.NoBody) // want `"CONNECT" can be replaced by http\.MethodConnect`
 	_, _ = http.NewRequestWithContext(nil, "DELETE", "", http.NoBody)  // want `"DELETE" can be replaced by http\.MethodDelete`
 	_, _ = http.NewRequestWithContext(nil, "GET", "", http.NoBody)     // want `"GET" can be replaced by http\.MethodGet`
@@ -53,37 +53,19 @@ func _() {
 	_, _ = http.NewRequestWithContext(nil, "POST", "", http.NoBody)    // want `"POST" can be replaced by http\.MethodPost`
 	_, _ = http.NewRequestWithContext(nil, "PUT", "", http.NoBody)     // want `"PUT" can be replaced by http\.MethodPut`
 	_, _ = http.NewRequestWithContext(nil, "TRACE", "", http.NoBody)   // want `"TRACE" can be replaced by http\.MethodTrace`
-}
+)
 
-func _() {
-	_ = &http.Request{
-		Method: "CONNECT", // want `"CONNECT" can be replaced by http\.MethodConnect`
-	}
-	_ = &http.Request{
-		Method: "DELETE", // want `"DELETE" can be replaced by http\.MethodDelete`
-	}
-	_ = &http.Request{
-		Method: "GET", // want `"GET" can be replaced by http\.MethodGet`
-	}
-	_ = &http.Request{
-		Method: "HEAD", // want `"HEAD" can be replaced by http\.MethodHead`
-	}
-	_ = &http.Request{
-		Method: "OPTIONS", // want `"OPTIONS" can be replaced by http\.MethodOptions`
-	}
-	_ = &http.Request{
-		Method: "PATCH", // want `"PATCH" can be replaced by http\.MethodPatch`
-	}
-	_ = &http.Request{
-		Method: "POST", // want `"POST" can be replaced by http\.MethodPost`
-	}
-	_ = &http.Request{
-		Method: "PUT", // want `"PUT" can be replaced by http\.MethodPut`
-	}
-	_ = &http.Request{
-		Method: "TRACE", // want `"TRACE" can be replaced by http\.MethodTrace`
-	}
-}
+var (
+	_ = &http.Request{Method: "CONNECT"} // want `"CONNECT" can be replaced by http\.MethodConnect`
+	_ = &http.Request{Method: "DELETE"}  // want `"DELETE" can be replaced by http\.MethodDelete`
+	_ = &http.Request{Method: "GET"}     // want `"GET" can be replaced by http\.MethodGet`
+	_ = &http.Request{Method: "HEAD"}    // want `"HEAD" can be replaced by http\.MethodHead`
+	_ = &http.Request{Method: "OPTIONS"} // want `"OPTIONS" can be replaced by http\.MethodOptions`
+	_ = &http.Request{Method: "PATCH"}   // want `"PATCH" can be replaced by http\.MethodPatch`
+	_ = &http.Request{Method: "POST"}    // want `"POST" can be replaced by http\.MethodPost`
+	_ = &http.Request{Method: "PUT"}     // want `"PUT" can be replaced by http\.MethodPut`
+	_ = &http.Request{Method: "TRACE"}   // want `"TRACE" can be replaced by http\.MethodTrace`
+)
 
 func _() error {
 	resp, err := http.DefaultClient.Do(&http.Request{})
@@ -94,99 +76,27 @@ func _() error {
 	if resp.Request.Method == "CONNECT" { // want `"CONNECT" can be replaced by http\.MethodConnect`
 		return nil
 	}
-	return nil
-}
-
-func _() error {
-	resp, err := http.DefaultClient.Do(&http.Request{})
-	if err != nil {
-		return err
-	}
-	defer func() { _ = resp.Body.Close() }()
 	if resp.Request.Method == "DELETE" { // want `"DELETE" can be replaced by http\.MethodDelete`
 		return nil
 	}
-	return nil
-}
-
-func _() error {
-	resp, err := http.DefaultClient.Do(&http.Request{})
-	if err != nil {
-		return err
-	}
-	defer func() { _ = resp.Body.Close() }()
 	if resp.Request.Method == "GET" { // want `"GET" can be replaced by http\.MethodGet`
 		return nil
 	}
-	return nil
-}
-
-func _() error {
-	resp, err := http.DefaultClient.Do(&http.Request{})
-	if err != nil {
-		return err
-	}
-	defer func() { _ = resp.Body.Close() }()
 	if resp.Request.Method == "HEAD" { // want `"HEAD" can be replaced by http\.MethodHead`
 		return nil
 	}
-	return nil
-}
-
-func _() error {
-	resp, err := http.DefaultClient.Do(&http.Request{})
-	if err != nil {
-		return err
-	}
-	defer func() { _ = resp.Body.Close() }()
 	if resp.Request.Method == "OPTIONS" { // want `"OPTIONS" can be replaced by http\.MethodOptions`
 		return nil
 	}
-	return nil
-}
-
-func _() error {
-	resp, err := http.DefaultClient.Do(&http.Request{})
-	if err != nil {
-		return err
-	}
-	defer func() { _ = resp.Body.Close() }()
 	if resp.Request.Method == "PATCH" { // want `"PATCH" can be replaced by http\.MethodPatch`
 		return nil
 	}
-	return nil
-}
-
-func _() error {
-	resp, err := http.DefaultClient.Do(&http.Request{})
-	if err != nil {
-		return err
-	}
-	defer func() { _ = resp.Body.Close() }()
 	if resp.Request.Method == "POST" { // want `"POST" can be replaced by http\.MethodPost`
 		return nil
 	}
-	return nil
-}
-
-func _() error {
-	resp, err := http.DefaultClient.Do(&http.Request{})
-	if err != nil {
-		return err
-	}
-	defer func() { _ = resp.Body.Close() }()
 	if resp.Request.Method == "PUT" { // want `"PUT" can be replaced by http\.MethodPut`
 		return nil
 	}
-	return nil
-}
-
-func _() error {
-	resp, err := http.DefaultClient.Do(&http.Request{})
-	if err != nil {
-		return err
-	}
-	defer func() { _ = resp.Body.Close() }()
 	if resp.Request.Method == "TRACE" { // want `"TRACE" can be replaced by http\.MethodTrace`
 		return nil
 	}
@@ -202,99 +112,27 @@ func _() error {
 	if resp.Request.Method == http.MethodConnect {
 		return nil
 	}
-	return nil
-}
-
-func _() error {
-	resp, err := http.DefaultClient.Do(&http.Request{})
-	if err != nil {
-		return err
-	}
-	defer func() { _ = resp.Body.Close() }()
 	if resp.Request.Method == http.MethodDelete {
 		return nil
 	}
-	return nil
-}
-
-func _() error {
-	resp, err := http.DefaultClient.Do(&http.Request{})
-	if err != nil {
-		return err
-	}
-	defer func() { _ = resp.Body.Close() }()
 	if resp.Request.Method == http.MethodGet {
 		return nil
 	}
-	return nil
-}
-
-func _() error {
-	resp, err := http.DefaultClient.Do(&http.Request{})
-	if err != nil {
-		return err
-	}
-	defer func() { _ = resp.Body.Close() }()
 	if resp.Request.Method == http.MethodHead {
 		return nil
 	}
-	return nil
-}
-
-func _() error {
-	resp, err := http.DefaultClient.Do(&http.Request{})
-	if err != nil {
-		return err
-	}
-	defer func() { _ = resp.Body.Close() }()
 	if resp.Request.Method == http.MethodOptions {
 		return nil
 	}
-	return nil
-}
-
-func _() error {
-	resp, err := http.DefaultClient.Do(&http.Request{})
-	if err != nil {
-		return err
-	}
-	defer func() { _ = resp.Body.Close() }()
 	if resp.Request.Method == http.MethodPatch {
 		return nil
 	}
-	return nil
-}
-
-func _() error {
-	resp, err := http.DefaultClient.Do(&http.Request{})
-	if err != nil {
-		return err
-	}
-	defer func() { _ = resp.Body.Close() }()
 	if resp.Request.Method == http.MethodPost {
 		return nil
 	}
-	return nil
-}
-
-func _() error {
-	resp, err := http.DefaultClient.Do(&http.Request{})
-	if err != nil {
-		return err
-	}
-	defer func() { _ = resp.Body.Close() }()
 	if resp.Request.Method == http.MethodPut {
 		return nil
 	}
-	return nil
-}
-
-func _() error {
-	resp, err := http.DefaultClient.Do(&http.Request{})
-	if err != nil {
-		return err
-	}
-	defer func() { _ = resp.Body.Close() }()
 	if resp.Request.Method == http.MethodTrace {
 		return nil
 	}
@@ -306,68 +144,20 @@ func _() {
 	switch r.Method {
 	case "CONNECT": // want `"CONNECT" can be replaced by http\.MethodConnect`
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch r.Method {
 	case "DELETE": // want `"DELETE" can be replaced by http\.MethodDelete`
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch r.Method {
 	case "GET": // want `"GET" can be replaced by http\.MethodGet`
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch r.Method {
 	case "HEAD": // want `"HEAD" can be replaced by http\.MethodHead`
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch r.Method {
 	case "OPTIONS": // want `"OPTIONS" can be replaced by http\.MethodOptions`
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch r.Method {
 	case "PATCH": // want `"PATCH" can be replaced by http\.MethodPatch`
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch r.Method {
 	case "POST": // want `"POST" can be replaced by http\.MethodPost`
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch r.Method {
 	case "PUT": // want `"PUT" can be replaced by http\.MethodPut`
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch r.Method {
 	case "TRACE": // want `"TRACE" can be replaced by http\.MethodTrace`
 		return
 	}
@@ -378,68 +168,20 @@ func _() {
 	switch r.Method {
 	case http.MethodConnect:
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch r.Method {
 	case http.MethodDelete:
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch r.Method {
 	case http.MethodGet:
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch r.Method {
 	case http.MethodHead:
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch r.Method {
 	case http.MethodOptions:
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch r.Method {
 	case http.MethodPatch:
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch r.Method {
 	case http.MethodPost:
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch r.Method {
 	case http.MethodPut:
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch r.Method {
 	case http.MethodTrace:
 		return
 	}
@@ -450,68 +192,20 @@ func _() {
 	switch {
 	case r.Method == "CONNECT": // want `"CONNECT" can be replaced by http\.MethodConnect`
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch {
 	case r.Method == "DELETE": // want `"DELETE" can be replaced by http\.MethodDelete`
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch {
 	case r.Method == "GET": // want `"GET" can be replaced by http\.MethodGet`
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch {
 	case r.Method == "HEAD": // want `"HEAD" can be replaced by http\.MethodHead`
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch {
 	case r.Method == "OPTIONS": // want `"OPTIONS" can be replaced by http\.MethodOptions`
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch {
 	case r.Method == "PATCH": // want `"PATCH" can be replaced by http\.MethodPatch`
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch {
 	case r.Method == "POST": // want `"POST" can be replaced by http\.MethodPost`
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch {
 	case r.Method == "PUT": // want `"PUT" can be replaced by http\.MethodPut`
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch {
 	case r.Method == "TRACE": // want `"TRACE" can be replaced by http\.MethodTrace`
 		return
 	}
@@ -522,73 +216,26 @@ func _() {
 	switch {
 	case r.Method == http.MethodConnect:
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch {
 	case r.Method == http.MethodDelete:
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch {
 	case r.Method == http.MethodGet:
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch {
 	case r.Method == http.MethodHead:
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch {
 	case r.Method == http.MethodOptions:
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch {
 	case r.Method == http.MethodPatch:
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch {
 	case r.Method == http.MethodPost:
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch {
 	case r.Method == http.MethodPut:
 		return
-	}
-}
-
-func _() {
-	var r http.Request
-	switch {
 	case r.Method == http.MethodTrace:
 		return
 	}
 }
-func _() {
+
+var (
 	_ = httptest.NewRequest("CONNECT", "", http.NoBody) // want `"CONNECT" can be replaced by http\.MethodConnect`
 	_ = httptest.NewRequest("DELETE", "", http.NoBody)  // want `"DELETE" can be replaced by http\.MethodDelete`
 	_ = httptest.NewRequest("GET", "", http.NoBody)     // want `"GET" can be replaced by http\.MethodGet`
@@ -598,4 +245,4 @@ func _() {
 	_ = httptest.NewRequest("POST", "", http.NoBody)    // want `"POST" can be replaced by http\.MethodPost`
 	_ = httptest.NewRequest("PUT", "", http.NoBody)     // want `"PUT" can be replaced by http\.MethodPut`
 	_ = httptest.NewRequest("TRACE", "", http.NoBody)   // want `"TRACE" can be replaced by http\.MethodTrace`
-}
+)
