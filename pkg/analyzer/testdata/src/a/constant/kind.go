@@ -6,34 +6,34 @@ import "fmt"
 
 var (
 	_ = "Bool"    // want `"Bool" can be replaced by constant\.Bool\.String\(\)`
-	_ = "Complex" // want `"Complex" can be replaced by constant\.\.String\(\)`
-	_ = "Float"   // want `"Float" can be replaced by constant\.\.String\(\)`
-	_ = "Int"     // want `"Int" can be replaced by constant\.\.String\(\)`
-	_ = "String"  // want `"String" can be replaced by constant\.\.String\(\)`
+	_ = "Complex" // want `"Complex" can be replaced by constant\.Complex\.String\(\)`
+	_ = "Float"   // want `"Float" can be replaced by constant\.Float\.String\(\)`
+	_ = "Int"     // want `"Int" can be replaced by constant\.Int\.String\(\)`
+	_ = "String"  // want `"String" can be replaced by constant\.String\.String\(\)`
 )
 
 const (
 	_ = "Bool"    // want `"Bool" can be replaced by constant\.Bool\.String\(\)`
-	_ = "Complex" // want `"Complex" can be replaced by constant\.\.String\(\)`
-	_ = "Float"   // want `"Float" can be replaced by constant\.\.String\(\)`
-	_ = "Int"     // want `"Int" can be replaced by constant\.\.String\(\)`
-	_ = "String"  // want `"String" can be replaced by constant\.\.String\(\)`
+	_ = "Complex" // want `"Complex" can be replaced by constant\.Complex\.String\(\)`
+	_ = "Float"   // want `"Float" can be replaced by constant\.Float\.String\(\)`
+	_ = "Int"     // want `"Int" can be replaced by constant\.Int\.String\(\)`
+	_ = "String"  // want `"String" can be replaced by constant\.String\.String\(\)`
 )
 
 func _() {
 	_ = func(s string) string { return s }("Bool") // want `"Bool" can be replaced by constant\.Bool\.String\(\)`
 	_ = func(s string) string { return s }("text before key Bool")
 	_ = func(s string) string { return s }("Bool text after key")
-	_ = func(s string) string { return s }("Complex") // want `"Complex" can be replaced by constant\.\.String\(\)`
+	_ = func(s string) string { return s }("Complex") // want `"Complex" can be replaced by constant\.Complex\.String\(\)`
 	_ = func(s string) string { return s }("text before key Complex")
 	_ = func(s string) string { return s }("Complex text after key")
-	_ = func(s string) string { return s }("Float") // want `"Float" can be replaced by constant\.\.String\(\)`
+	_ = func(s string) string { return s }("Float") // want `"Float" can be replaced by constant\.Float\.String\(\)`
 	_ = func(s string) string { return s }("text before key Float")
 	_ = func(s string) string { return s }("Float text after key")
-	_ = func(s string) string { return s }("Int") // want `"Int" can be replaced by constant\.\.String\(\)`
+	_ = func(s string) string { return s }("Int") // want `"Int" can be replaced by constant\.Int\.String\(\)`
 	_ = func(s string) string { return s }("text before key Int")
 	_ = func(s string) string { return s }("Int text after key")
-	_ = func(s string) string { return s }("String") // want `"String" can be replaced by constant\.\.String\(\)`
+	_ = func(s string) string { return s }("String") // want `"String" can be replaced by constant\.String\.String\(\)`
 	_ = func(s string) string { return s }("text before key String")
 	_ = func(s string) string { return s }("String text after key")
 }
@@ -42,16 +42,16 @@ func _() {
 	_ = fmt.Sprint("Bool") // want `"Bool" can be replaced by constant\.Bool\.String\(\)`
 	_ = fmt.Sprint("text before key Bool")
 	_ = fmt.Sprint("Bool text after key")
-	_ = fmt.Sprint("Complex") // want `"Complex" can be replaced by constant\.\.String\(\)`
+	_ = fmt.Sprint("Complex") // want `"Complex" can be replaced by constant\.Complex\.String\(\)`
 	_ = fmt.Sprint("text before key Complex")
 	_ = fmt.Sprint("Complex text after key")
-	_ = fmt.Sprint("Float") // want `"Float" can be replaced by constant\.\.String\(\)`
+	_ = fmt.Sprint("Float") // want `"Float" can be replaced by constant\.Float\.String\(\)`
 	_ = fmt.Sprint("text before key Float")
 	_ = fmt.Sprint("Float text after key")
-	_ = fmt.Sprint("Int") // want `"Int" can be replaced by constant\.\.String\(\)`
+	_ = fmt.Sprint("Int") // want `"Int" can be replaced by constant\.Int\.String\(\)`
 	_ = fmt.Sprint("text before key Int")
 	_ = fmt.Sprint("Int text after key")
-	_ = fmt.Sprint("String") // want `"String" can be replaced by constant\.\.String\(\)`
+	_ = fmt.Sprint("String") // want `"String" can be replaced by constant\.String\.String\(\)`
 	_ = fmt.Sprint("text before key String")
 	_ = fmt.Sprint("String text after key")
 }
