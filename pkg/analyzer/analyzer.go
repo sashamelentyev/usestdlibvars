@@ -337,17 +337,17 @@ func switchStmtAsIfElseStmt(pass *analysis.Pass, cases []ast.Stmt) {
 		}
 
 		for _, expr := range caseClause.List {
-			e, ok := expr.(*ast.BinaryExpr)
+			binaryExpr, ok := expr.(*ast.BinaryExpr)
 			if !ok {
 				continue
 			}
 
-			x, ok := e.X.(*ast.SelectorExpr)
+			x, ok := binaryExpr.X.(*ast.SelectorExpr)
 			if !ok {
 				continue
 			}
 
-			y, ok := e.Y.(*ast.BasicLit)
+			y, ok := binaryExpr.Y.(*ast.BasicLit)
 			if !ok {
 				continue
 			}
@@ -482,12 +482,12 @@ func getBasicLitFromArgs(args []ast.Expr, count, idx int, typ token.Token) *ast.
 //   - key: name of key in struct
 func getBasicLitFromElts(elts []ast.Expr, key string) *ast.BasicLit {
 	for _, e := range elts {
-		expr, ok := e.(*ast.KeyValueExpr)
+		keyValueExpr, ok := e.(*ast.KeyValueExpr)
 		if !ok {
 			continue
 		}
 
-		ident, ok := expr.Key.(*ast.Ident)
+		ident, ok := keyValueExpr.Key.(*ast.Ident)
 		if !ok {
 			continue
 		}
@@ -496,7 +496,7 @@ func getBasicLitFromElts(elts []ast.Expr, key string) *ast.BasicLit {
 			continue
 		}
 
-		if basicLit, ok := expr.Value.(*ast.BasicLit); ok {
+		if basicLit, ok := keyValueExpr.Value.(*ast.BasicLit); ok {
 			return basicLit
 		}
 	}
