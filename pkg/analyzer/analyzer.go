@@ -364,7 +364,9 @@ func lookupFlag(pass *analysis.Pass, name string) bool {
 func checkHTTPMethod(pass *analysis.Pass, basicLit *ast.BasicLit) {
 	currentVal := getBasicLitValue(basicLit)
 
-	if newVal, ok := mapping.HTTPMethod[strings.ToUpper(currentVal)]; ok {
+	key := strings.ToUpper(currentVal)
+
+	if newVal, ok := mapping.HTTPMethod[key]; ok {
 		report(pass, basicLit.Pos(), currentVal, newVal)
 	}
 }
