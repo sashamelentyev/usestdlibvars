@@ -197,8 +197,8 @@ var TLSSignatureScheme = map[string]string{
 var ConstantKind = map[string]string{
 	// constant.Unknown.String(): "constant.Unknown.String()",
 	constant.Bool.String():    "constant.Bool.String()",
-	constant.String.String():  "constant..String()",
-	constant.Int.String():     "constant..String()",
-	constant.Float.String():   "constant..String()",
-	constant.Complex.String(): "constant..String()",
+	constant.String.String():  "constant.String.String()",
+	constant.Int.String():     "constant.Int.String()",
+	constant.Float.String():   "constant.Float.String()",
+	constant.Complex.String(): "constant.Complex.String()",
 }
