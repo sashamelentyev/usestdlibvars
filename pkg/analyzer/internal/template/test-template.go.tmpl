@@ -2,8 +2,6 @@
 
 package {{ .PackageName }}
 
-import "fmt"
-
 var (
 {{- range $key, $value := .Mapping }}
 	_ = "{{ $key }}" // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
@@ -16,18 +14,8 @@ const (
 {{- end }}
 )
 
-func _() {
+var (
 {{- range  $key, $value := .Mapping }}
 	_ = func(s string)string{return s}("{{ $key }}") // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
-	_ = func(s string)string{return s}("text before key {{ $key }}")
-	_ = func(s string)string{return s}("{{ $key }} text after key")
 {{- end }}
-}
-
-func _() {
-{{- range $key, $value := .Mapping }}
-	_ = fmt.Sprint("{{ $key }}") // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
-	_ = fmt.Sprint("text before key {{ $key }}")
-	_ = fmt.Sprint("{{ $key }} text after key")
-{{- end }}
-}
+)

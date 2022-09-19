@@ -33,6 +33,12 @@ var (
 
 var (
 {{- range $key, $value := .Mapping }}
+	_ = http.Request{Method: "{{ $key }}"} // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+{{- end }}
+)
+
+var (
+{{- range $key, $value := .Mapping }}
 	_ = &http.Request{Method: "{{ $key }}"} // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
 {{- end }}
 )

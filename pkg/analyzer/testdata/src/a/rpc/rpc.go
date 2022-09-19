@@ -2,8 +2,6 @@
 
 package rpc_test
 
-import "fmt"
-
 var (
 	_ = "/_goRPC_"   // want `"/_goRPC_" can be replaced by rpc\.DefaultRPCPath`
 	_ = "/debug/rpc" // want `"/debug/rpc" can be replaced by rpc\.DefaultDebugPath`
@@ -14,20 +12,7 @@ const (
 	_ = "/debug/rpc" // want `"/debug/rpc" can be replaced by rpc\.DefaultDebugPath`
 )
 
-func _() {
-	_ = func(s string) string { return s }("/_goRPC_") // want `"/_goRPC_" can be replaced by rpc\.DefaultRPCPath`
-	_ = func(s string) string { return s }("text before key /_goRPC_")
-	_ = func(s string) string { return s }("/_goRPC_ text after key")
+var (
+	_ = func(s string) string { return s }("/_goRPC_")   // want `"/_goRPC_" can be replaced by rpc\.DefaultRPCPath`
 	_ = func(s string) string { return s }("/debug/rpc") // want `"/debug/rpc" can be replaced by rpc\.DefaultDebugPath`
-	_ = func(s string) string { return s }("text before key /debug/rpc")
-	_ = func(s string) string { return s }("/debug/rpc text after key")
-}
-
-func _() {
-	_ = fmt.Sprint("/_goRPC_") // want `"/_goRPC_" can be replaced by rpc\.DefaultRPCPath`
-	_ = fmt.Sprint("text before key /_goRPC_")
-	_ = fmt.Sprint("/_goRPC_ text after key")
-	_ = fmt.Sprint("/debug/rpc") // want `"/debug/rpc" can be replaced by rpc\.DefaultDebugPath`
-	_ = fmt.Sprint("text before key /debug/rpc")
-	_ = fmt.Sprint("/debug/rpc text after key")
-}
+)
