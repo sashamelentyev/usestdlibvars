@@ -7,7 +7,7 @@ A linter that detect the possibility to use variables/constants from the Go stan
 ## Install
 
 ```bash
-go install github.com/sashamelentyev/usestdlibvars
+go install github.com/sashamelentyev/usestdlibvars@latest
 ```
 
 ## Usage
