@@ -56,6 +56,18 @@ var (
 )
 
 var (
+	_ = http.Request{Method: "CONNECT"} // want `"CONNECT" can be replaced by http\.MethodConnect`
+	_ = http.Request{Method: "DELETE"}  // want `"DELETE" can be replaced by http\.MethodDelete`
+	_ = http.Request{Method: "GET"}     // want `"GET" can be replaced by http\.MethodGet`
+	_ = http.Request{Method: "HEAD"}    // want `"HEAD" can be replaced by http\.MethodHead`
+	_ = http.Request{Method: "OPTIONS"} // want `"OPTIONS" can be replaced by http\.MethodOptions`
+	_ = http.Request{Method: "PATCH"}   // want `"PATCH" can be replaced by http\.MethodPatch`
+	_ = http.Request{Method: "POST"}    // want `"POST" can be replaced by http\.MethodPost`
+	_ = http.Request{Method: "PUT"}     // want `"PUT" can be replaced by http\.MethodPut`
+	_ = http.Request{Method: "TRACE"}   // want `"TRACE" can be replaced by http\.MethodTrace`
+)
+
+var (
 	_ = &http.Request{Method: "CONNECT"} // want `"CONNECT" can be replaced by http\.MethodConnect`
 	_ = &http.Request{Method: "DELETE"}  // want `"DELETE" can be replaced by http\.MethodDelete`
 	_ = &http.Request{Method: "GET"}     // want `"GET" can be replaced by http\.MethodGet`
