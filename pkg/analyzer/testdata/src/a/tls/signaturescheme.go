@@ -2,8 +2,6 @@
 
 package tls_test
 
-import "fmt"
-
 var (
 	_ = "ECDSAWithP256AndSHA256" // want `"ECDSAWithP256AndSHA256" can be replaced by tls\.ECDSAWithP256AndSHA256\.String\(\)`
 	_ = "ECDSAWithP384AndSHA384" // want `"ECDSAWithP384AndSHA384" can be replaced by tls\.ECDSAWithP384AndSHA384\.String\(\)`
@@ -34,80 +32,17 @@ const (
 	_ = "PSSWithSHA512"          // want `"PSSWithSHA512" can be replaced by tls\.PSSWithSHA512\.String\(\)`
 )
 
-func _() {
+var (
 	_ = func(s string) string { return s }("ECDSAWithP256AndSHA256") // want `"ECDSAWithP256AndSHA256" can be replaced by tls\.ECDSAWithP256AndSHA256\.String\(\)`
-	_ = func(s string) string { return s }("text before key ECDSAWithP256AndSHA256")
-	_ = func(s string) string { return s }("ECDSAWithP256AndSHA256 text after key")
 	_ = func(s string) string { return s }("ECDSAWithP384AndSHA384") // want `"ECDSAWithP384AndSHA384" can be replaced by tls\.ECDSAWithP384AndSHA384\.String\(\)`
-	_ = func(s string) string { return s }("text before key ECDSAWithP384AndSHA384")
-	_ = func(s string) string { return s }("ECDSAWithP384AndSHA384 text after key")
 	_ = func(s string) string { return s }("ECDSAWithP521AndSHA512") // want `"ECDSAWithP521AndSHA512" can be replaced by tls\.ECDSAWithP521AndSHA512\.String\(\)`
-	_ = func(s string) string { return s }("text before key ECDSAWithP521AndSHA512")
-	_ = func(s string) string { return s }("ECDSAWithP521AndSHA512 text after key")
-	_ = func(s string) string { return s }("ECDSAWithSHA1") // want `"ECDSAWithSHA1" can be replaced by tls\.ECDSAWithSHA1\.String\(\)`
-	_ = func(s string) string { return s }("text before key ECDSAWithSHA1")
-	_ = func(s string) string { return s }("ECDSAWithSHA1 text after key")
-	_ = func(s string) string { return s }("Ed25519") // want `"Ed25519" can be replaced by tls\.Ed25519\.String\(\)`
-	_ = func(s string) string { return s }("text before key Ed25519")
-	_ = func(s string) string { return s }("Ed25519 text after key")
-	_ = func(s string) string { return s }("PKCS1WithSHA1") // want `"PKCS1WithSHA1" can be replaced by tls\.PKCS1WithSHA1\.String\(\)`
-	_ = func(s string) string { return s }("text before key PKCS1WithSHA1")
-	_ = func(s string) string { return s }("PKCS1WithSHA1 text after key")
-	_ = func(s string) string { return s }("PKCS1WithSHA256") // want `"PKCS1WithSHA256" can be replaced by tls\.PKCS1WithSHA256\.String\(\)`
-	_ = func(s string) string { return s }("text before key PKCS1WithSHA256")
-	_ = func(s string) string { return s }("PKCS1WithSHA256 text after key")
-	_ = func(s string) string { return s }("PKCS1WithSHA384") // want `"PKCS1WithSHA384" can be replaced by tls\.PKCS1WithSHA384\.String\(\)`
-	_ = func(s string) string { return s }("text before key PKCS1WithSHA384")
-	_ = func(s string) string { return s }("PKCS1WithSHA384 text after key")
-	_ = func(s string) string { return s }("PKCS1WithSHA512") // want `"PKCS1WithSHA512" can be replaced by tls\.PKCS1WithSHA512\.String\(\)`
-	_ = func(s string) string { return s }("text before key PKCS1WithSHA512")
-	_ = func(s string) string { return s }("PKCS1WithSHA512 text after key")
-	_ = func(s string) string { return s }("PSSWithSHA256") // want `"PSSWithSHA256" can be replaced by tls\.PSSWithSHA256\.String\(\)`
-	_ = func(s string) string { return s }("text before key PSSWithSHA256")
-	_ = func(s string) string { return s }("PSSWithSHA256 text after key")
-	_ = func(s string) string { return s }("PSSWithSHA384") // want `"PSSWithSHA384" can be replaced by tls\.PSSWithSHA384\.String\(\)`
-	_ = func(s string) string { return s }("text before key PSSWithSHA384")
-	_ = func(s string) string { return s }("PSSWithSHA384 text after key")
-	_ = func(s string) string { return s }("PSSWithSHA512") // want `"PSSWithSHA512" can be replaced by tls\.PSSWithSHA512\.String\(\)`
-	_ = func(s string) string { return s }("text before key PSSWithSHA512")
-	_ = func(s string) string { return s }("PSSWithSHA512 text after key")
-}
-
-func _() {
-	_ = fmt.Sprint("ECDSAWithP256AndSHA256") // want `"ECDSAWithP256AndSHA256" can be replaced by tls\.ECDSAWithP256AndSHA256\.String\(\)`
-	_ = fmt.Sprint("text before key ECDSAWithP256AndSHA256")
-	_ = fmt.Sprint("ECDSAWithP256AndSHA256 text after key")
-	_ = fmt.Sprint("ECDSAWithP384AndSHA384") // want `"ECDSAWithP384AndSHA384" can be replaced by tls\.ECDSAWithP384AndSHA384\.String\(\)`
-	_ = fmt.Sprint("text before key ECDSAWithP384AndSHA384")
-	_ = fmt.Sprint("ECDSAWithP384AndSHA384 text after key")
-	_ = fmt.Sprint("ECDSAWithP521AndSHA512") // want `"ECDSAWithP521AndSHA512" can be replaced by tls\.ECDSAWithP521AndSHA512\.String\(\)`
-	_ = fmt.Sprint("text before key ECDSAWithP521AndSHA512")
-	_ = fmt.Sprint("ECDSAWithP521AndSHA512 text after key")
-	_ = fmt.Sprint("ECDSAWithSHA1") // want `"ECDSAWithSHA1" can be replaced by tls\.ECDSAWithSHA1\.String\(\)`
-	_ = fmt.Sprint("text before key ECDSAWithSHA1")
-	_ = fmt.Sprint("ECDSAWithSHA1 text after key")
-	_ = fmt.Sprint("Ed25519") // want `"Ed25519" can be replaced by tls\.Ed25519\.String\(\)`
-	_ = fmt.Sprint("text before key Ed25519")
-	_ = fmt.Sprint("Ed25519 text after key")
-	_ = fmt.Sprint("PKCS1WithSHA1") // want `"PKCS1WithSHA1" can be replaced by tls\.PKCS1WithSHA1\.String\(\)`
-	_ = fmt.Sprint("text before key PKCS1WithSHA1")
-	_ = fmt.Sprint("PKCS1WithSHA1 text after key")
-	_ = fmt.Sprint("PKCS1WithSHA256") // want `"PKCS1WithSHA256" can be replaced by tls\.PKCS1WithSHA256\.String\(\)`
-	_ = fmt.Sprint("text before key PKCS1WithSHA256")
-	_ = fmt.Sprint("PKCS1WithSHA256 text after key")
-	_ = fmt.Sprint("PKCS1WithSHA384") // want `"PKCS1WithSHA384" can be replaced by tls\.PKCS1WithSHA384\.String\(\)`
-	_ = fmt.Sprint("text before key PKCS1WithSHA384")
-	_ = fmt.Sprint("PKCS1WithSHA384 text after key")
-	_ = fmt.Sprint("PKCS1WithSHA512") // want `"PKCS1WithSHA512" can be replaced by tls\.PKCS1WithSHA512\.String\(\)`
-	_ = fmt.Sprint("text before key PKCS1WithSHA512")
-	_ = fmt.Sprint("PKCS1WithSHA512 text after key")
-	_ = fmt.Sprint("PSSWithSHA256") // want `"PSSWithSHA256" can be replaced by tls\.PSSWithSHA256\.String\(\)`
-	_ = fmt.Sprint("text before key PSSWithSHA256")
-	_ = fmt.Sprint("PSSWithSHA256 text after key")
-	_ = fmt.Sprint("PSSWithSHA384") // want `"PSSWithSHA384" can be replaced by tls\.PSSWithSHA384\.String\(\)`
-	_ = fmt.Sprint("text before key PSSWithSHA384")
-	_ = fmt.Sprint("PSSWithSHA384 text after key")
-	_ = fmt.Sprint("PSSWithSHA512") // want `"PSSWithSHA512" can be replaced by tls\.PSSWithSHA512\.String\(\)`
-	_ = fmt.Sprint("text before key PSSWithSHA512")
-	_ = fmt.Sprint("PSSWithSHA512 text after key")
-}
+	_ = func(s string) string { return s }("ECDSAWithSHA1")          // want `"ECDSAWithSHA1" can be replaced by tls\.ECDSAWithSHA1\.String\(\)`
+	_ = func(s string) string { return s }("Ed25519")                // want `"Ed25519" can be replaced by tls\.Ed25519\.String\(\)`
+	_ = func(s string) string { return s }("PKCS1WithSHA1")          // want `"PKCS1WithSHA1" can be replaced by tls\.PKCS1WithSHA1\.String\(\)`
+	_ = func(s string) string { return s }("PKCS1WithSHA256")        // want `"PKCS1WithSHA256" can be replaced by tls\.PKCS1WithSHA256\.String\(\)`
+	_ = func(s string) string { return s }("PKCS1WithSHA384")        // want `"PKCS1WithSHA384" can be replaced by tls\.PKCS1WithSHA384\.String\(\)`
+	_ = func(s string) string { return s }("PKCS1WithSHA512")        // want `"PKCS1WithSHA512" can be replaced by tls\.PKCS1WithSHA512\.String\(\)`
+	_ = func(s string) string { return s }("PSSWithSHA256")          // want `"PSSWithSHA256" can be replaced by tls\.PSSWithSHA256\.String\(\)`
+	_ = func(s string) string { return s }("PSSWithSHA384")          // want `"PSSWithSHA384" can be replaced by tls\.PSSWithSHA384\.String\(\)`
+	_ = func(s string) string { return s }("PSSWithSHA512")          // want `"PSSWithSHA512" can be replaced by tls\.PSSWithSHA512\.String\(\)`
+)

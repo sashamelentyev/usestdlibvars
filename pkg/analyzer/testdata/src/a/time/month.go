@@ -2,8 +2,6 @@
 
 package time_test
 
-import "fmt"
-
 var (
 	_ = "April"     // want `"April" can be replaced by time\.April\.String\(\)`
 	_ = "August"    // want `"August" can be replaced by time\.August\.String\(\)`
@@ -34,80 +32,17 @@ const (
 	_ = "September" // want `"September" can be replaced by time\.September\.String\(\)`
 )
 
-func _() {
-	_ = func(s string) string { return s }("April") // want `"April" can be replaced by time\.April\.String\(\)`
-	_ = func(s string) string { return s }("text before key April")
-	_ = func(s string) string { return s }("April text after key")
-	_ = func(s string) string { return s }("August") // want `"August" can be replaced by time\.August\.String\(\)`
-	_ = func(s string) string { return s }("text before key August")
-	_ = func(s string) string { return s }("August text after key")
-	_ = func(s string) string { return s }("December") // want `"December" can be replaced by time\.December\.String\(\)`
-	_ = func(s string) string { return s }("text before key December")
-	_ = func(s string) string { return s }("December text after key")
-	_ = func(s string) string { return s }("February") // want `"February" can be replaced by time\.February\.String\(\)`
-	_ = func(s string) string { return s }("text before key February")
-	_ = func(s string) string { return s }("February text after key")
-	_ = func(s string) string { return s }("January") // want `"January" can be replaced by time\.January\.String\(\)`
-	_ = func(s string) string { return s }("text before key January")
-	_ = func(s string) string { return s }("January text after key")
-	_ = func(s string) string { return s }("July") // want `"July" can be replaced by time\.July\.String\(\)`
-	_ = func(s string) string { return s }("text before key July")
-	_ = func(s string) string { return s }("July text after key")
-	_ = func(s string) string { return s }("June") // want `"June" can be replaced by time\.June\.String\(\)`
-	_ = func(s string) string { return s }("text before key June")
-	_ = func(s string) string { return s }("June text after key")
-	_ = func(s string) string { return s }("March") // want `"March" can be replaced by time\.March\.String\(\)`
-	_ = func(s string) string { return s }("text before key March")
-	_ = func(s string) string { return s }("March text after key")
-	_ = func(s string) string { return s }("May") // want `"May" can be replaced by time\.May\.String\(\)`
-	_ = func(s string) string { return s }("text before key May")
-	_ = func(s string) string { return s }("May text after key")
-	_ = func(s string) string { return s }("November") // want `"November" can be replaced by time\.November\.String\(\)`
-	_ = func(s string) string { return s }("text before key November")
-	_ = func(s string) string { return s }("November text after key")
-	_ = func(s string) string { return s }("October") // want `"October" can be replaced by time\.October\.String\(\)`
-	_ = func(s string) string { return s }("text before key October")
-	_ = func(s string) string { return s }("October text after key")
+var (
+	_ = func(s string) string { return s }("April")     // want `"April" can be replaced by time\.April\.String\(\)`
+	_ = func(s string) string { return s }("August")    // want `"August" can be replaced by time\.August\.String\(\)`
+	_ = func(s string) string { return s }("December")  // want `"December" can be replaced by time\.December\.String\(\)`
+	_ = func(s string) string { return s }("February")  // want `"February" can be replaced by time\.February\.String\(\)`
+	_ = func(s string) string { return s }("January")   // want `"January" can be replaced by time\.January\.String\(\)`
+	_ = func(s string) string { return s }("July")      // want `"July" can be replaced by time\.July\.String\(\)`
+	_ = func(s string) string { return s }("June")      // want `"June" can be replaced by time\.June\.String\(\)`
+	_ = func(s string) string { return s }("March")     // want `"March" can be replaced by time\.March\.String\(\)`
+	_ = func(s string) string { return s }("May")       // want `"May" can be replaced by time\.May\.String\(\)`
+	_ = func(s string) string { return s }("November")  // want `"November" can be replaced by time\.November\.String\(\)`
+	_ = func(s string) string { return s }("October")   // want `"October" can be replaced by time\.October\.String\(\)`
 	_ = func(s string) string { return s }("September") // want `"September" can be replaced by time\.September\.String\(\)`
-	_ = func(s string) string { return s }("text before key September")
-	_ = func(s string) string { return s }("September text after key")
-}
-
-func _() {
-	_ = fmt.Sprint("April") // want `"April" can be replaced by time\.April\.String\(\)`
-	_ = fmt.Sprint("text before key April")
-	_ = fmt.Sprint("April text after key")
-	_ = fmt.Sprint("August") // want `"August" can be replaced by time\.August\.String\(\)`
-	_ = fmt.Sprint("text before key August")
-	_ = fmt.Sprint("August text after key")
-	_ = fmt.Sprint("December") // want `"December" can be replaced by time\.December\.String\(\)`
-	_ = fmt.Sprint("text before key December")
-	_ = fmt.Sprint("December text after key")
-	_ = fmt.Sprint("February") // want `"February" can be replaced by time\.February\.String\(\)`
-	_ = fmt.Sprint("text before key February")
-	_ = fmt.Sprint("February text after key")
-	_ = fmt.Sprint("January") // want `"January" can be replaced by time\.January\.String\(\)`
-	_ = fmt.Sprint("text before key January")
-	_ = fmt.Sprint("January text after key")
-	_ = fmt.Sprint("July") // want `"July" can be replaced by time\.July\.String\(\)`
-	_ = fmt.Sprint("text before key July")
-	_ = fmt.Sprint("July text after key")
-	_ = fmt.Sprint("June") // want `"June" can be replaced by time\.June\.String\(\)`
-	_ = fmt.Sprint("text before key June")
-	_ = fmt.Sprint("June text after key")
-	_ = fmt.Sprint("March") // want `"March" can be replaced by time\.March\.String\(\)`
-	_ = fmt.Sprint("text before key March")
-	_ = fmt.Sprint("March text after key")
-	_ = fmt.Sprint("May") // want `"May" can be replaced by time\.May\.String\(\)`
-	_ = fmt.Sprint("text before key May")
-	_ = fmt.Sprint("May text after key")
-	_ = fmt.Sprint("November") // want `"November" can be replaced by time\.November\.String\(\)`
-	_ = fmt.Sprint("text before key November")
-	_ = fmt.Sprint("November text after key")
-	_ = fmt.Sprint("October") // want `"October" can be replaced by time\.October\.String\(\)`
-	_ = fmt.Sprint("text before key October")
-	_ = fmt.Sprint("October text after key")
-	_ = fmt.Sprint("September") // want `"September" can be replaced by time\.September\.String\(\)`
-	_ = fmt.Sprint("text before key September")
-	_ = fmt.Sprint("September text after key")
-}
+)
