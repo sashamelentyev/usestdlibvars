@@ -506,7 +506,7 @@ func getBasicLitFromElts(elts []ast.Expr, key string) *ast.BasicLit {
 	return nil
 }
 
-// getBasicLitValue returns BasicLit value as string without quotes
+// getBasicLitValue returns BasicLit value as string without quotes.
 func getBasicLitValue(basicLit *ast.BasicLit) string {
 	var val strings.Builder
 	for _, r := range basicLit.Value {
