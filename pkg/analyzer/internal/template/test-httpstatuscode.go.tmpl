@@ -18,190 +18,179 @@ const (
 	_ = {{ $key }}
 {{- end }}
 )
-{{ range $key, $value := .Mapping }}
+
 func _() {
 	var w http.ResponseWriter
+{{- range $key, $value := .Mapping }}
 	w.WriteHeader({{ $key }}) // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+{{- end }}
 }
-{{ end -}}
 
-{{ range $key, $value := .Mapping }}
 func _() {
 	var w http.ResponseWriter
+{{- range $key, $value := .Mapping }}
 	w.WriteHeader({{ $value }})
+{{- end }}
 }
-{{ end -}}
 
-{{ range $key, $value := .Mapping }}
-func _() {
-	_ = &http.Response{
-		StatusCode: {{ $key }}, // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
-	}
-}
-{{ end -}}
+var (
+{{- range $key, $value := .Mapping }}
+	_ = http.Response{StatusCode: {{ $key }}} // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+{{- end }}
+)
 
-{{ range $key, $value := .Mapping }}
-func _() {
-	_ = &http.Response{
-		StatusCode: {{ $value }},
-	}
-}
-{{ end -}}
+var (
+{{- range $key, $value := .Mapping }}
+	_ = http.Response{StatusCode: {{ $value }}}
+{{- end }}
+)
 
-{{ range $key, $value := .Mapping }}
-func _() {
-	_ = http.Response{
-		StatusCode: {{ $key }}, // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
-	}
-}
-{{ end -}}
+var (
+{{- range $key, $value := .Mapping }}
+	_ = &http.Response{StatusCode: {{ $key }}} // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+{{- end }}
+)
 
-{{ range $key, $value := .Mapping }}
-func _() {
-	_ = http.Response{
-		StatusCode: {{ $value }},
-	}
-}
-{{ end -}}
+var (
+{{- range $key, $value := .Mapping }}
+	_ = &http.Response{StatusCode: {{ $value }}}
+{{- end }}
+)
 
-{{ range $key, $value := .Mapping }}
 func _() error {
     resp, err := http.DefaultClient.Do(&http.Request{})
     if err != nil {
         return err
     }
     defer func() { _ = resp.Body.Close() }()
+{{- range $key, $value := .Mapping }}
     if resp.StatusCode == {{ $key }} { // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
         return nil
     } else if resp.StatusCode == {{ $key }} { // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
         return nil
     }
+{{- end }}
     return nil
 }
-{{ end -}}
 
-{{ range $key, $value := .Mapping }}
 func _() error {
     resp, err := http.DefaultClient.Do(&http.Request{})
     if err != nil {
         return err
     }
     defer func() { _ = resp.Body.Close() }()
+{{- range $key, $value := .Mapping }}
     if resp.StatusCode == {{ $value }} {
         return nil
     } else if resp.StatusCode == {{ $value }} {
         return nil
     }
+{{- end }}
     return nil
 }
-{{ end -}}
 
-{{ range $key, $value := .Mapping }}
 func _() {
     var w http.ResponseWriter
+{{- range $key, $value := .Mapping }}
     http.Error(w, "", {{ $key }}) // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+{{- end }}
 }
-{{ end -}}
 
-{{ range $key, $value := .Mapping }}
 func _() {
     var w http.ResponseWriter
+{{- range $key, $value := .Mapping }}
     http.Error(w, "", {{ $value }})
+{{- end }}
 }
-{{ end -}}
 
-{{ range $key, $value := .Mapping }}
-func _() {
-    http.StatusText({{ $key }}) // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
-}
-{{ end -}}
+var (
+{{- range $key, $value := .Mapping }}
+    _ = http.StatusText({{ $key }}) // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+{{- end }}
+)
 
-{{ range $key, $value := .Mapping }}
-func _() {
-    http.StatusText({{ $value }})
-}
-{{ end -}}
+var (
+{{- range $key, $value := .Mapping }}
+    _ = http.StatusText({{ $value }})
+{{- end }}
+)
 
-{{ range $key, $value := .Mapping }}
 func _() {
     var w http.ResponseWriter
     var r *http.Request
+{{- range $key, $value := .Mapping }}
     http.Redirect(w, r, "", {{ $key }}) // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+{{- end }}
 }
-{{ end -}}
 
-{{ range $key, $value := .Mapping }}
 func _() {
     var w http.ResponseWriter
     var r *http.Request
+{{- range $key, $value := .Mapping }}
     http.Redirect(w, r, "", {{ $value }})
+{{- end }}
 }
-{{ end -}}
 
-{{ range $key, $value := .Mapping }}
-func _() {
-    http.RedirectHandler("", {{ $key }}) // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
-}
-{{ end -}}
+var (
+{{- range $key, $value := .Mapping }}
+    _ = http.RedirectHandler("", {{ $key }}) // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+{{- end }}
+)
 
-{{ range $key, $value := .Mapping }}
-func _() {
-    http.RedirectHandler("", {{ $value }})
-}
-{{ end -}}
+var (
+{{- range $key, $value := .Mapping }}
+    _ = http.RedirectHandler("", {{ $value }})
+{{- end }}
+)
 
-{{ range $key, $value := .Mapping }}
 func _() {
     var resp http.Response
     switch resp.StatusCode {
+{{- range $key, $value := .Mapping }}
     case {{ $key }}: // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
       return
+{{- end }}
     }
 }
-{{ end -}}
 
-{{ range $key, $value := .Mapping }}
 func _() {
     var resp http.Response
     switch resp.StatusCode {
+{{- range $key, $value := .Mapping }}
     case {{ $value }}:
       return
+{{- end }}
     }
 }
-{{ end -}}
 
-{{ range $key, $value := .Mapping }}
 func _() {
     var resp http.Response
     switch {
+{{- range $key, $value := .Mapping }}
     case resp.StatusCode == {{ $key }}: // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
       return
+{{- end }}
     }
 }
-{{ end -}}
 
-{{ range $key, $value := .Mapping }}
 func _() {
     var resp http.Response
     switch {
+{{- range $key, $value := .Mapping }}
     case resp.StatusCode == {{ $value }}:
       return
+{{- end }}
     }
 }
-{{ end -}}
 
-{{ range $key, $value := .Mapping }}
-func _() {
-	_ = httptest.ResponseRecorder{
-		Code: {{ $key }}, // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
-	}
-}
-{{ end -}}
+var (
+{{- range $key, $value := .Mapping }}
+	_ = httptest.ResponseRecorder{Code: {{ $key }}} // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+{{- end }}
+)
 
-{{ range $key, $value := .Mapping }}
-func _() {
-	_ = httptest.ResponseRecorder{
-		Code: {{ $value }},
-	}
-}
-{{ end -}}
+var (
+{{- range $key, $value := .Mapping }}
+	_ = httptest.ResponseRecorder{Code: {{ $value }}}
+{{- end }}
+)
