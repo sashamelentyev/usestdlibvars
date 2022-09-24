@@ -6,11 +6,20 @@ A linter that detect the possibility to use variables/constants from the Go stan
 
 ## Install
 
+### `go install`
+
 ```bash
 go install github.com/sashamelentyev/usestdlibvars@latest
 ```
 
+### `golangci-lint`
+
+`usestdlibvars` is already integrated with
+[golangci-lint](https://github.com/golangci/golangci-lint).
+
 ## Usage
+
+### Binary
 
 ```console
 $ usestdlibvars -h
@@ -68,6 +77,12 @@ Flags:
   -trace string
         write trace log to this file
   -v    no effect (deprecated)
+```
+
+### `golangci-lint`
+
+```console
+golangci-lint run --disable-all --enable usestdlibvars
 ```
 
 ## Examples
