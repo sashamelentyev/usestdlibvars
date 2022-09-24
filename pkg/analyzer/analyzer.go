@@ -454,6 +454,7 @@ func checkConstantKind(pass *analysis.Pass, basicLit *ast.BasicLit) {
 // getBasicLitFromArgs gets the *ast.BasicLit of a function argument.
 //
 // Arguments:
+//   - args - slice of function arguments
 //   - count - expected number of argument in function
 //   - idx - index of the argument to get the *ast.BasicLit
 //   - typ - argument type
@@ -481,7 +482,8 @@ func getBasicLitFromArgs(args []ast.Expr, count, idx int, typ token.Token) *ast.
 // getBasicLitFromElts gets the *ast.BasicLit of a struct elements.
 //
 // Arguments:
-//   - key: name of key in struct
+//   - elts - slice of a struct elements
+//   - key - name of key in struct
 func getBasicLitFromElts(elts []ast.Expr, key string) *ast.BasicLit {
 	for _, e := range elts {
 		keyValueExpr, ok := e.(*ast.KeyValueExpr)
