@@ -50,8 +50,8 @@ func main() {
 		{
 			mapping:      mapping.HTTPStatusCode,
 			packageName:  "http_test",
-			templateName: "test-httpstatuscode.go.tmpl",
-			fileName:     "pkg/analyzer/testdata/src/a/http/statuscode.go",
+			templateName: "test-httpstatus.go.tmpl",
+			fileName:     "pkg/analyzer/testdata/src/a/http/status.go",
 		},
 		{
 			mapping:      mapping.RPCDefaultPath,
