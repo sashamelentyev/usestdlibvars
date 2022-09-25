@@ -112,6 +112,33 @@ func _() error {
 	if resp.Request.Method == "TRACE" { // want `"TRACE" can be replaced by http\.MethodTrace`
 		return nil
 	}
+	for resp.Request.Method == "CONNECT" { // want `"CONNECT" can be replaced by http\.MethodConnect`
+		return nil
+	}
+	for resp.Request.Method == "DELETE" { // want `"DELETE" can be replaced by http\.MethodDelete`
+		return nil
+	}
+	for resp.Request.Method == "GET" { // want `"GET" can be replaced by http\.MethodGet`
+		return nil
+	}
+	for resp.Request.Method == "HEAD" { // want `"HEAD" can be replaced by http\.MethodHead`
+		return nil
+	}
+	for resp.Request.Method == "OPTIONS" { // want `"OPTIONS" can be replaced by http\.MethodOptions`
+		return nil
+	}
+	for resp.Request.Method == "PATCH" { // want `"PATCH" can be replaced by http\.MethodPatch`
+		return nil
+	}
+	for resp.Request.Method == "POST" { // want `"POST" can be replaced by http\.MethodPost`
+		return nil
+	}
+	for resp.Request.Method == "PUT" { // want `"PUT" can be replaced by http\.MethodPut`
+		return nil
+	}
+	for resp.Request.Method == "TRACE" { // want `"TRACE" can be replaced by http\.MethodTrace`
+		return nil
+	}
 	return nil
 }
 
@@ -146,6 +173,33 @@ func _() error {
 		return nil
 	}
 	if resp.Request.Method == http.MethodTrace {
+		return nil
+	}
+	for resp.Request.Method == http.MethodConnect {
+		return nil
+	}
+	for resp.Request.Method == http.MethodDelete {
+		return nil
+	}
+	for resp.Request.Method == http.MethodGet {
+		return nil
+	}
+	for resp.Request.Method == http.MethodHead {
+		return nil
+	}
+	for resp.Request.Method == http.MethodOptions {
+		return nil
+	}
+	for resp.Request.Method == http.MethodPatch {
+		return nil
+	}
+	for resp.Request.Method == http.MethodPost {
+		return nil
+	}
+	for resp.Request.Method == http.MethodPut {
+		return nil
+	}
+	for resp.Request.Method == http.MethodTrace {
 		return nil
 	}
 	return nil

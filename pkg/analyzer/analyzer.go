@@ -63,6 +63,7 @@ func run(pass *analysis.Pass) (interface{}, error) {
 		(*ast.CompositeLit)(nil),
 		(*ast.IfStmt)(nil),
 		(*ast.SwitchStmt)(nil),
+		(*ast.ForStmt)(nil),
 	}
 
 	insp.Preorder(types, func(node ast.Node) {
@@ -138,6 +139,24 @@ func run(pass *analysis.Pass) (interface{}, error) {
 			} else {
 				switchStmtAsIfElseStmt(pass, n.Body.List)
 			}
+
+		case *ast.ForStmt:
+			cond, ok := n.Cond.(*ast.BinaryExpr)
+			if !ok {
+				return
+			}
+
+			x, ok := cond.X.(*ast.SelectorExpr)
+			if !ok {
+				return
+			}
+
+			y, ok := cond.Y.(*ast.BasicLit)
+			if !ok {
+				return
+			}
+
+			ifElseStmt(pass, x, y)
 		}
 	})
 

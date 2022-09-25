@@ -845,6 +845,192 @@ func _() error {
 	} else if resp.StatusCode == 511 { // want `"511" can be replaced by http\.StatusNetworkAuthenticationRequired`
 		return nil
 	}
+	for resp.StatusCode == 100 { // want `"100" can be replaced by http\.StatusContinue`
+		return nil
+	}
+	for resp.StatusCode == 101 { // want `"101" can be replaced by http\.StatusSwitchingProtocols`
+		return nil
+	}
+	for resp.StatusCode == 102 { // want `"102" can be replaced by http\.StatusProcessing`
+		return nil
+	}
+	for resp.StatusCode == 103 { // want `"103" can be replaced by http\.StatusEarlyHints`
+		return nil
+	}
+	for resp.StatusCode == 200 { // want `"200" can be replaced by http\.StatusOK`
+		return nil
+	}
+	for resp.StatusCode == 201 { // want `"201" can be replaced by http\.StatusCreated`
+		return nil
+	}
+	for resp.StatusCode == 202 { // want `"202" can be replaced by http\.StatusAccepted`
+		return nil
+	}
+	for resp.StatusCode == 203 { // want `"203" can be replaced by http\.StatusNonAuthoritativeInfo`
+		return nil
+	}
+	for resp.StatusCode == 204 { // want `"204" can be replaced by http\.StatusNoContent`
+		return nil
+	}
+	for resp.StatusCode == 205 { // want `"205" can be replaced by http\.StatusResetContent`
+		return nil
+	}
+	for resp.StatusCode == 206 { // want `"206" can be replaced by http\.StatusPartialContent`
+		return nil
+	}
+	for resp.StatusCode == 207 { // want `"207" can be replaced by http\.StatusMultiStatus`
+		return nil
+	}
+	for resp.StatusCode == 208 { // want `"208" can be replaced by http\.StatusAlreadyReported`
+		return nil
+	}
+	for resp.StatusCode == 226 { // want `"226" can be replaced by http\.StatusIMUsed`
+		return nil
+	}
+	for resp.StatusCode == 300 { // want `"300" can be replaced by http\.StatusMultipleChoices`
+		return nil
+	}
+	for resp.StatusCode == 301 { // want `"301" can be replaced by http\.StatusMovedPermanently`
+		return nil
+	}
+	for resp.StatusCode == 302 { // want `"302" can be replaced by http\.StatusFound`
+		return nil
+	}
+	for resp.StatusCode == 303 { // want `"303" can be replaced by http\.StatusSeeOther`
+		return nil
+	}
+	for resp.StatusCode == 304 { // want `"304" can be replaced by http\.StatusNotModified`
+		return nil
+	}
+	for resp.StatusCode == 305 { // want `"305" can be replaced by http\.StatusUseProxy`
+		return nil
+	}
+	for resp.StatusCode == 307 { // want `"307" can be replaced by http\.StatusTemporaryRedirect`
+		return nil
+	}
+	for resp.StatusCode == 308 { // want `"308" can be replaced by http\.StatusPermanentRedirect`
+		return nil
+	}
+	for resp.StatusCode == 400 { // want `"400" can be replaced by http\.StatusBadRequest`
+		return nil
+	}
+	for resp.StatusCode == 401 { // want `"401" can be replaced by http\.StatusUnauthorized`
+		return nil
+	}
+	for resp.StatusCode == 402 { // want `"402" can be replaced by http\.StatusPaymentRequired`
+		return nil
+	}
+	for resp.StatusCode == 403 { // want `"403" can be replaced by http\.StatusForbidden`
+		return nil
+	}
+	for resp.StatusCode == 404 { // want `"404" can be replaced by http\.StatusNotFound`
+		return nil
+	}
+	for resp.StatusCode == 405 { // want `"405" can be replaced by http\.StatusMethodNotAllowed`
+		return nil
+	}
+	for resp.StatusCode == 406 { // want `"406" can be replaced by http\.StatusNotAcceptable`
+		return nil
+	}
+	for resp.StatusCode == 407 { // want `"407" can be replaced by http\.StatusProxyAuthRequired`
+		return nil
+	}
+	for resp.StatusCode == 408 { // want `"408" can be replaced by http\.StatusRequestTimeout`
+		return nil
+	}
+	for resp.StatusCode == 409 { // want `"409" can be replaced by http\.StatusConflict`
+		return nil
+	}
+	for resp.StatusCode == 410 { // want `"410" can be replaced by http\.StatusGone`
+		return nil
+	}
+	for resp.StatusCode == 411 { // want `"411" can be replaced by http\.StatusLengthRequired`
+		return nil
+	}
+	for resp.StatusCode == 412 { // want `"412" can be replaced by http\.StatusPreconditionFailed`
+		return nil
+	}
+	for resp.StatusCode == 413 { // want `"413" can be replaced by http\.StatusRequestEntityTooLarge`
+		return nil
+	}
+	for resp.StatusCode == 414 { // want `"414" can be replaced by http\.StatusRequestURITooLong`
+		return nil
+	}
+	for resp.StatusCode == 415 { // want `"415" can be replaced by http\.StatusUnsupportedMediaType`
+		return nil
+	}
+	for resp.StatusCode == 416 { // want `"416" can be replaced by http\.StatusRequestedRangeNotSatisfiable`
+		return nil
+	}
+	for resp.StatusCode == 417 { // want `"417" can be replaced by http\.StatusExpectationFailed`
+		return nil
+	}
+	for resp.StatusCode == 418 { // want `"418" can be replaced by http\.StatusTeapot`
+		return nil
+	}
+	for resp.StatusCode == 421 { // want `"421" can be replaced by http\.StatusMisdirectedRequest`
+		return nil
+	}
+	for resp.StatusCode == 422 { // want `"422" can be replaced by http\.StatusUnprocessableEntity`
+		return nil
+	}
+	for resp.StatusCode == 423 { // want `"423" can be replaced by http\.StatusLocked`
+		return nil
+	}
+	for resp.StatusCode == 424 { // want `"424" can be replaced by http\.StatusFailedDependency`
+		return nil
+	}
+	for resp.StatusCode == 425 { // want `"425" can be replaced by http\.StatusTooEarly`
+		return nil
+	}
+	for resp.StatusCode == 426 { // want `"426" can be replaced by http\.StatusUpgradeRequired`
+		return nil
+	}
+	for resp.StatusCode == 428 { // want `"428" can be replaced by http\.StatusPreconditionRequired`
+		return nil
+	}
+	for resp.StatusCode == 429 { // want `"429" can be replaced by http\.StatusTooManyRequests`
+		return nil
+	}
+	for resp.StatusCode == 431 { // want `"431" can be replaced by http\.StatusRequestHeaderFieldsTooLarge`
+		return nil
+	}
+	for resp.StatusCode == 451 { // want `"451" can be replaced by http\.StatusUnavailableForLegalReasons`
+		return nil
+	}
+	for resp.StatusCode == 500 { // want `"500" can be replaced by http\.StatusInternalServerError`
+		return nil
+	}
+	for resp.StatusCode == 501 { // want `"501" can be replaced by http\.StatusNotImplemented`
+		return nil
+	}
+	for resp.StatusCode == 502 { // want `"502" can be replaced by http\.StatusBadGateway`
+		return nil
+	}
+	for resp.StatusCode == 503 { // want `"503" can be replaced by http\.StatusServiceUnavailable`
+		return nil
+	}
+	for resp.StatusCode == 504 { // want `"504" can be replaced by http\.StatusGatewayTimeout`
+		return nil
+	}
+	for resp.StatusCode == 505 { // want `"505" can be replaced by http\.StatusHTTPVersionNotSupported`
+		return nil
+	}
+	for resp.StatusCode == 506 { // want `"506" can be replaced by http\.StatusVariantAlsoNegotiates`
+		return nil
+	}
+	for resp.StatusCode == 507 { // want `"507" can be replaced by http\.StatusInsufficientStorage`
+		return nil
+	}
+	for resp.StatusCode == 508 { // want `"508" can be replaced by http\.StatusLoopDetected`
+		return nil
+	}
+	for resp.StatusCode == 510 { // want `"510" can be replaced by http\.StatusNotExtended`
+		return nil
+	}
+	for resp.StatusCode == 511 { // want `"511" can be replaced by http\.StatusNetworkAuthenticationRequired`
+		return nil
+	}
 	return nil
 }
 
@@ -1162,6 +1348,192 @@ func _() error {
 	if resp.StatusCode == http.StatusNetworkAuthenticationRequired {
 		return nil
 	} else if resp.StatusCode == http.StatusNetworkAuthenticationRequired {
+		return nil
+	}
+	for resp.StatusCode == http.StatusContinue {
+		return nil
+	}
+	for resp.StatusCode == http.StatusSwitchingProtocols {
+		return nil
+	}
+	for resp.StatusCode == http.StatusProcessing {
+		return nil
+	}
+	for resp.StatusCode == http.StatusEarlyHints {
+		return nil
+	}
+	for resp.StatusCode == http.StatusOK {
+		return nil
+	}
+	for resp.StatusCode == http.StatusCreated {
+		return nil
+	}
+	for resp.StatusCode == http.StatusAccepted {
+		return nil
+	}
+	for resp.StatusCode == http.StatusNonAuthoritativeInfo {
+		return nil
+	}
+	for resp.StatusCode == http.StatusNoContent {
+		return nil
+	}
+	for resp.StatusCode == http.StatusResetContent {
+		return nil
+	}
+	for resp.StatusCode == http.StatusPartialContent {
+		return nil
+	}
+	for resp.StatusCode == http.StatusMultiStatus {
+		return nil
+	}
+	for resp.StatusCode == http.StatusAlreadyReported {
+		return nil
+	}
+	for resp.StatusCode == http.StatusIMUsed {
+		return nil
+	}
+	for resp.StatusCode == http.StatusMultipleChoices {
+		return nil
+	}
+	for resp.StatusCode == http.StatusMovedPermanently {
+		return nil
+	}
+	for resp.StatusCode == http.StatusFound {
+		return nil
+	}
+	for resp.StatusCode == http.StatusSeeOther {
+		return nil
+	}
+	for resp.StatusCode == http.StatusNotModified {
+		return nil
+	}
+	for resp.StatusCode == http.StatusUseProxy {
+		return nil
+	}
+	for resp.StatusCode == http.StatusTemporaryRedirect {
+		return nil
+	}
+	for resp.StatusCode == http.StatusPermanentRedirect {
+		return nil
+	}
+	for resp.StatusCode == http.StatusBadRequest {
+		return nil
+	}
+	for resp.StatusCode == http.StatusUnauthorized {
+		return nil
+	}
+	for resp.StatusCode == http.StatusPaymentRequired {
+		return nil
+	}
+	for resp.StatusCode == http.StatusForbidden {
+		return nil
+	}
+	for resp.StatusCode == http.StatusNotFound {
+		return nil
+	}
+	for resp.StatusCode == http.StatusMethodNotAllowed {
+		return nil
+	}
+	for resp.StatusCode == http.StatusNotAcceptable {
+		return nil
+	}
+	for resp.StatusCode == http.StatusProxyAuthRequired {
+		return nil
+	}
+	for resp.StatusCode == http.StatusRequestTimeout {
+		return nil
+	}
+	for resp.StatusCode == http.StatusConflict {
+		return nil
+	}
+	for resp.StatusCode == http.StatusGone {
+		return nil
+	}
+	for resp.StatusCode == http.StatusLengthRequired {
+		return nil
+	}
+	for resp.StatusCode == http.StatusPreconditionFailed {
+		return nil
+	}
+	for resp.StatusCode == http.StatusRequestEntityTooLarge {
+		return nil
+	}
+	for resp.StatusCode == http.StatusRequestURITooLong {
+		return nil
+	}
+	for resp.StatusCode == http.StatusUnsupportedMediaType {
+		return nil
+	}
+	for resp.StatusCode == http.StatusRequestedRangeNotSatisfiable {
+		return nil
+	}
+	for resp.StatusCode == http.StatusExpectationFailed {
+		return nil
+	}
+	for resp.StatusCode == http.StatusTeapot {
+		return nil
+	}
+	for resp.StatusCode == http.StatusMisdirectedRequest {
+		return nil
+	}
+	for resp.StatusCode == http.StatusUnprocessableEntity {
+		return nil
+	}
+	for resp.StatusCode == http.StatusLocked {
+		return nil
+	}
+	for resp.StatusCode == http.StatusFailedDependency {
+		return nil
+	}
+	for resp.StatusCode == http.StatusTooEarly {
+		return nil
+	}
+	for resp.StatusCode == http.StatusUpgradeRequired {
+		return nil
+	}
+	for resp.StatusCode == http.StatusPreconditionRequired {
+		return nil
+	}
+	for resp.StatusCode == http.StatusTooManyRequests {
+		return nil
+	}
+	for resp.StatusCode == http.StatusRequestHeaderFieldsTooLarge {
+		return nil
+	}
+	for resp.StatusCode == http.StatusUnavailableForLegalReasons {
+		return nil
+	}
+	for resp.StatusCode == http.StatusInternalServerError {
+		return nil
+	}
+	for resp.StatusCode == http.StatusNotImplemented {
+		return nil
+	}
+	for resp.StatusCode == http.StatusBadGateway {
+		return nil
+	}
+	for resp.StatusCode == http.StatusServiceUnavailable {
+		return nil
+	}
+	for resp.StatusCode == http.StatusGatewayTimeout {
+		return nil
+	}
+	for resp.StatusCode == http.StatusHTTPVersionNotSupported {
+		return nil
+	}
+	for resp.StatusCode == http.StatusVariantAlsoNegotiates {
+		return nil
+	}
+	for resp.StatusCode == http.StatusInsufficientStorage {
+		return nil
+	}
+	for resp.StatusCode == http.StatusLoopDetected {
+		return nil
+	}
+	for resp.StatusCode == http.StatusNotExtended {
+		return nil
+	}
+	for resp.StatusCode == http.StatusNetworkAuthenticationRequired {
 		return nil
 	}
 	return nil
