@@ -107,6 +107,12 @@ func main() {
 			templateName: "test-template.go.tmpl",
 			fileName:     "pkg/analyzer/testdata/src/a/constant/kind.go",
 		},
+		{
+			mapping:      mapping.SyslogPriority,
+			packageName:  "syslog_test",
+			templateName: "test-syslog.go.tmpl",
+			fileName:     "pkg/analyzer/testdata/src/a/syslog/priority.go",
+		},
 	}
 
 	for _, operation := range operations {

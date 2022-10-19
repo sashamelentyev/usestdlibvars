@@ -21,6 +21,7 @@ func TestUseStdlibVars(t *testing.T) {
 		analyzer.SQLIsolationLevelFlag,
 		analyzer.TLSSignatureSchemeFlag,
 		analyzer.ConstantKindFlag,
+		analyzer.SyslogPriorityFlag,
 	} {
 		if err := a.Flags.Set(flag, "true"); err != nil {
 			t.Fatal(err)
@@ -36,6 +37,7 @@ func TestUseStdlibVars(t *testing.T) {
 		"a/sql",
 		"a/tls",
 		"a/constant",
+		"a/syslog",
 	}
 
 	analysistest.Run(t, analysistest.TestData(), a, pkgs...)
