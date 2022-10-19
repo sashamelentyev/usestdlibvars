@@ -241,28 +241,22 @@ func funArgs(pass *analysis.Pass, x *ast.Ident, fun *ast.SelectorExpr, args []as
 			}
 		}
 	case "syslog":
+		if !lookupFlag(pass, SyslogPriorityFlag) {
+			return
+		}
+
 		switch fun.Sel.Name {
 		case "New":
-			if !lookupFlag(pass, SyslogPriorityFlag) {
-				return
-			}
-
 			if basicLit := getBasicLitFromArgs(args, 2, 0, token.INT); basicLit != nil {
 				checkSyslogPriority(pass, basicLit)
 			}
-		case "Dial":
-			if !lookupFlag(pass, SyslogPriorityFlag) {
-				return
-			}
 
+		case "Dial":
 			if basicLit := getBasicLitFromArgs(args, 4, 2, token.INT); basicLit != nil {
 				checkSyslogPriority(pass, basicLit)
 			}
-		case "NewLogger":
-			if !lookupFlag(pass, SyslogPriorityFlag) {
-				return
-			}
 
+		case "NewLogger":
 			if basicLit := getBasicLitFromArgs(args, 2, 0, token.INT); basicLit != nil {
 				checkSyslogPriority(pass, basicLit)
 			}
