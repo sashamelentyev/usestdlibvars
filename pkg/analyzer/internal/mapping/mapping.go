@@ -5,6 +5,7 @@ import (
 	"crypto/tls"
 	"database/sql"
 	"go/constant"
+	"log/syslog"
 	"net/http"
 	"net/rpc"
 	"os"
@@ -201,4 +202,36 @@ var ConstantKind = map[string]string{
 	constant.Int.String():     "constant.Int.String()",
 	constant.Float.String():   "constant.Float.String()",
 	constant.Complex.String(): "constant.Complex.String()",
+}
+
+var SyslogPriority = map[string]string{
+	// strconv.Itoa(int(syslog.LOG_EMERG)):    "syslog.LOG_EMERG",
+	strconv.Itoa(int(syslog.LOG_ALERT)):   "syslog.LOG_ALERT",
+	strconv.Itoa(int(syslog.LOG_CRIT)):    "syslog.LOG_CRIT",
+	strconv.Itoa(int(syslog.LOG_ERR)):     "syslog.LOG_ERR",
+	strconv.Itoa(int(syslog.LOG_WARNING)): "syslog.LOG_WARNING",
+	strconv.Itoa(int(syslog.LOG_NOTICE)):  "syslog.LOG_NOTICE",
+	strconv.Itoa(int(syslog.LOG_INFO)):    "syslog.LOG_INFO",
+	strconv.Itoa(int(syslog.LOG_DEBUG)):   "syslog.LOG_DEBUG",
+
+	// strconv.Itoa(int(syslog.LOG_KERN)):     "syslog.LOG_KERN",
+	strconv.Itoa(int(syslog.LOG_USER)):     "syslog.LOG_USER",
+	strconv.Itoa(int(syslog.LOG_MAIL)):     "syslog.LOG_MAIL",
+	strconv.Itoa(int(syslog.LOG_DAEMON)):   "syslog.LOG_DAEMON",
+	strconv.Itoa(int(syslog.LOG_AUTH)):     "syslog.LOG_AUTH",
+	strconv.Itoa(int(syslog.LOG_SYSLOG)):   "syslog.LOG_SYSLOG",
+	strconv.Itoa(int(syslog.LOG_LPR)):      "syslog.LOG_LPR",
+	strconv.Itoa(int(syslog.LOG_NEWS)):     "syslog.LOG_NEWS",
+	strconv.Itoa(int(syslog.LOG_UUCP)):     "syslog.LOG_UUCP",
+	strconv.Itoa(int(syslog.LOG_CRON)):     "syslog.LOG_CRON",
+	strconv.Itoa(int(syslog.LOG_AUTHPRIV)): "syslog.LOG_AUTHPRIV",
+	strconv.Itoa(int(syslog.LOG_FTP)):      "syslog.LOG_FTP",
+	strconv.Itoa(int(syslog.LOG_LOCAL0)):   "syslog.LOG_LOCAL0",
+	strconv.Itoa(int(syslog.LOG_LOCAL1)):   "syslog.LOG_LOCAL1",
+	strconv.Itoa(int(syslog.LOG_LOCAL2)):   "syslog.LOG_LOCAL2",
+	strconv.Itoa(int(syslog.LOG_LOCAL3)):   "syslog.LOG_LOCAL3",
+	strconv.Itoa(int(syslog.LOG_LOCAL4)):   "syslog.LOG_LOCAL4",
+	strconv.Itoa(int(syslog.LOG_LOCAL5)):   "syslog.LOG_LOCAL5",
+	strconv.Itoa(int(syslog.LOG_LOCAL6)):   "syslog.LOG_LOCAL6",
+	strconv.Itoa(int(syslog.LOG_LOCAL7)):   "syslog.LOG_LOCAL7",
 }
