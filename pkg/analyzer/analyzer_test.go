@@ -8,6 +8,17 @@ import (
 	"github.com/sashamelentyev/usestdlibvars/pkg/analyzer"
 )
 
+var pkgs = []string{
+	"a/crypto",
+	"a/http",
+	"a/rpc",
+	"a/time",
+	"a/os",
+	"a/sql",
+	"a/tls",
+	"a/constant",
+}
+
 func TestUseStdlibVars(t *testing.T) {
 	a := analyzer.New()
 
@@ -26,18 +37,6 @@ func TestUseStdlibVars(t *testing.T) {
 		if err := a.Flags.Set(flag, "true"); err != nil {
 			t.Fatal(err)
 		}
-	}
-
-	pkgs := []string{
-		"a/crypto",
-		"a/http",
-		"a/rpc",
-		"a/time",
-		"a/os",
-		"a/sql",
-		"a/tls",
-		"a/constant",
-		"a/syslog",
 	}
 
 	analysistest.Run(t, analysistest.TestData(), a, pkgs...)
