@@ -14,7 +14,6 @@ var flags = []string{
 	analyzer.TimeLayoutFlag,
 	analyzer.CryptoHashFlag,
 	analyzer.RPCDefaultPathFlag,
-	analyzer.OSDevNullFlag,
 	analyzer.SQLIsolationLevelFlag,
 	analyzer.TLSSignatureSchemeFlag,
 	analyzer.ConstantKindFlag,
