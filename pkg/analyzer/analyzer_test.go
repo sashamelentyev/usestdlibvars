@@ -24,7 +24,6 @@ var pkgs = []string{
 	"a/http",
 	"a/rpc",
 	"a/time",
-	"a/os",
 	"a/sql",
 	"a/tls",
 	"a/constant",
