@@ -8,6 +8,18 @@ import (
 	"github.com/sashamelentyev/usestdlibvars/pkg/analyzer"
 )
 
+var flags = []string{
+	analyzer.TimeWeekdayFlag,
+	analyzer.TimeMonthFlag,
+	analyzer.TimeLayoutFlag,
+	analyzer.CryptoHashFlag,
+	analyzer.RPCDefaultPathFlag,
+	analyzer.OSDevNullFlag,
+	analyzer.SQLIsolationLevelFlag,
+	analyzer.TLSSignatureSchemeFlag,
+	analyzer.ConstantKindFlag,
+}
+
 var pkgs = []string{
 	"a/crypto",
 	"a/http",
@@ -22,18 +34,7 @@ var pkgs = []string{
 func TestUseStdlibVars(t *testing.T) {
 	a := analyzer.New()
 
-	for _, flag := range []string{
-		analyzer.TimeWeekdayFlag,
-		analyzer.TimeMonthFlag,
-		analyzer.TimeLayoutFlag,
-		analyzer.CryptoHashFlag,
-		analyzer.RPCDefaultPathFlag,
-		analyzer.OSDevNullFlag,
-		analyzer.SQLIsolationLevelFlag,
-		analyzer.TLSSignatureSchemeFlag,
-		analyzer.ConstantKindFlag,
-		analyzer.SyslogPriorityFlag,
-	} {
+	for _, flag := range flags {
 		if err := a.Flags.Set(flag, "true"); err != nil {
 			t.Fatal(err)
 		}
