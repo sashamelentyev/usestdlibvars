@@ -32,8 +32,6 @@ var pkgs = []string{
 func TestUseStdlibVars(t *testing.T) {
 	a := analyzer.New()
 
-	t.Log(flags)
-
 	for _, flag := range flags {
 		if err := a.Flags.Set(flag, "true"); err != nil {
 			t.Fatal(err)
