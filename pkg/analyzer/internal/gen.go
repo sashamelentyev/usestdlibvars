@@ -84,12 +84,6 @@ func main() {
 			fileName:     "pkg/analyzer/testdata/src/a/http/issue32.go",
 		},
 		{
-			mapping:      mapping.OSDevNull,
-			packageName:  "os_test",
-			templateName: "test-template.go.tmpl",
-			fileName:     "pkg/analyzer/testdata/src/a/os/devnull.go",
-		},
-		{
 			mapping:      mapping.SQLIsolationLevel,
 			packageName:  "sql_test",
 			templateName: "test-template.go.tmpl",
@@ -106,12 +100,6 @@ func main() {
 			packageName:  "constant_test",
 			templateName: "test-template.go.tmpl",
 			fileName:     "pkg/analyzer/testdata/src/a/constant/kind.go",
-		},
-		{
-			mapping:      mapping.SyslogPriority,
-			packageName:  "syslog_test",
-			templateName: "test-syslog.go.tmpl",
-			fileName:     "pkg/analyzer/testdata/src/a/syslog/priority.go",
 		},
 	}
 
