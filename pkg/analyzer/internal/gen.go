@@ -101,6 +101,12 @@ func main() {
 			templateName: "test-template.go.tmpl",
 			fileName:     "pkg/analyzer/testdata/src/a/constant/kind.go",
 		},
+		{
+			mapping:      mapping.HTTPStatusCode,
+			packageName:  "http_test",
+			templateName: "test-issue89.go.tmpl",
+			fileName:     "pkg/analyzer/testdata/src/a/http/issue89.go",
+		},
 	}
 
 	for _, operation := range operations {
