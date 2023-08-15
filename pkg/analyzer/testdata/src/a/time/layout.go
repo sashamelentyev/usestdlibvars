@@ -6,6 +6,9 @@ var (
 	_ = "01/02 03:04:05PM '06 -0700"          // want `"01/02 03:04:05PM '06 -0700" can be replaced by time\.Layout`
 	_ = "02 Jan 06 15:04 -0700"               // want `"02 Jan 06 15:04 -0700" can be replaced by time\.RFC822Z`
 	_ = "02 Jan 06 15:04 MST"                 // want `"02 Jan 06 15:04 MST" can be replaced by time\.RFC822`
+	_ = "15:04:05"                            // want `"15:04:05" can be replaced by time\.TimeOnly`
+	_ = "2006-01-02"                          // want `"2006-01-02" can be replaced by time\.DateOnly`
+	_ = "2006-01-02 15:04:05"                 // want `"2006-01-02 15:04:05" can be replaced by time\.DateTime`
 	_ = "2006-01-02T15:04:05.999999999Z07:00" // want `"2006-01-02T15:04:05\.999999999Z07:00" can be replaced by time\.RFC3339Nano`
 	_ = "2006-01-02T15:04:05Z07:00"           // want `"2006-01-02T15:04:05Z07:00" can be replaced by time\.RFC3339`
 	_ = "3:04PM"                              // want `"3:04PM" can be replaced by time\.Kitchen`
@@ -25,6 +28,9 @@ const (
 	_ = "01/02 03:04:05PM '06 -0700"          // want `"01/02 03:04:05PM '06 -0700" can be replaced by time\.Layout`
 	_ = "02 Jan 06 15:04 -0700"               // want `"02 Jan 06 15:04 -0700" can be replaced by time\.RFC822Z`
 	_ = "02 Jan 06 15:04 MST"                 // want `"02 Jan 06 15:04 MST" can be replaced by time\.RFC822`
+	_ = "15:04:05"                            // want `"15:04:05" can be replaced by time\.TimeOnly`
+	_ = "2006-01-02"                          // want `"2006-01-02" can be replaced by time\.DateOnly`
+	_ = "2006-01-02 15:04:05"                 // want `"2006-01-02 15:04:05" can be replaced by time\.DateTime`
 	_ = "2006-01-02T15:04:05.999999999Z07:00" // want `"2006-01-02T15:04:05\.999999999Z07:00" can be replaced by time\.RFC3339Nano`
 	_ = "2006-01-02T15:04:05Z07:00"           // want `"2006-01-02T15:04:05Z07:00" can be replaced by time\.RFC3339`
 	_ = "3:04PM"                              // want `"3:04PM" can be replaced by time\.Kitchen`
@@ -44,6 +50,9 @@ var (
 	_ = func(s string) string { return s }("01/02 03:04:05PM '06 -0700")          // want `"01/02 03:04:05PM '06 -0700" can be replaced by time\.Layout`
 	_ = func(s string) string { return s }("02 Jan 06 15:04 -0700")               // want `"02 Jan 06 15:04 -0700" can be replaced by time\.RFC822Z`
 	_ = func(s string) string { return s }("02 Jan 06 15:04 MST")                 // want `"02 Jan 06 15:04 MST" can be replaced by time\.RFC822`
+	_ = func(s string) string { return s }("15:04:05")                            // want `"15:04:05" can be replaced by time\.TimeOnly`
+	_ = func(s string) string { return s }("2006-01-02")                          // want `"2006-01-02" can be replaced by time\.DateOnly`
+	_ = func(s string) string { return s }("2006-01-02 15:04:05")                 // want `"2006-01-02 15:04:05" can be replaced by time\.DateTime`
 	_ = func(s string) string { return s }("2006-01-02T15:04:05.999999999Z07:00") // want `"2006-01-02T15:04:05\.999999999Z07:00" can be replaced by time\.RFC3339Nano`
 	_ = func(s string) string { return s }("2006-01-02T15:04:05Z07:00")           // want `"2006-01-02T15:04:05Z07:00" can be replaced by time\.RFC3339`
 	_ = func(s string) string { return s }("3:04PM")                              // want `"3:04PM" can be replaced by time\.Kitchen`
