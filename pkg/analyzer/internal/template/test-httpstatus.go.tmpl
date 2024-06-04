@@ -91,6 +91,8 @@ func _() error {
         return nil
     } else if resp.StatusCode == {{ $value }} {
         return nil
+    } else if false || resp.StatusCode == {{ $value }} {
+        return nil
     }
 {{- end }}
 {{- range $key, $value := .Mapping }}
