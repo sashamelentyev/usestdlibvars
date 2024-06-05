@@ -68,6 +68,8 @@ func _() error {
         return nil
     } else if resp.StatusCode == {{ $key }} { // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
         return nil
+    } else if false || resp.StatusCode == {{ $key }} { // want `"{{ quoteMeta $key }}" can be replaced by {{ quoteMeta $value }}`
+        return nil
     }
 {{- end }}
 {{- range $key, $value := .Mapping }}
@@ -88,6 +90,8 @@ func _() error {
     if resp.StatusCode == {{ $value }} {
         return nil
     } else if resp.StatusCode == {{ $value }} {
+        return nil
+    } else if false || resp.StatusCode == {{ $value }} {
         return nil
     }
 {{- end }}
