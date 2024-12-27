@@ -19,16 +19,6 @@ var flags = []string{
 	analyzer.ConstantKindFlag,
 }
 
-var pkgs = []string{
-	"a/crypto",
-	"a/http",
-	"a/rpc",
-	"a/time",
-	"a/sql",
-	"a/tls",
-	"a/constant",
-}
-
 func TestUseStdlibVars(t *testing.T) {
 	a := analyzer.New()
 
@@ -38,5 +28,21 @@ func TestUseStdlibVars(t *testing.T) {
 		}
 	}
 
-	analysistest.Run(t, analysistest.TestData(), a, pkgs...)
+	testCases := []struct {
+		dir string
+	}{
+		{dir: "a/crypto"},
+		{dir: "a/http"},
+		{dir: "a/rpc"},
+		{dir: "a/time"},
+		{dir: "a/sql"},
+		{dir: "a/tls"},
+		{dir: "a/constant"},
+	}
+
+	for _, test := range testCases {
+		t.Run(test.dir, func(t *testing.T) {
+			analysistest.RunWithSuggestedFixes(t, analysistest.TestData(), a, test.dir)
+		})
+	}
 }

@@ -9,6 +9,7 @@ import (
 	"go/format"
 	"log"
 	"os"
+	"path/filepath"
 	"regexp"
 	"strings"
 	"text/template"
@@ -30,82 +31,95 @@ func main() {
 	)
 
 	operations := []struct {
-		mapping      map[string]string
-		packageName  string
-		templateName string
-		fileName     string
+		mapping            map[string]string
+		packageName        string
+		templateName       string
+		goldenTemplateName string
+		fileName           string
 	}{
 		{
-			mapping:      mapping.CryptoHash,
-			packageName:  "crypto_test",
-			templateName: "test-template.go.tmpl",
-			fileName:     "pkg/analyzer/testdata/src/a/crypto/crypto.go",
+			mapping:            mapping.CryptoHash,
+			packageName:        "crypto_test",
+			templateName:       "test-template.go.tmpl",
+			goldenTemplateName: "test-template.go.golden.tmpl",
+			fileName:           "pkg/analyzer/testdata/src/a/crypto/crypto.go",
 		},
 		{
-			mapping:      mapping.HTTPMethod,
-			packageName:  "http_test",
-			templateName: "test-httpmethod.go.tmpl",
-			fileName:     "pkg/analyzer/testdata/src/a/http/method.go",
+			mapping:            mapping.RPCDefaultPath,
+			packageName:        "rpc_test",
+			templateName:       "test-template.go.tmpl",
+			goldenTemplateName: "test-template.go.golden.tmpl",
+			fileName:           "pkg/analyzer/testdata/src/a/rpc/rpc.go",
 		},
 		{
-			mapping:      mapping.HTTPStatusCode,
-			packageName:  "http_test",
-			templateName: "test-httpstatus.go.tmpl",
-			fileName:     "pkg/analyzer/testdata/src/a/http/status.go",
+			mapping:            mapping.TimeWeekday,
+			packageName:        "time_test",
+			templateName:       "test-template.go.tmpl",
+			goldenTemplateName: "test-template.go.golden.tmpl",
+			fileName:           "pkg/analyzer/testdata/src/a/time/weekday.go",
 		},
 		{
-			mapping:      mapping.RPCDefaultPath,
-			packageName:  "rpc_test",
-			templateName: "test-template.go.tmpl",
-			fileName:     "pkg/analyzer/testdata/src/a/rpc/rpc.go",
+			mapping:            mapping.TimeMonth,
+			packageName:        "time_test",
+			templateName:       "test-template.go.tmpl",
+			goldenTemplateName: "test-template.go.golden.tmpl",
+			fileName:           "pkg/analyzer/testdata/src/a/time/month.go",
 		},
 		{
-			mapping:      mapping.TimeWeekday,
-			packageName:  "time_test",
-			templateName: "test-template.go.tmpl",
-			fileName:     "pkg/analyzer/testdata/src/a/time/weekday.go",
+			mapping:            mapping.TimeLayout,
+			packageName:        "time_test",
+			templateName:       "test-template.go.tmpl",
+			goldenTemplateName: "test-template.go.golden.tmpl",
+			fileName:           "pkg/analyzer/testdata/src/a/time/layout.go",
 		},
 		{
-			mapping:      mapping.TimeMonth,
-			packageName:  "time_test",
-			templateName: "test-template.go.tmpl",
-			fileName:     "pkg/analyzer/testdata/src/a/time/month.go",
+			mapping:            mapping.SQLIsolationLevel,
+			packageName:        "sql_test",
+			templateName:       "test-template.go.tmpl",
+			goldenTemplateName: "test-template.go.golden.tmpl",
+			fileName:           "pkg/analyzer/testdata/src/a/sql/isolationlevel.go",
 		},
 		{
-			mapping:      mapping.TimeLayout,
-			packageName:  "time_test",
-			templateName: "test-template.go.tmpl",
-			fileName:     "pkg/analyzer/testdata/src/a/time/layout.go",
+			mapping:            mapping.TLSSignatureScheme,
+			packageName:        "tls_test",
+			templateName:       "test-template.go.tmpl",
+			goldenTemplateName: "test-template.go.golden.tmpl",
+			fileName:           "pkg/analyzer/testdata/src/a/tls/signaturescheme.go",
 		},
 		{
-			mapping:      mapping.HTTPMethod,
-			packageName:  "http_test",
-			templateName: "test-issue32.go.tmpl",
-			fileName:     "pkg/analyzer/testdata/src/a/http/issue32.go",
+			mapping:            mapping.ConstantKind,
+			packageName:        "constant_test",
+			templateName:       "test-template.go.tmpl",
+			goldenTemplateName: "test-template.go.golden.tmpl",
+			fileName:           "pkg/analyzer/testdata/src/a/constant/kind.go",
 		},
 		{
-			mapping:      mapping.SQLIsolationLevel,
-			packageName:  "sql_test",
-			templateName: "test-template.go.tmpl",
-			fileName:     "pkg/analyzer/testdata/src/a/sql/isolationlevel.go",
+			mapping:            mapping.HTTPMethod,
+			packageName:        "http_test",
+			templateName:       "test-httpmethod.go.tmpl",
+			goldenTemplateName: "test-httpmethod.go.golden.tmpl",
+			fileName:           "pkg/analyzer/testdata/src/a/http/method.go",
 		},
 		{
-			mapping:      mapping.TLSSignatureScheme,
-			packageName:  "tls_test",
-			templateName: "test-template.go.tmpl",
-			fileName:     "pkg/analyzer/testdata/src/a/tls/signaturescheme.go",
+			mapping:            mapping.HTTPStatusCode,
+			packageName:        "http_test",
+			templateName:       "test-httpstatus.go.tmpl",
+			goldenTemplateName: "test-httpstatus.go.golden.tmpl",
+			fileName:           "pkg/analyzer/testdata/src/a/http/status.go",
 		},
 		{
-			mapping:      mapping.ConstantKind,
-			packageName:  "constant_test",
-			templateName: "test-template.go.tmpl",
-			fileName:     "pkg/analyzer/testdata/src/a/constant/kind.go",
+			mapping:            mapping.HTTPMethod,
+			packageName:        "http_test",
+			templateName:       "test-issue32.go.tmpl",
+			goldenTemplateName: "test-issue32.go.golden.tmpl",
+			fileName:           "pkg/analyzer/testdata/src/a/http/issue32.go",
 		},
 		{
-			mapping:      mapping.HTTPStatusCode,
-			packageName:  "http_test",
-			templateName: "test-issue89.go.tmpl",
-			fileName:     "pkg/analyzer/testdata/src/a/http/issue89.go",
+			mapping:            mapping.HTTPStatusCode,
+			packageName:        "http_test",
+			templateName:       "test-issue89.go.tmpl",
+			goldenTemplateName: "test-issue89.go.golden.tmpl",
+			fileName:           "pkg/analyzer/testdata/src/a/http/issue89.go",
 		},
 	}
 
@@ -118,6 +132,12 @@ func main() {
 		if err := execute(t, operation.templateName, data, operation.fileName); err != nil {
 			log.Fatal(err)
 		}
+
+		if operation.goldenTemplateName != "" {
+			if err := execute(t, operation.goldenTemplateName, data, operation.fileName+".golden"); err != nil {
+				log.Fatal(err)
+			}
+		}
 	}
 }
 
@@ -128,14 +148,14 @@ func execute(t *template.Template, templateName string, data any, fileName strin
 		return err
 	}
 
-	sourceData, err := format.Source(builder.Bytes())
-	if err != nil {
-		return err
+	if filepath.Ext(fileName) == ".go" {
+		sourceData, err := format.Source(builder.Bytes())
+		if err != nil {
+			return err
+		}
+
+		return os.WriteFile(fileName, sourceData, os.ModePerm)
 	}
 
-	if err := os.WriteFile(fileName, sourceData, os.ModePerm); err != nil {
-		return err
-	}
-
-	return nil
+	return os.WriteFile(fileName, builder.Bytes(), os.ModePerm)
 }
