@@ -121,6 +121,13 @@ func main() {
 			goldenTemplateName: "test-issue89.go.golden.tmpl",
 			fileName:           "pkg/analyzer/testdata/src/a/http/issue89.go",
 		},
+		{
+			mapping:            mapping.FileMode,
+			packageName:        "os_test",
+			templateName:       "test-osfilemode.go.tmpl",
+			goldenTemplateName: "test-osfilemode.go.golden.tmpl",
+			fileName:           "pkg/analyzer/testdata/src/a/os/filemode.go",
+		},
 	}
 
 	for _, operation := range operations {

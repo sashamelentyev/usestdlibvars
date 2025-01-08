@@ -114,6 +114,19 @@ var HTTPStatusCode = map[string]string{
 	strconv.Itoa(http.StatusNetworkAuthenticationRequired): "http.StatusNetworkAuthenticationRequired",
 }
 
+var FileMode = map[string]string{
+	"0o777": "syscall.S_IRWXU | syscall.S_IRWXG | syscall.S_IRWXO",
+	"0o775": "syscall.S_IRWXU | syscall.S_IRWXG | syscall.S_IROTH | syscall.S_IXOTH",
+	"0o755": "syscall.S_IRWXU | syscall.S_IRGRP | syscall.S_IXGRP | syscall.S_IROTH | syscall.S_IXOTH",
+	"0o700": "syscall.S_IRWXU",
+	"0o666": "syscall.S_IRUSR | syscall.S_IWUSR | syscall.S_IRGRP | syscall.S_IWGRP | syscall.S_IROTH | syscall.S_IWOTH",
+	"0o644": "syscall.S_IRUSR | syscall.S_IWUSR | syscall.S_IRGRP | syscall.S_IROTH",
+	"0o600": "syscall.S_IRUSR | syscall.S_IWUSR",
+	"0o440": "syscall.S_IRUSR | syscall.S_IRGRP",
+	"0o444": "syscall.S_IRUSR | syscall.S_IRGRP | syscall.S_IROTH",
+	"0o400": "syscall.S_IRUSR",
+}
+
 var RPCDefaultPath = map[string]string{
 	rpc.DefaultRPCPath:   "rpc.DefaultRPCPath",
 	rpc.DefaultDebugPath: "rpc.DefaultDebugPath",

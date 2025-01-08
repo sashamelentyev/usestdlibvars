@@ -17,6 +17,7 @@ var flags = []string{
 	analyzer.SQLIsolationLevelFlag,
 	analyzer.TLSSignatureSchemeFlag,
 	analyzer.ConstantKindFlag,
+	analyzer.SyscallFileModeFlag,
 }
 
 func TestUseStdlibVars(t *testing.T) {
@@ -38,6 +39,7 @@ func TestUseStdlibVars(t *testing.T) {
 		{dir: "a/sql"},
 		{dir: "a/tls"},
 		{dir: "a/constant"},
+		{dir: "a/os"},
 	}
 
 	for _, test := range testCases {

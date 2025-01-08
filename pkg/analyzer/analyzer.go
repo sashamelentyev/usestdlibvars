@@ -26,6 +26,7 @@ const (
 	SQLIsolationLevelFlag  = "sql-isolation-level"
 	TLSSignatureSchemeFlag = "tls-signature-scheme"
 	ConstantKindFlag       = "constant-kind"
+	SyscallFileModeFlag    = "syscall-file-mode"
 	SyslogPriorityFlag     = "syslog-priority"
 )
 
@@ -53,6 +54,7 @@ func flags() flag.FlagSet {
 	flags.Bool(SQLIsolationLevelFlag, false, "suggest the use of sql.LevelXX.String()")
 	flags.Bool(TLSSignatureSchemeFlag, false, "suggest the use of tls.SignatureScheme.String()")
 	flags.Bool(ConstantKindFlag, false, "suggest the use of constant.Kind.String()")
+	flags.Bool(SyscallFileModeFlag, false, "suggest the use of syscall constants for file mode")
 	flags.Bool(SyslogPriorityFlag, false, "[DEPRECATED] suggest the use of syslog.Priority")
 	return *flags
 }
@@ -221,6 +223,23 @@ func funArgs(pass *analysis.Pass, x *ast.Ident, fun *ast.SelectorExpr, args []as
 				checkHTTPMethod(pass, basicLit)
 			}
 		}
+	case "os":
+		if !lookupFlag(pass, SyscallFileModeFlag) {
+			return
+		}
+
+		switch fun.Sel.Name {
+		case "Chmod", "Mkdir", "MkdirAll":
+
+			if basicLit := getBasicLitFromArgs(args, 2, 1, token.INT); basicLit != nil {
+				checkFileModeMethod(pass, basicLit)
+			}
+		case "OpenFile", "WriteFile":
+			if basicLit := getBasicLitFromArgs(args, 3, 2, token.INT); basicLit != nil {
+				checkFileModeMethod(pass, basicLit)
+			}
+		}
+
 	case "syslog":
 		if !lookupFlag(pass, SyslogPriorityFlag) {
 			return
@@ -357,6 +376,14 @@ func switchStmt(pass *analysis.Pass, x *ast.SelectorExpr, cases []ast.Stmt) {
 
 func lookupFlag(pass *analysis.Pass, name string) bool {
 	return pass.Analyzer.Flags.Lookup(name).Value.(flag.Getter).Get().(bool)
+}
+
+func checkFileModeMethod(pass *analysis.Pass, basicLit *ast.BasicLit) {
+	currentVal := getBasicLitValue(basicLit)
+
+	if newVal, ok := mapping.FileMode[currentVal]; ok {
+		report(pass, basicLit, currentVal, newVal)
+	}
 }
 
 func checkHTTPMethod(pass *analysis.Pass, basicLit *ast.BasicLit) {
