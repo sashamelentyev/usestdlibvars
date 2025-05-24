@@ -25,38 +25,24 @@ jobs:
         with:
           go-version: ${{ matrix.go }}
 
-      - name: Go Format
-        run: gofmt -s -w . && git diff --exit-code
-
       - name: Go Tidy
         run: go mod tidy && git diff --exit-code
 
-      - name: Go Test
-        run: go test -v -race ./...
-
       - name: Lint
-        uses: golangci/golangci-lint-action@v6
+        uses: golangci/golangci-lint-action@v8
         with:
           version: latest
           args: --timeout 5m
 
-  tests-on-windows:
+      - name: run
+        run: go run . ./...
+
+  tests:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
     needs: run
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: ${{ env.GO_VERSION }}
-
-      - name: Go Test
-        run: go test -v -race ./...
-
-  tests-on-macos:
-    needs: run 
-    runs-on: macos-latest
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
 
