@@ -121,6 +121,13 @@ func main() {
 			goldenTemplateName: "test-issue89.go.golden.tmpl",
 			fileName:           "pkg/analyzer/testdata/src/a/http/issue89.go",
 		},
+		{
+			mapping:            mapping.TimeDateMonth,
+			packageName:        "time_test",
+			templateName:       "test-issue103.go.tmpl",
+			goldenTemplateName: "test-issue103.go.golden.tmpl",
+			fileName:           "pkg/analyzer/testdata/src/a/time/issue103.go",
+		},
 	}
 
 	for _, operation := range operations {

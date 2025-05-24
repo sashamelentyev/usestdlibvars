@@ -17,6 +17,7 @@ var flags = []string{
 	analyzer.SQLIsolationLevelFlag,
 	analyzer.TLSSignatureSchemeFlag,
 	analyzer.ConstantKindFlag,
+	analyzer.TimeDateMonthFlag,
 }
 
 func TestUseStdlibVars(t *testing.T) {
