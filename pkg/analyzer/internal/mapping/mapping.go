@@ -202,16 +202,16 @@ var ConstantKind = map[string]string{
 }
 
 var TimeDateMonth = map[string]string{
-	"time.Date(2023, 1, 2, 3, 4, 5, 0, time.UTC)":  "time.Date(2023, time.January, 2, 3, 4, 5, 0, time.UTC)",
-	"time.Date(2023, 2, 2, 3, 4, 5, 0, time.UTC)":  "time.Date(2023, time.February, 2, 3, 4, 5, 0, time.UTC)",
-	"time.Date(2023, 3, 2, 3, 4, 5, 0, time.UTC)":  "time.Date(2023, time.March, 2, 3, 4, 5, 0, time.UTC)",
-	"time.Date(2023, 4, 2, 3, 4, 5, 0, time.UTC)":  "time.Date(2023, time.April, 2, 3, 4, 5, 0, time.UTC)",
-	"time.Date(2023, 5, 2, 3, 4, 5, 0, time.UTC)":  "time.Date(2023, time.May, 2, 3, 4, 5, 0, time.UTC)",
-	"time.Date(2023, 6, 2, 3, 4, 5, 0, time.UTC)":  "time.Date(2023, time.June, 2, 3, 4, 5, 0, time.UTC)",
-	"time.Date(2023, 7, 2, 3, 4, 5, 0, time.UTC)":  "time.Date(2023, time.July, 2, 3, 4, 5, 0, time.UTC)",
-	"time.Date(2023, 8, 2, 3, 4, 5, 0, time.UTC)":  "time.Date(2023, time.August, 2, 3, 4, 5, 0, time.UTC)",
-	"time.Date(2023, 9, 2, 3, 4, 5, 0, time.UTC)":  "time.Date(2023, time.September, 2, 3, 4, 5, 0, time.UTC)",
-	"time.Date(2023, 10, 2, 3, 4, 5, 0, time.UTC)": "time.Date(2023, time.October, 2, 3, 4, 5, 0, time.UTC)",
-	"time.Date(2023, 11, 2, 3, 4, 5, 0, time.UTC)": "time.Date(2023, time.November, 2, 3, 4, 5, 0, time.UTC)",
-	"time.Date(2023, 12, 2, 3, 4, 5, 0, time.UTC)": "time.Date(2023, time.December, 2, 3, 4, 5, 0, time.UTC)",
+	"1":  "time.January",
+	"2":  "time.February",
+	"3":  "time.March",
+	"4":  "time.April",
+	"5":  "time.May",
+	"6":  "time.June",
+	"7":  "time.July",
+	"8":  "time.August",
+	"9":  "time.September",
+	"10": "time.October",
+	"11": "time.November",
+	"12": "time.December",
 }

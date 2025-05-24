@@ -99,7 +99,6 @@ func run(pass *analysis.Pass) (interface{}, error) {
 				{flag: SQLIsolationLevelFlag, checkFunc: checkSQLIsolationLevel},
 				{flag: TLSSignatureSchemeFlag, checkFunc: checkTLSSignatureScheme},
 				{flag: ConstantKindFlag, checkFunc: checkConstantKind},
-				{flag: TimeDateMonthFlag, checkFunc: checkTimeDateMonth},
 			} {
 				if lookupFlag(pass, c.flag) {
 					c.checkFunc(pass, n)
@@ -245,6 +244,18 @@ func funArgs(pass *analysis.Pass, x *ast.Ident, fun *ast.SelectorExpr, args []as
 				checkSyslogPriority(pass, basicLit)
 			}
 		}
+	case "time":
+		if !lookupFlag(pass, TimeDateMonthFlag) {
+			return
+		}
+
+		// time.Date(2023, time.January, 2, 3, 4, 5, 0, time.UTC)
+		if fun.Sel.Name == "Date" {
+			if basicLit := getBasicLitFromArgs(args, 8, 1, token.INT); basicLit != nil {
+				checkTimeDateMonth(pass, basicLit)
+			}
+		}
+
 	default:
 		// w.WriteHeader(http.StatusOk)
 		if fun.Sel.Name == "WriteHeader" {

@@ -124,9 +124,9 @@ func main() {
 		{
 			mapping:            mapping.TimeDateMonth,
 			packageName:        "time_test",
-			templateName:       "test-template.go.tmpl",
-			goldenTemplateName: "test-template.go.golden.tmpl",
-			fileName:           "pkg/analyzer/testdata/src/a/time/datetimemonth.go",
+			templateName:       "test-issue103.go.tmpl",
+			goldenTemplateName: "test-issue103.go.golden.tmpl",
+			fileName:           "pkg/analyzer/testdata/src/a/time/issue103.go",
 		},
 	}
 
