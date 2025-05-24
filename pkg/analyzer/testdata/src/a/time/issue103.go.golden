@@ -17,5 +17,20 @@ func _() {
     var _ = time.Date(2023, time.July, 2, 3, 4, 5, 0, time.UTC) // want `"7" can be replaced by time\.July`
     var _ = time.Date(2023, time.August, 2, 3, 4, 5, 0, time.UTC) // want `"8" can be replaced by time\.August`
     var _ = time.Date(2023, time.September, 2, 3, 4, 5, 0, time.UTC) // want `"9" can be replaced by time\.September`
-    var _ = time.Date(2023, 13, 2, 3, 4, 5, 0, time.UTC)
+
+
+    var _ = time.Date(2023, time.January, 2, 3, 4, 5, 0, time.UTC)
+    var _ = time.Date(2023, time.October, 2, 3, 4, 5, 0, time.UTC)
+    var _ = time.Date(2023, time.November, 2, 3, 4, 5, 0, time.UTC)
+    var _ = time.Date(2023, time.December, 2, 3, 4, 5, 0, time.UTC)
+    var _ = time.Date(2023, time.February, 2, 3, 4, 5, 0, time.UTC)
+    var _ = time.Date(2023, time.March, 2, 3, 4, 5, 0, time.UTC)
+    var _ = time.Date(2023, time.April, 2, 3, 4, 5, 0, time.UTC)
+    var _ = time.Date(2023, time.May, 2, 3, 4, 5, 0, time.UTC)
+    var _ = time.Date(2023, time.June, 2, 3, 4, 5, 0, time.UTC)
+    var _ = time.Date(2023, time.July, 2, 3, 4, 5, 0, time.UTC)
+    var _ = time.Date(2023, time.August, 2, 3, 4, 5, 0, time.UTC)
+    var _ = time.Date(2023, time.September, 2, 3, 4, 5, 0, time.UTC)
 }
+
+var _ = time.Date(2023, 13, 2, 3, 4, 5, 0, time.UTC)
